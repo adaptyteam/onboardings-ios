@@ -9,7 +9,7 @@
 import Foundation
 
 extension OctoflowsError {
-    public struct Source: Sendable, Equatable {
+    public struct Source: Sendable {
         public let version = Octoflows.SDKVersion
         public let file: String
         public let function: String

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum OctoflowsError: Error {
+public enum OctoflowsError: Error, Sendable {
     case notActivated(Source)
     case activateOnce(Source)
 }
