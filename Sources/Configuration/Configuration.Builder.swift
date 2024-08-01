@@ -11,7 +11,8 @@ import Foundation
 extension Octoflows.Configuration {
     init(with builder: Builder) {
         self.init(
-            apiKey: builder.apiKey
+            apiKey: builder.apiKey,
+            alternativeBaseUrl: builder.alternativeBaseUrl
         )
     }
 
@@ -21,6 +22,7 @@ extension Octoflows.Configuration {
 
     public final class Builder {
         public private(set) var apiKey: String
+        public private(set) var alternativeBaseUrl: URL?
 
         public convenience init(withAPIKey key: String) {
             self.init(Octoflows.Configuration.default)
@@ -36,6 +38,11 @@ extension Octoflows.Configuration {
 
         public func with(apiKey key: String) -> Builder {
             apiKey = key
+            return self
+        }
+
+        public func with(alternativeBaseUrl url: URL?) -> Builder {
+            alternativeBaseUrl = url
             return self
         }
     }

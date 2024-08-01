@@ -11,12 +11,14 @@ import Foundation
 public extension OctoflowsError {
     enum Code: Int {
         case unknown = 0
-        case notActivated = 1
-        case activateOnce = 2
+        case wrongApiKey = 1
+        case notActivated = 2
+        case activateOnce = 3
     }
 
     var code: Code {
         switch self {
+        case .wrongApiKey: .wrongApiKey
         case .notActivated: .notActivated
         case .activateOnce: .activateOnce
         }

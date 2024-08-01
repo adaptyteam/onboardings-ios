@@ -9,6 +9,7 @@
 import Foundation
 
 public enum OctoflowsError: Error, Sendable {
+    case wrongApiKey(Source, description: String)
     case notActivated(Source)
     case activateOnce(Source)
 }
@@ -16,7 +17,8 @@ public enum OctoflowsError: Error, Sendable {
 extension OctoflowsError {
     public var source: Source {
         switch self {
-        case let .activateOnce(src),
+        case let .wrongApiKey(src, _),
+             let .activateOnce(src),
              let .notActivated(src):
             src
         }
@@ -27,5 +29,32 @@ extension OctoflowsError {
         default:
             nil
         }
+    }
+}
+
+extension OctoflowsError {
+    static func wrongApiKey(
+        description: String,
+        file: String = #fileID,
+        function: String = #function,
+        line: UInt = #line
+    ) -> Self {
+        .wrongApiKey(OctoflowsError.Source(file: file, function: function, line: line), description: description)
+    }
+
+    static func activateOnce(
+        file: String = #fileID,
+        function: String = #function,
+        line: UInt = #line
+    ) -> Self {
+        .activateOnce(OctoflowsError.Source(file: file, function: function, line: line))
+    }
+
+    static func notActivated(
+        file: String = #fileID,
+        function: String = #function,
+        line: UInt = #line
+    ) -> Self {
+        .notActivated(OctoflowsError.Source(file: file, function: function, line: line))
     }
 }
