@@ -39,5 +39,4 @@ public extension Octoflows {
         return try await sdk.getInroView(name: name)
     }
 
-    static var logLevel: LogLevel { shared?.configuration.logLevel ?? .default }
 }
