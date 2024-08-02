@@ -13,4 +13,3 @@ extension Octoflows {
 
     public typealias LogHandler = @Sendable (_ time: Date, _ level: LogLevel, _ message: String) -> Void
 }
-

@@ -10,4 +10,6 @@ import Foundation
 
 public protocol OctoflowsIntroViewDelegate {
     func recived(from: Octoflows, event: Octoflows.Event)
+    
+    func octoflowsSplashViewController(_ octoflows: Octoflows) -> UIViewController?
 }

@@ -31,13 +31,22 @@ public extension Octoflows {
         shared = try await Octoflows(configuration: configuration)
     }
 
-    static func getInroView(name: String) async throws -> OctoflowsIntroView.Configuration {
+    static func getOnboardingView(name: String) async throws -> OctoflowsOnboardingView.Configuration {
         guard let sdk = shared else {
             throw OctoflowsError.notActivated()
         }
 
-        return try await sdk.getInroView(name: name)
+        return try await sdk.getOnboardingView(name: name)
     }
 
     static var logLevel: LogLevel { shared?.configuration.logLevel ?? .default }
+}
+
+public extension Octoflows {
+    @MainActor 
+    static func createOnboardingController() -> UIViewController {
+//        OctoflowsOnboardingViewController(url: <#T##URL#>)
+//        UIViewController()
+        OctoflowsOnboardingViewController(url: URL(string: "https://x.fnlfx.com/funnel_a")!)
+    }
 }
