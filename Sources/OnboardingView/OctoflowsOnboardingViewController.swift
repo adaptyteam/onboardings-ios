@@ -12,9 +12,12 @@ public final class OctoflowsOnboardingViewController: UIViewController {
     private var webView: WKWebView!
 
     private let url: URL
+    private var delegate: OctoflowsOnboardingViewDelegate
+    private weak var applicationSplashVC: UIViewController?
 
-    public init(url: URL) {
+    public init(url: URL, delegate: OctoflowsOnboardingViewDelegate) {
         self.url = url
+        self.delegate = delegate
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -27,18 +30,75 @@ public final class OctoflowsOnboardingViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-//        Octoflows.onActivate = {
-//            // code
-//        }
-//        let task = Task {
-//            return 5
-//        }
-//
-//        let value = await task.value
-
-        let webView = self.buildWebView()
-        self.layoutWebView(webView)
+        let webView = buildWebView()
+        layoutWebView(webView)
         self.webView = webView
+
+        applicationSplashVC = layoutApplicationSplash()
+    }
+
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        applicationSplashVC?.beginAppearanceTransition(true, animated: animated)
+    }
+
+    override public func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        applicationSplashVC?.endAppearanceTransition()
+    }
+
+    override public func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        applicationSplashVC?.beginAppearanceTransition(false, animated: animated)
+    }
+
+    override public func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        applicationSplashVC?.endAppearanceTransition()
+    }
+
+    private func layoutApplicationSplash() -> UIViewController? {
+        guard let childVC = delegate.octoflowsSplashViewController() else {
+            return nil
+        }
+
+        view.addSubview(childVC.view)
+        addChild(childVC)
+        childVC.didMove(toParent: self)
+
+        view.addConstraints([
+            childVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            childVC.view.topAnchor.constraint(equalTo: view.topAnchor),
+            childVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            childVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+
+        childVC.view.clipsToBounds = true
+
+        return childVC
+    }
+
+    private func removeApplicationSplash() {
+        guard let applicationSplashVC else { return }
+
+        UIView.animate(
+            withDuration: 0.3,
+            delay: 0.5,
+            animations: {
+                applicationSplashVC.view.alpha = 0.0
+
+            }, completion: { _ in
+                applicationSplashVC.willMove(toParent: nil)
+                applicationSplashVC.view.removeFromSuperview()
+                applicationSplashVC.removeFromParent()
+
+                self.applicationSplashVC = nil
+            }
+        )
     }
 
     private func buildWebView() -> WKWebView {
@@ -85,6 +145,8 @@ extension OctoflowsOnboardingViewController: WKNavigationDelegate, WKScriptMessa
     public func webView(_: WKWebView, didFinish _: WKNavigation!) {
         print("Finished loading")
 //        isLoading = false
+
+        removeApplicationSplash()
     }
 
     public func webView(_: WKWebView, didFail _: WKNavigation!, withError error: Error) {
@@ -94,6 +156,7 @@ extension OctoflowsOnboardingViewController: WKNavigationDelegate, WKScriptMessa
 
     public func userContentController(_: WKUserContentController, didReceive message: WKScriptMessage) {
         if message.name == "closeWebView", let messageBody = message.body as? String, messageBody == "close" {
+            delegate.octoflowsCloseAction()
 //            print("Close message received")
 //            withAnimation {
 //                self.parent.isPresented = false

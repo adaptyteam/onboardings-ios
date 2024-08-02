@@ -9,8 +9,8 @@
 import Foundation
 
 public class OctoflowsOnboardingView {
-    public var delegate: OctoflowsIntroViewDelegate?
-    public init(congiguration _: Configuration, delegate: OctoflowsIntroViewDelegate? = nil) {
+    public var delegate: OctoflowsOnboardingViewDelegate?
+    public init(congiguration _: Configuration, delegate: OctoflowsOnboardingViewDelegate? = nil) {
         self.delegate = delegate
     }
 }
