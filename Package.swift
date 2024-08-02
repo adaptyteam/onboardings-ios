@@ -5,7 +5,7 @@ let package = Package(
     name: "Octoflows",
 
     platforms: [
-        .iOS("13"),
+        .iOS("13")
     ],
     products: [
         .library(

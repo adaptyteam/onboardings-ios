@@ -10,6 +10,6 @@ import Foundation
 
 extension Octoflows {
     func getInroView(name: String) async throws -> OctoflowsIntroView.Configuration {
-        .init(url: baseUrl.appendingPathComponent(name))
+        .init(url: configuration.baseUrl.appendingPathComponent(name))
     }
 }

@@ -20,9 +20,7 @@ public extension Octoflows {
     }
 
     static func activate(with builder: Octoflows.Configuration.Builder) async throws {
-        try await activate(with:
-            builder.build()
-        )
+        try await activate(with: builder.build())
     }
 
     static func activate(with configuration: Octoflows.Configuration) async throws {
@@ -30,7 +28,7 @@ public extension Octoflows {
             throw OctoflowsError.activateOnce()
         }
 
-        shared = try Octoflows(configuration: configuration)
+        shared = try await Octoflows(configuration: configuration)
     }
 
     static func getInroView(name: String) async throws -> OctoflowsIntroView.Configuration {
@@ -41,15 +39,5 @@ public extension Octoflows {
         return try await sdk.getInroView(name: name)
     }
 
-    /// Set to the most appropriate level of logging
-    static var logLevel: LogLevel {
-        get { Log.level }
-        set { Log.level = newValue }
-    }
-
-    /// Override the default logger behavior using this method
-    /// - Parameter handler: The function will be called for each message with the appropriate `logLevel`
-    static func setLogHandler(_ handler: @escaping LogHandler) {
-        Log.handler = handler
-    }
+    static var logLevel: LogLevel { shared?.configuration.logLevel ?? .default }
 }

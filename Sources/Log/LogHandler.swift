@@ -9,5 +9,8 @@
 import Foundation
 
 extension Octoflows {
-    public typealias LogHandler = (_ time: Date, _ level: LogLevel, _ message: String) -> Void
+    static let defaultLogHandler: LogHandler = { NSLog("%@", $2) }
+
+    public typealias LogHandler = @Sendable (_ time: Date, _ level: LogLevel, _ message: String) -> Void
 }
+

@@ -9,33 +9,18 @@
 import Foundation
 
 extension Octoflows {
-    public struct Configuration: Sendable, Hashable {
-        static let `default` = Configuration(
-            apiKey: "",
-            alternativeBaseUrl: nil
-        )
-
+    public struct Configuration: Sendable {
         let apiKey: String
-        let alternativeBaseUrl: URL?
+        let baseUrl: URL
+        let logLevel: LogLevel
+        let logHandler: LogHandler
     }
 }
 
 extension Octoflows.Configuration {
-    var baseUrl: URL? {
-        if let url = alternativeBaseUrl { return url }
-        return URL(string: "https://\(apiKey).fnlfx.com/")
+    static func createBaseUrl(apiKey: String) -> URL? {
+        URL(string: "https://\(apiKey).fnlfx.com/")
     }
 }
 
-extension Octoflows.Configuration: Decodable {
-    enum CodingKeys: String, CodingKey {
-        case apiKey = "api_key"
-        case alternativeBaseUrl = "base_url"
-    }
 
-    public init(from decoder: any Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        apiKey = try container.decode(String.self, forKey: .apiKey)
-        alternativeBaseUrl = try container.decodeIfPresent(URL.self, forKey: .alternativeBaseUrl)
-    }
-}

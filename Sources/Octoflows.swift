@@ -11,15 +11,10 @@ import Foundation
 public actor Octoflows {
     static var shared: Octoflows?
 
-    let baseUrl: URL
+    let configuration: Configuration
 
-    init(configuration: Configuration) throws {
-        guard let baseUrl = configuration.baseUrl else {
-            throw OctoflowsError.wrongApiKey(description: "unable to create baseUrl.")
-        }
-
-        self.baseUrl = baseUrl
+    init(configuration: Configuration) async throws {
+        self.configuration = configuration
+        await Log.set(level: configuration.logLevel, handler: configuration.logHandler)
     }
 }
-
-

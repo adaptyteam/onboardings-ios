@@ -9,7 +9,7 @@
 import Foundation
 
 extension Octoflows {
-    public enum LogLevel: Int {
+    public enum LogLevel: Int, Sendable {
         public static let `default` = LogLevel.info
 
         /// Only errors will be logged
