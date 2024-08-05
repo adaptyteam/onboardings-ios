@@ -8,9 +8,12 @@
 
 import Foundation
 
-public protocol OctoflowsOnboardingViewDelegate {
+public protocol OnboardingDelegate {
 //    func recived(from: Octoflows, event: Octoflows.Event)
     
-    func octoflowsSplashViewController() -> UIViewController?
     func octoflowsCloseAction()
+}
+
+public protocol OnboardingSplashDelegate: OnboardingDelegate {
+    func octoflowsSplashViewController() -> UIViewController?
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JlC-iO-qVx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--App Splash Controller-->
+        <!--Splash Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="SplashViewController" id="BYZ-38-t0r" customClass="AppSplashController" customModule="OctoflowsDemo_UIKit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SplashController" id="BYZ-38-t0r" customClass="SplashController" customModule="OctoflowsDemo_UIKit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -46,61 +46,41 @@
             </objects>
             <point key="canvasLocation" x="-1169" y="-342"/>
         </scene>
-        <!--Item 2-->
-        <scene sceneID="gLs-0C-Vtf">
+        <!--View Controller-->
+        <scene sceneID="qCZ-Q1-Mwo">
             <objects>
-                <viewController id="tFh-t3-tYU" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8tg-Sp-2OT">
+                <viewController storyboardIdentifier="ViewController" id="xbg-pV-QSI" customClass="ViewController" customModule="OctoflowsDemo_UIKit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zkm-7e-d9f">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="noM-m1-Ejz"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fnk-CU-oJj">
+                                <rect key="frame" x="157.66666666666666" y="408.66666666666669" width="78" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Logout"/>
+                                <connections>
+                                    <action selector="logoutPressed:" destination="xbg-pV-QSI" eventType="touchUpInside" id="0K0-i1-o30"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="whb-9O-n7Z"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="fnk-CU-oJj" firstAttribute="centerY" secondItem="zkm-7e-d9f" secondAttribute="centerY" id="3VH-Rv-e1X"/>
+                            <constraint firstItem="fnk-CU-oJj" firstAttribute="centerX" secondItem="zkm-7e-d9f" secondAttribute="centerX" id="xK2-4l-vEV"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="lJl-JR-WQO"/>
+                    <navigationItem key="navigationItem" id="LEX-KL-ls4"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IEw-U0-XR4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="03x-UE-Pso" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="987" y="-39"/>
-        </scene>
-        <!--Item 1-->
-        <scene sceneID="APc-gu-GtF">
-            <objects>
-                <viewController id="CW2-Js-Eu7" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="WQw-QD-QMp">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="Rgr-wC-P9e"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="SHm-Mb-vB1"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="82e-Xj-xer" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="987" y="-646"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="zoN-OC-c7t">
-            <objects>
-                <tabBarController id="JlC-iO-qVx" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="T9V-uz-bQu">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="CW2-Js-Eu7" kind="relationship" relationship="viewControllers" id="Yep-g5-ysl"/>
-                        <segue destination="tFh-t3-tYU" kind="relationship" relationship="viewControllers" id="mFa-fN-Ofv"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0KN-T6-hNp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="84" y="-342"/>
+            <point key="canvasLocation" x="-202" y="-342"/>
         </scene>
     </scenes>
     <resources>
         <image name="SplashIcon" width="200" height="200"/>
         <namedColor name="AccentColor">
-            <color red="0.58306308613687607" green="0.08021276935018383" blue="0.77107871746279533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.58300000429153442" green="0.079999998211860657" blue="0.77100002765655518" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

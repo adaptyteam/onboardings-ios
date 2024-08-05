@@ -44,11 +44,11 @@ public extension Octoflows {
 public extension Octoflows {
     @MainActor 
     static func createOnboardingController(
-        delegate: OctoflowsOnboardingViewDelegate
+        delegate: OnboardingSplashDelegate
     ) -> UIViewController {
 //        OctoflowsOnboardingViewController(url: <#T##URL#>)
 //        UIViewController()
-        let vc = OctoflowsOnboardingViewController(
+        let vc = OnboardingSplashController(
             url: URL(string: "https://x.fnlfx.com/funnel_a")!,
             delegate: delegate
         )
