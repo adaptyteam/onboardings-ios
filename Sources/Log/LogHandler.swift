@@ -7,9 +7,32 @@
 //
 
 import Foundation
+import os.log
 
 extension Octoflows {
-    static let defaultLogHandler: LogHandler = { NSLog("%@", $2) }
+    public typealias LogHandler = @Sendable (LogMessage) -> Void
 
-    public typealias LogHandler = @Sendable (_ time: Date, _ level: LogLevel, _ message: String) -> Void
+    private static let logger = OSLog(subsystem: "io.adapty.octoflows", category: "sdk")
+
+    @Sendable
+    static func defaultLogHandler(_ msg: LogMessage) {
+        os_log(msg.level.asOSLogType, log: logger, "%@\n%@", msg.message, msg.source.debugDescription)
+    }
+}
+
+private extension Octoflows.LogLevel {
+    var asOSLogType: OSLogType {
+        switch self {
+        case .error:
+            .fault
+        case .warn:
+            .error
+        case .info:
+            .default
+        case .verbose:
+            .info
+        case .debug:
+            .debug
+        }
+    }
 }

@@ -10,7 +10,7 @@ import Foundation
 
 extension Log {
     @inlinable
-    package static var stamp: String {
+    package nonisolated static var stamp: String {
         var result = ""
         let base62chars = Array("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")
         for _ in 0 ..< 6 {

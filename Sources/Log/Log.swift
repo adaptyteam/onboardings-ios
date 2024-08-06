@@ -10,9 +10,9 @@ import Foundation
 
 package enum Log {
     @LogActor
-    private static var handler: Octoflows.LogHandler = Octoflows.defaultLogHandler
+    private(set) static var handler: Octoflows.LogHandler = Octoflows.defaultLogHandler
     @LogActor
-    private static var level: Octoflows.LogLevel = .default
+    private(set) static var level: Octoflows.LogLevel = .default
 
     @LogActor
     package static func isLevel(_ value: Octoflows.LogLevel) -> Bool {
@@ -26,81 +26,94 @@ package enum Log {
     }
 
     @LogActor
-    private static func write(_ time: Date, _ level: Octoflows.LogLevel, _ message: @escaping () -> String, file: String, function _: String, line: UInt) {
+    private static func write(
+        date: Date,
+        level: Octoflows.LogLevel,
+        message: @escaping () -> String,
+        threadName: String,
+        fileName: String,
+        functionName: String,
+        lineNumber: UInt
+    ) {
         guard isLevel(level) else { return }
-        if isLevel(.debug) {
-            handler(time, level, "[Octoflows v\(Octoflows.SDKVersion)] - \(level)\t\(file)#\(line): \(message())")
-        } else {
-            handler(time, level, "[Octoflows v\(Octoflows.SDKVersion)] - \(level): \(message())")
-        }
-    }
-
-    @inline(__always)
-    private static func writeAsync(_ time: Date, _ level: Octoflows.LogLevel, _ message: @escaping () -> String, file: String, function: String, line: UInt) {
-        Task(priority: .utility) {
-            await Log.write(time, level, message, file: file, function: function, line: line)
-        }
+        handler(.init(
+            date: date,
+            level: level,
+            message: message(),
+            source: .init(
+                sdkVersion: Octoflows.SDKVersion,
+                threadName: threadName,
+                fileName: fileName,
+                functionName: functionName,
+                lineNumber: lineNumber
+            )
+        ))
     }
 }
 
 package extension Log {
     @inlinable
-    static func message(_ level: Octoflows.LogLevel, _ message: @autoclosure @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
-        Log.writeAsync(Date(), level, message, file: file, function: function, line: line)
+    nonisolated static func message(level: Octoflows.LogLevel, message: @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        let threadName = Log.currentThreadName
+        Task(priority: .utility) {
+            await Log.write(date: Date(), level: level, message: message, threadName: threadName, fileName: file, functionName: function, lineNumber: line)
+        }
     }
 
     @inlinable
-    static func message(_ level: Octoflows.LogLevel, message: @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
-        Log.writeAsync(Date(), level, message, file: file, function: function, line: line)
+    nonisolated static func error(message: @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        Log.message(level: .error, message: message, file: file, function: function, line: line)
     }
 
     @inlinable
-    static func error(_ message: @autoclosure @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
-        Log.writeAsync(Date(), .error, message, file: file, function: function, line: line)
+    nonisolated static func warn(message: @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        Log.message(level: .warn, message: message, file: file, function: function, line: line)
     }
 
     @inlinable
-    static func error(message: @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
-        Log.writeAsync(Date(), .error, message, file: file, function: function, line: line)
+    nonisolated static func info(message: @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        Log.message(level: .info, message: message, file: file, function: function, line: line)
     }
 
     @inlinable
-    static func warn(_ message: @autoclosure @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
-        Log.writeAsync(Date(), .warn, message, file: file, function: function, line: line)
+    nonisolated static func verbose(message: @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        Log.message(level: .verbose, message: message, file: file, function: function, line: line)
     }
 
     @inlinable
-    static func warn(message: @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
-        Log.writeAsync(Date(), .warn, message, file: file, function: function, line: line)
+    nonisolated static func debug(message: @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        Log.message(level: .debug, message: message, file: file, function: function, line: line)
+    }
+}
+
+package extension Log {
+    @inlinable
+    nonisolated static func message(_ level: Octoflows.LogLevel, _ message: @autoclosure @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        Log.message(level: level, message: message, file: file, function: function, line: line)
     }
 
     @inlinable
-    static func info(_ message: @autoclosure @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
-        Log.writeAsync(Date(), .info, message, file: file, function: function, line: line)
+    nonisolated static func error(_ message: @autoclosure @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        Log.message(level: .error, message: message, file: file, function: function, line: line)
     }
 
     @inlinable
-    static func info(message: @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
-        Log.writeAsync(Date(), .info, message, file: file, function: function, line: line)
+    nonisolated static func warn(_ message: @autoclosure @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        Log.message(level: .warn, message: message, file: file, function: function, line: line)
     }
 
     @inlinable
-    static func verbose(_ message: @autoclosure @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
-        Log.writeAsync(Date(), .verbose, message, file: file, function: function, line: line)
+    nonisolated static func info(_ message: @autoclosure @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        Log.message(level: .info, message: message, file: file, function: function, line: line)
     }
 
     @inlinable
-    static func verbose(message: @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
-        Log.writeAsync(Date(), .verbose, message, file: file, function: function, line: line)
+    nonisolated static func verbose(_ message: @autoclosure @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        Log.message(level: .verbose, message: message, file: file, function: function, line: line)
     }
 
     @inlinable
-    static func debug(_ message: @autoclosure @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
-        Log.writeAsync(Date(), .debug, message, file: file, function: function, line: line)
-    }
-
-    @inlinable
-    static func debug(message: @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
-        Log.writeAsync(Date(), .debug, message, file: file, function: function, line: line)
+    nonisolated static func debug(_ message: @autoclosure @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        Log.message(level: .debug, message: message, file: file, function: function, line: line)
     }
 }
