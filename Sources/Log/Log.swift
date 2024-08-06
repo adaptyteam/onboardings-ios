@@ -9,17 +9,36 @@
 import Foundation
 
 package enum Log {
-    private static let logger = Logger()
+    @LogActor
+    private static var handler: Octoflows.LogHandler = Octoflows.defaultLogHandler
+    @LogActor
+    private static var level: Octoflows.LogLevel = .default
 
-    @inlinable
+    @LogActor
+    package static func isLevel(_ value: Octoflows.LogLevel) -> Bool {
+        level.rawValue >= value.rawValue
+    }
+
+    @LogActor
     static func set(level: Octoflows.LogLevel, handler: @escaping Octoflows.LogHandler) async {
-        await logger.set(level: level, handler: handler)
+        Log.handler = handler
+        Log.level = level
+    }
+
+    @LogActor
+    private static func write(_ time: Date, _ level: Octoflows.LogLevel, _ message: @escaping () -> String, file: String, function _: String, line: UInt) {
+        guard isLevel(level) else { return }
+        if isLevel(.debug) {
+            handler(time, level, "[Octoflows v\(Octoflows.SDKVersion)] - \(level)\t\(file)#\(line): \(message())")
+        } else {
+            handler(time, level, "[Octoflows v\(Octoflows.SDKVersion)] - \(level): \(message())")
+        }
     }
 
     @inline(__always)
     private static func writeAsync(_ time: Date, _ level: Octoflows.LogLevel, _ message: @escaping () -> String, file: String, function: String, line: UInt) {
         Task(priority: .utility) {
-            await Log.logger.write(time, level, message, file: file, function: function, line: line)
+            await Log.write(time, level, message, file: file, function: function, line: line)
         }
     }
 }

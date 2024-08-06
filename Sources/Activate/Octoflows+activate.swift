@@ -8,11 +8,6 @@
 
 import Foundation
 
-@globalActor
-actor OctoflowsActor {
-    static let shared = OctoflowsActor()
-}
-
 public actor Octoflows {
     let configuration: Configuration
 
