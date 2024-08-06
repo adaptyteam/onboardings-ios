@@ -23,4 +23,8 @@ extension Octoflows.Configuration {
     }
 }
 
-
+extension Octoflows.Configuration: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        "{baseUrl: \(baseUrl.absoluteString), logLevel: \(logLevel.description)}"
+    }
+}

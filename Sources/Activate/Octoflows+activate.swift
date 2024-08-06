@@ -8,31 +8,24 @@
 
 import Foundation
 
-public actor Octoflows {
+public struct Octoflows: Sendable {
     let configuration: Configuration
 
+    @OctoflowsActor
     private init(configuration: Configuration) async throws {
         self.configuration = configuration
         await Log.set(level: configuration.logLevel, handler: configuration.logHandler)
+        Log.info("SDK Activated with configuration: \(configuration)")
     }
 }
 
 extension Octoflows {
-    private static let shared = Shared()
-
-    private actor Shared {
-        var task: Task<Octoflows, Error>?
-        func setTaskOnce(_ task: @autoclosure () -> Task<Octoflows, Error>) throws {
-            guard self.task == nil else {
-                throw OctoflowsError.activateOnce()
-            }
-            self.task = task()
-        }
-    }
+    @MainActor
+    private static var shared: Task<Octoflows, Error>?
 
     package static var activated: Octoflows {
         get async throws {
-            if let task = await shared.task {
+            if let task = await shared {
                 try await task.value
             } else {
                 throw OctoflowsError.notActivated()
@@ -40,9 +33,14 @@ extension Octoflows {
         }
     }
 
-    static func startActivate(with configuration: Configuration) async throws {
-        try await shared.setTaskOnce(Task {
+    @MainActor
+    static func startActivate(with configuration: Configuration) throws {
+        guard shared == nil else {
+            throw OctoflowsError.activateOnce()
+        }
+
+        shared = Task {
             try await Octoflows(configuration: configuration)
-        })
+        }
     }
 }

@@ -11,20 +11,20 @@ import Octoflows
 class ViewModel: ObservableObject {
     @Published var onboardingFinished = false
     
+    @MainActor
     func initialize() {
-        Task {
-            do {
-                let configuration = try Octoflows.Configuration
-                    .Builder(withAPIKey: "")
-                    .with(loglevel: .verbose)
-                    .build()
+        do {
+            let configuration = try Octoflows.Configuration
+                .Builder(withAPIKey: "")
+                .with(loglevel: .verbose)
+                .build()
 
-                try await Octoflows.activate(with: configuration)
-            } catch {
-                // handle the error
-            }
+            try Octoflows.activate(with: configuration)
+        } catch let error as OctoflowsError {
+            // handle the error
         }
     }
+    
 }
 
 @main

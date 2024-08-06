@@ -6,23 +6,26 @@
 //
 //
 
-import UIKit
+import Foundation
 
 public extension Octoflows {
-    static func activate(_ apiKey: String) async throws {
-        try await activate(
+    @MainActor
+    static func activate(_ apiKey: String) throws {
+        try activate(
             with: Configuration
                 .builder(withAPIKey: apiKey)
                 .build()
         )
     }
 
-    static func activate(with builder: Octoflows.Configuration.Builder) async throws {
-        try await activate(with: builder.build())
+    @MainActor
+    static func activate(with builder: Octoflows.Configuration.Builder) throws {
+        try activate(with: builder.build())
     }
 
-    static func activate(with configuration: Octoflows.Configuration) async throws {
-        try await startActivate(with: configuration)
+    @MainActor
+    static func activate(with configuration: Octoflows.Configuration) throws {
+        try startActivate(with: configuration)
     }
 
     @MainActor
@@ -51,4 +54,3 @@ public extension Octoflows {
         )
     }
 }
-

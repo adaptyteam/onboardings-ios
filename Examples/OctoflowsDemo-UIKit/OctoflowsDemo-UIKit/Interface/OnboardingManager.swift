@@ -36,18 +36,17 @@ final class OnboardingManager: NSObject {
         window.makeKeyAndVisible()
     }
 
+    @MainActor
     private func activateOctoflows() {
-        Task {
-            do {
-                let configuration = try Octoflows.Configuration
-                    .Builder(withAPIKey: "")
-                    .with(loglevel: .verbose)
-                    .build()
+        do {
+            let configuration = try Octoflows.Configuration
+                .Builder(withAPIKey: "")
+                .with(loglevel: .verbose)
+                .build()
 
-                try await Octoflows.activate(with: configuration)
-            } catch {
-                // handle the error
-            }
+            try Octoflows.activate(with: configuration)
+        } catch let error as OctoflowsError {
+            // handle the error
         }
     }
 }

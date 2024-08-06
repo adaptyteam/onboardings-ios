@@ -9,6 +9,10 @@
 import Foundation
 import os.log
 
+#if swift(<6.0)
+    extension OSLog: @unchecked Sendable {}
+#endif
+
 extension Octoflows {
     public typealias LogHandler = @Sendable (LogMessage) -> Void
 
