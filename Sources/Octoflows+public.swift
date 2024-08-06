@@ -9,8 +9,6 @@
 import Foundation
 
 public extension Octoflows {
-    static var isActivated: Bool { shared != nil }
-
     static func activate(_ apiKey: String) async throws {
         try await activate(
             with: Configuration
@@ -24,22 +22,8 @@ public extension Octoflows {
     }
 
     static func activate(with configuration: Octoflows.Configuration) async throws {
-        guard shared == nil else {
-            throw OctoflowsError.activateOnce()
-        }
-
-        shared = try await Octoflows(configuration: configuration)
+        try await startActivate(with: configuration)
     }
-
-    static func getOnboardingView(name: String) async throws -> OctoflowsOnboardingView.Configuration {
-        guard let sdk = shared else {
-            throw OctoflowsError.notActivated()
-        }
-
-        return try await sdk.getOnboardingView(name: name)
-    }
-
-}
 
 public extension Octoflows {
     @MainActor 
