@@ -13,7 +13,7 @@ extension Octoflows {
     func createOnboardingController(
         name: String,
         delegate: OnboardingSplashDelegate
-    ) async throws -> UIViewController {
+    ) throws -> UIViewController {
         let url = configuration.baseUrl.appendingPathComponent(name)
         //        OctoflowsOnboardingViewController(url: <#T##URL#>)
         //        UIViewController()
