@@ -8,7 +8,7 @@
 import Octoflows
 import UIKit
 
-final class OnboardingManager {
+final class OnboardingManager: NSObject {
     static let shared = OnboardingManager()
 
     fileprivate var window: UIWindow?
@@ -28,8 +28,10 @@ final class OnboardingManager {
     func presentOnboarding() {
         guard let window else { return }
 
-        window.rootViewController = Octoflows.createOnboardingController(
-            delegate: self
+        window.rootViewController = Octoflows.createSplashController(
+            name: "test",
+            delegate: self,
+            splashDelegate: self
         )
         window.makeKeyAndVisible()
     }
