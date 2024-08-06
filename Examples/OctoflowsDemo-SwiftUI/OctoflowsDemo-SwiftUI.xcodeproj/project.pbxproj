@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,8 @@
 		74152F5A2C615576007F4EFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74152F592C615576007F4EFF /* Assets.xcassets */; };
 		74152F5E2C615576007F4EFF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74152F5D2C615576007F4EFF /* Preview Assets.xcassets */; };
 		744C9B4C2C6159DA005D6E5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 744C9B4B2C6159DA005D6E5A /* LaunchScreen.storyboard */; };
+		74B5ECCA2C6284F500B0CCCF /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B5ECC92C6284F500B0CCCF /* SplashView.swift */; };
+		74B5ECD02C6288A100B0CCCF /* Octoflows in Frameworks */ = {isa = PBXBuildFile; productRef = 74B5ECCF2C6288A100B0CCCF /* Octoflows */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,7 @@
 		74152F5B2C615576007F4EFF /* OctoflowsDemo_SwiftUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OctoflowsDemo_SwiftUI.entitlements; sourceTree = "<group>"; };
 		74152F5D2C615576007F4EFF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		744C9B4B2C6159DA005D6E5A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		74B5ECC92C6284F500B0CCCF /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74B5ECD02C6288A100B0CCCF /* Octoflows in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +60,7 @@
 			children = (
 				74152F552C615575007F4EFF /* OctoflowsDemo_SwiftUIApp.swift */,
 				74152F572C615575007F4EFF /* ContentView.swift */,
+				74B5ECC92C6284F500B0CCCF /* SplashView.swift */,
 				744C9B4A2C6159A1005D6E5A /* Supporting Files */,
 				74152F5C2C615576007F4EFF /* Preview Content */,
 			);
@@ -97,6 +102,7 @@
 			);
 			name = "OctoflowsDemo-SwiftUI";
 			packageProductDependencies = (
+				74B5ECCF2C6288A100B0CCCF /* Octoflows */,
 			);
 			productName = "OctoflowsDemo-SwiftUI";
 			productReference = 74152F522C615575007F4EFF /* OctoflowsDemo-SwiftUI.app */;
@@ -127,7 +133,6 @@
 			);
 			mainGroup = 74152F492C615575007F4EFF;
 			packageReferences = (
-				74152F6B2C6158A7007F4EFF /* XCLocalSwiftPackageReference "../../" */,
 			);
 			productRefGroup = 74152F532C615575007F4EFF /* Products */;
 			projectDirPath = "";
@@ -158,6 +163,7 @@
 			files = (
 				74152F582C615575007F4EFF /* ContentView.swift in Sources */,
 				74152F562C615575007F4EFF /* OctoflowsDemo_SwiftUIApp.swift in Sources */,
+				74B5ECCA2C6284F500B0CCCF /* SplashView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,12 +387,12 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		74152F6B2C6158A7007F4EFF /* XCLocalSwiftPackageReference "../../" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../../;
+/* Begin XCSwiftPackageProductDependency section */
+		74B5ECCF2C6288A100B0CCCF /* Octoflows */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Octoflows;
 		};
-/* End XCLocalSwiftPackageReference section */
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 74152F4A2C615575007F4EFF /* Project object */;
 }

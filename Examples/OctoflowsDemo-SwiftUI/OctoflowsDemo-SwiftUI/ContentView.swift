@@ -7,31 +7,16 @@
 
 import SwiftUI
 
-struct SplashView: View {
-    var body: some View {
-        ZStack {
-            Color.white
-
-            Image("SplashIcon")
-                .resizable()
-                .frame(width: 200, height: 200)
-                .offset(CGSize(width: 0.0, height: -100.0))
-        }
-    }
-}
 
 struct ContentView: View {
     var body: some View {
         ZStack {
             VStack {
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                Text("Hello, world!")
+                Text("Welcome to Octoflows SDK!")
             }
             .padding()
-
-            SplashView()
         }
+        
     }
 }
 

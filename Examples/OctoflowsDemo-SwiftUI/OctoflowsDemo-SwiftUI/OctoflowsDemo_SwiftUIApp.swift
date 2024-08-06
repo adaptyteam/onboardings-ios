@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Octoflows
 
 @main
 struct OctoflowsDemo_SwiftUIApp: App {
