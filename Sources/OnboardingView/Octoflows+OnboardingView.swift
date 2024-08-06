@@ -11,12 +11,11 @@ import UIKit
 extension Octoflows {
     @MainActor
     func createOnboardingController(
-        name _: String,
+        name: String,
         delegate: OnboardingDelegate,
         onFinishLoading: @escaping (Error?) -> Void
     ) throws -> OnboardingController {
-//        let url = configuration.baseUrl.appendingPathComponent(name)
-        let url = URL(string: "https://x.fnlfx.com/funnel_a")!
+        let url = configuration.baseUrl.appendingPathComponent(name)
 
         let vc = OnboardingController(
             url: url,

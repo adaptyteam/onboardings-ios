@@ -29,7 +29,7 @@ final class OnboardingManager: NSObject {
         guard let window else { return }
 
         window.rootViewController = Octoflows.createSplashController(
-            name: "test",
+            name: "funnel_a",
             delegate: self,
             splashDelegate: self
         )
@@ -40,7 +40,8 @@ final class OnboardingManager: NSObject {
     private func activateOctoflows() {
         do {
             let configuration = try Octoflows.Configuration
-                .Builder(withAPIKey: "")
+                .Builder(withAPIKey: "")  // TODO: insert apiKey
+                .with(alternativeBaseUrl: URL(string: "https://x.fnlfx.com/")! ) // TODO: remove
                 .with(loglevel: .verbose)
                 .build()
 

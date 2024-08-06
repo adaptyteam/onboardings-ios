@@ -15,7 +15,8 @@ class ViewModel: ObservableObject {
     func initialize() {
         do {
             let configuration = try Octoflows.Configuration
-                .Builder(withAPIKey: "")
+                .Builder(withAPIKey: "") // TODO: insert apiKey
+                .with(alternativeBaseUrl: URL(string: "https://x.fnlfx.com/")! ) // TODO: remove
                 .with(loglevel: .verbose)
                 .build()
 
