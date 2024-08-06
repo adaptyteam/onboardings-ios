@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,7 @@
 		744C9B4C2C6159DA005D6E5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 744C9B4B2C6159DA005D6E5A /* LaunchScreen.storyboard */; };
 		74B5ECCA2C6284F500B0CCCF /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B5ECC92C6284F500B0CCCF /* SplashView.swift */; };
 		74B5ECD02C6288A100B0CCCF /* Octoflows in Frameworks */ = {isa = PBXBuildFile; productRef = 74B5ECCF2C6288A100B0CCCF /* Octoflows */; };
+		74B5ECD32C62893100B0CCCF /* Octoflows in Frameworks */ = {isa = PBXBuildFile; productRef = 74B5ECD22C62893100B0CCCF /* Octoflows */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74B5ECD02C6288A100B0CCCF /* Octoflows in Frameworks */,
+				74B5ECD32C62893100B0CCCF /* Octoflows in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +105,7 @@
 			name = "OctoflowsDemo-SwiftUI";
 			packageProductDependencies = (
 				74B5ECCF2C6288A100B0CCCF /* Octoflows */,
+				74B5ECD22C62893100B0CCCF /* Octoflows */,
 			);
 			productName = "OctoflowsDemo-SwiftUI";
 			productReference = 74152F522C615575007F4EFF /* OctoflowsDemo-SwiftUI.app */;
@@ -133,6 +136,7 @@
 			);
 			mainGroup = 74152F492C615575007F4EFF;
 			packageReferences = (
+				74B5ECD12C62893100B0CCCF /* XCLocalSwiftPackageReference "../../" */,
 			);
 			productRefGroup = 74152F532C615575007F4EFF /* Products */;
 			projectDirPath = "";
@@ -387,8 +391,19 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		74B5ECD12C62893100B0CCCF /* XCLocalSwiftPackageReference "../../" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../";
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		74B5ECCF2C6288A100B0CCCF /* Octoflows */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Octoflows;
+		};
+		74B5ECD22C62893100B0CCCF /* Octoflows */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Octoflows;
 		};

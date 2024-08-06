@@ -7,27 +7,55 @@
 
 import SwiftUI
 
-struct OnboardingView: UIViewControllerRepresentable {
+@available(iOS 14.0, *)
+public struct OnboardingSplashView<Splash: View>: View {
+    private let splashViewBuilder: () -> Splash
+
+    @State
+    private var isLoading = true
+
+    public init(splashViewBuilder: @escaping () -> Splash) {
+        self.splashViewBuilder = splashViewBuilder
+    }
+
+    public var body: some View {
+        ZStack {
+            OnboardingView(
+                url: URL(string: "https://x.fnlfx.com/funnel_a")!,
+                onFinishLoading: { _ in
+                    isLoading = false
+                }
+            )
+
+            if isLoading {
+                splashViewBuilder()
+            }
+        }
+        .ignoresSafeArea()
+    }
+}
+
+public struct OnboardingView: UIViewControllerRepresentable {
     private let delegate = OnboardinViewDelegateImpl()
-    
+
     let url: URL
     let onFinishLoading: (Error?) -> Void
-    
-    init(
+
+    public init(
         url: URL,
         onFinishLoading: @escaping (Error?) -> Void
     ) {
         self.url = url
         self.onFinishLoading = onFinishLoading
     }
-    
-    func makeUIViewController(context: Context) -> some UIViewController {
+
+    public func makeUIViewController(context: Context) -> some UIViewController {
         OnboardingController(url: url,
                              delegate: delegate,
                              onFinishLoading: onFinishLoading)
     }
-    
-    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
+
+    public func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
 }
 
 final class OnboardinViewDelegateImpl: NSObject, OnboardingDelegate {
