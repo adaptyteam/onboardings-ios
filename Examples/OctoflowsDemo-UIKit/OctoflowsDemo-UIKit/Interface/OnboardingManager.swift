@@ -11,7 +11,6 @@ import UIKit
 final class OnboardingManager {
     static let shared = OnboardingManager()
 
-    fileprivate let storyboard = UIStoryboard(name: "Main", bundle: nil)
     fileprivate var window: UIWindow?
 
     @MainActor
@@ -20,16 +19,19 @@ final class OnboardingManager {
 
         guard let windowScene = (scene as? UIWindowScene) else { return nil }
 
-        let window = UIWindow(windowScene: windowScene)
+        self.window = UIWindow(windowScene: windowScene)
+        presentOnboarding()
+        return window
+    }
+    
+    @MainActor 
+    func presentOnboarding() {
+        guard let window else { return }
 
         window.rootViewController = Octoflows.createOnboardingController(
             delegate: self
         )
         window.makeKeyAndVisible()
-
-        self.window = window
-
-        return window
     }
 
     private func activateOctoflows() {
@@ -38,9 +40,6 @@ final class OnboardingManager {
                 let configuration = try Octoflows.Configuration
                     .Builder(withAPIKey: "")
                     .with(loglevel: .verbose)
-                    .with(logHandler: { time, level, message in
-                        ApplicationLogger.handle(time, level, message)
-                    })
                     .build()
 
                 try await Octoflows.activate(with: configuration)
@@ -51,12 +50,23 @@ final class OnboardingManager {
     }
 }
 
-extension OnboardingManager: OctoflowsOnboardingViewDelegate {
-    func octoflowsSplashViewController() -> UIViewController? {
-        storyboard.instantiateViewController(identifier: "SplashViewController")
-    }
-
+extension OnboardingManager: OnboardingDelegate {
     func octoflowsCloseAction() {
-        window?.rootViewController = storyboard.instantiateInitialViewController()
+        guard let window else { return }
+
+        window.rootViewController = ViewController.instantiate()
+
+        UIView.transition(
+            with: window,
+            duration: 0.3,
+            options: .transitionCrossDissolve,
+            animations: {}
+        )
+    }
+}
+
+extension OnboardingManager: OnboardingSplashDelegate {
+    func octoflowsSplashViewController() -> UIViewController? {
+        SplashController.instantiate()
     }
 }

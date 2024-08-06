@@ -6,7 +6,7 @@
 //
 //
 
-import Foundation
+import UIKit
 
 public extension Octoflows {
     static func activate(_ apiKey: String) async throws {
@@ -25,18 +25,11 @@ public extension Octoflows {
         try await startActivate(with: configuration)
     }
 
-public extension Octoflows {
-    @MainActor 
+    @MainActor
     static func createOnboardingController(
-        delegate: OctoflowsOnboardingViewDelegate
-    ) -> UIViewController {
-//        OctoflowsOnboardingViewController(url: <#T##URL#>)
-//        UIViewController()
-        let vc = OctoflowsOnboardingViewController(
-            url: URL(string: "https://x.fnlfx.com/funnel_a")!,
-            delegate: delegate
-        )
-        
-        return vc
+        name: String,
+        delegate: OnboardingSplashDelegate
+    ) async throws -> UIViewController {
+        try await activated.createOnboardingController(name: name, delegate: delegate)
     }
 }
