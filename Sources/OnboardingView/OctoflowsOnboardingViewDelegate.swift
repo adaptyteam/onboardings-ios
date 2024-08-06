@@ -8,12 +8,10 @@
 
 import UIKit
 
-public protocol OnboardingDelegate {
-//    func recived(from: Octoflows, event: Octoflows.Event)
-    
+public protocol OnboardingDelegate: NSObjectProtocol {
     func octoflowsCloseAction()
 }
 
-public protocol OnboardingSplashDelegate: OnboardingDelegate {
+public protocol OnboardingSplashDelegate: NSObjectProtocol {
     func octoflowsSplashViewController() -> UIViewController?
 }

@@ -17,7 +17,6 @@ let package = Package(
         .target(
             name: "Octoflows",
             dependencies: [],
-            path: "Sources",
             resources: [.copy("PrivacyInfo.xcprivacy")]
         ),
     ]

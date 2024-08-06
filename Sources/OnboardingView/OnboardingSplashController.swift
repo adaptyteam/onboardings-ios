@@ -7,26 +7,42 @@
 
 import UIKit
 
-public class OnboardingSplashController: OnboardingController {
+public class OnboardingSplashController: UIViewController {
+    private let name: String
+
     private weak var applicationSplashVC: UIViewController?
+    private weak var onboardingVC: OnboardingController?
 
-    public init(url: URL, delegate: OnboardingSplashDelegate) {
-//        self.delegate = delegate
-//        self.viewModel = OnboardingViewModel(url: url)
+    private weak var delegate: OnboardingDelegate!
+    private weak var splashDelegate: OnboardingSplashDelegate!
 
-        super.init(url: url, delegate: delegate)
+    public init(
+        name: String,
+        delegate: OnboardingDelegate,
+        splashDelegate: OnboardingSplashDelegate
+    ) {
+        self.name = name
+        self.delegate = delegate
+        self.splashDelegate = splashDelegate
+
+        super.init(nibName: nil, bundle: nil)
     }
-    
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        viewModel.onFinishLoading = { [weak self] in
-            self?.removeApplicationSplash()
-        }
-        
         applicationSplashVC = layoutApplicationSplash()
+
+        Task {
+            onboardingVC = try? await layoutOnboarding()
+        }
     }
-    
+
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -51,13 +67,28 @@ public class OnboardingSplashController: OnboardingController {
         applicationSplashVC?.endAppearanceTransition()
     }
 
-    private func layoutApplicationSplash() -> UIViewController? {
-        guard let delegate = delegate as? OnboardingSplashDelegate,
-              let childVC = delegate.octoflowsSplashViewController() else {
-            return nil
+    private func layoutOnboarding() async throws -> OnboardingController {
+        let onboardingVC = try await Octoflows.createOnboardingController(
+            name: name,
+            delegate: delegate, 
+            onFinishLoading: { [weak self] error in
+                self?.removeApplicationSplash()
+            }
+        )
+        
+        layoutChildController(onboardingVC, at: 0)
+        return onboardingVC
+    }
+
+
+
+    private func layoutChildController(_ childVC: UIViewController, at index: Int? = nil) {
+        if let index {
+            view.insertSubview(childVC.view, at: index)
+        } else {
+            view.addSubview(childVC.view)
         }
 
-        view.addSubview(childVC.view)
         addChild(childVC)
         childVC.didMove(toParent: self)
 
@@ -69,6 +100,16 @@ public class OnboardingSplashController: OnboardingController {
         ])
 
         childVC.view.clipsToBounds = true
+    }
+    
+    private func layoutApplicationSplash() -> UIViewController? {
+        guard let splashDelegate,
+              let childVC = splashDelegate.octoflowsSplashViewController()
+        else {
+            return nil
+        }
+
+        layoutChildController(childVC)
 
         return childVC
     }

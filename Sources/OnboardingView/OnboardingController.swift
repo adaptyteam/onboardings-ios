@@ -12,11 +12,18 @@ public class OnboardingController: UIViewController {
     let viewModel: OnboardingViewModel
     var delegate: OnboardingDelegate
 
+    private let onFinishLoading: (Error?) -> Void
+
     private var webView: WKWebView!
 
-    public init(url: URL, delegate: OnboardingDelegate) {
+    public init(
+        url: URL,
+        delegate: OnboardingDelegate,
+        onFinishLoading: @escaping (Error?) -> Void
+    ) {
         self.delegate = delegate
         self.viewModel = OnboardingViewModel(url: url)
+        self.onFinishLoading = onFinishLoading
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -34,8 +41,7 @@ public class OnboardingController: UIViewController {
         self.webView = webView
 
         viewModel.configureWebView(webView)
-        viewModel.onFinishLoading = { [weak self] in
-        }
+        viewModel.onFinishLoading = onFinishLoading
         viewModel.onClose = { [weak self] in
             self?.delegate.octoflowsCloseAction()
         }

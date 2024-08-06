@@ -10,14 +10,14 @@ import WebKit
 
 class OnboardingViewModel: NSObject, ObservableObject {
     let url: URL
-    
-    var onFinishLoading: (() -> Void)?
+
+    var onFinishLoading: ((Error?) -> Void)?
     var onClose: (() -> Void)?
-    
+
     init(url: URL) {
         self.url = url
     }
-    
+
     func configureWebView(_ webView: WKWebView) {
         webView.navigationDelegate = self
         webView.configuration.userContentController.add(self, name: "closeWebView")
@@ -38,45 +38,25 @@ class OnboardingViewModel: NSObject, ObservableObject {
     }
 }
 
-
 extension OnboardingViewModel: WKNavigationDelegate, WKScriptMessageHandler {
-    public func webView(_: WKWebView, didStartProvisionalNavigation _: WKNavigation!) {
-        print("Started loading")
-//        isLoading = true
-    }
+    public func webView(_: WKWebView, didStartProvisionalNavigation _: WKNavigation!) {}
 
     public func webView(_: WKWebView, didFinish _: WKNavigation!) {
-//        print("Finished loading")
-//        isLoading = false
-
-//        removeApplicationSplash()
-        onFinishLoading?()
+        onFinishLoading?(nil)
     }
 
     public func webView(_: WKWebView, didFail _: WKNavigation!, withError error: Error) {
-        print("Failed to load with error: \(error.localizedDescription)")
-//        isLoading = false
+        onFinishLoading?(error)
     }
 
     public func userContentController(_: WKUserContentController, didReceive message: WKScriptMessage) {
-        if message.name == "closeWebView", let messageBody = message.body as? String, messageBody == "close" {
+        if message.name == "closeWebView",
+           let messageBody = message.body as? String, messageBody == "close"
+        {
             onClose?()
-//            delegate.octoflowsCloseAction()
-//            print("Close message received")
-//            withAnimation {
-//                self.parent.isPresented = false
-//            }
-//        } else if message.name == "sendData", let messageBody = message.body as? String {
-//            print("Data received: \(messageBody)")
-//            self.parent.receivedMessage = messageBody
-//
-//            if message.body as? String == "show paywall" {
-//                self.parent.paywallPresented = true
-//            }
         }
     }
 }
-
 
 private extension Octoflows {
     static let jsCodeInjection = """
