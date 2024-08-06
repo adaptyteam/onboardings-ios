@@ -28,7 +28,7 @@ extension Octoflows.LogMessage {
 }
 
 extension Octoflows.LogMessage: CustomStringConvertible, CustomDebugStringConvertible {
-    private static var dateFormatter: DateFormatter = {
+    private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .iso8601)
         formatter.locale = Locale(identifier: "en_US_POSIX")

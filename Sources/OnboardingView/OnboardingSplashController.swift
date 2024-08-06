@@ -16,7 +16,8 @@ public class OnboardingSplashController: UIViewController {
     private weak var delegate: OnboardingDelegate!
     private weak var splashDelegate: OnboardingSplashDelegate!
 
-    public init(
+    @MainActor
+    init(
         name: String,
         delegate: OnboardingDelegate,
         splashDelegate: OnboardingSplashDelegate
@@ -70,17 +71,15 @@ public class OnboardingSplashController: UIViewController {
     private func layoutOnboarding() async throws -> OnboardingController {
         let onboardingVC = try await Octoflows.createOnboardingController(
             name: name,
-            delegate: delegate, 
-            onFinishLoading: { [weak self] error in
+            delegate: delegate,
+            onFinishLoading: { [weak self] _ in
                 self?.removeApplicationSplash()
             }
         )
-        
+
         layoutChildController(onboardingVC, at: 0)
         return onboardingVC
     }
-
-
 
     private func layoutChildController(_ childVC: UIViewController, at index: Int? = nil) {
         if let index {
@@ -101,7 +100,7 @@ public class OnboardingSplashController: UIViewController {
 
         childVC.view.clipsToBounds = true
     }
-    
+
     private func layoutApplicationSplash() -> UIViewController? {
         guard let splashDelegate,
               let childVC = splashDelegate.octoflowsSplashViewController()
