@@ -18,7 +18,7 @@ extension Onbordings.RawEvent {
 //        case .none:
 //            let body = try? BodyDecoder.decode(body).asOptionalDictionary()
 //            let type = try? body?["type"].asOptionalString()
-//            self = .unknown(chanel: chanel, type: type)
+//            throw Onbordings.UnknownEventError(chanel: chanel, type: type)
 //        case .events:
         try self.init(chanel, eventBody: body)
 //        }
@@ -38,18 +38,17 @@ extension Onbordings.RawEvent {
 
         switch TypeName(rawValue: type) {
         case .none:
-            self = .unknown(chanel: chanel, type: type)
+            throw Onbordings.UnknownEventError(chanel: chanel, type: type)
         case .analytics:
             self = try .public(.stateUpdated(.init(body)))
         case .stateUpdated:
             self = try .public(.stateUpdated(.init(body)))
         case .close:
-            self = try .public(.close(.init(body)))
+            self = try .private(.close(.init(body)))
         case .openPaywall:
-            self = try .public(.openPaywall(.init(body)))
+            self = try .private(.openPaywall(.init(body)))
         case .custom:
-            self = try .public(.custom(.init(body)))
- 
+            self = try .private(.custom(.init(body)))
         }
     }
 }

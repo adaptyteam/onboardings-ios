@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Onbordings.Event {
+extension Onbordings {
     public struct CustomParameters: Sendable, Hashable {
         public let clientId: String
         public let meta: MetaParameters

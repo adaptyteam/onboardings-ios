@@ -59,5 +59,5 @@ public struct OnboardingView: UIViewControllerRepresentable {
 }
 
 final class OnboardinViewDelegateImpl: NSObject, OnboardingDelegate {
-    func onboardingsCloseAction() {}
+    func onboardingsCloseAction(clientId: String, withMeta: Onbordings.MetaParameters) {}
 }

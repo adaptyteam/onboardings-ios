@@ -42,8 +42,8 @@ public class OnboardingController: UIViewController {
 
         viewModel.configureWebView(webView)
         viewModel.onFinishLoading = onFinishLoading
-        viewModel.onClose = { [weak self] in
-            self?.delegate.onboardingsCloseAction()
+        viewModel.onEvent = { [weak self] event in
+            self?.delegate.apply(event: event)
         }
     }
 

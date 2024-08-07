@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Onbordings.Event {
+extension Onbordings {
     public struct StateUpdatedParameters: Sendable, Hashable {
         public let clientId: String
         public let meta: MetaParameters
@@ -46,7 +46,7 @@ extension Onbordings.Event {
     }
 }
 
-extension Onbordings.PublicEvent.StateUpdatedParameters {
+extension Onbordings.StateUpdatedParameters {
     public enum Value: Sendable, Hashable {
         case select(SelectValue)
         case multiSelect([SelectValue])
