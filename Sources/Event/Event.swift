@@ -11,8 +11,8 @@ import Foundation
 extension Onbordings {
     public enum Event: Sendable, Hashable {
         case close(CloseParameters)
-        case showPaywall(ShowPaywallParameters)
-        case example(ExampleParameters)
+        case openPaywall(OpenPaywallParameters)
+        case custom(CustomParameters)
     }
 
     typealias PublicEvent = Event
@@ -23,30 +23,64 @@ extension Onbordings {
 }
 
 extension Onbordings {
-    private enum RawEventName: String {
+    private enum EventChanelName: String {
+        case analytics
+        case event
+    }
+
+    private enum AnalyticsTypeName: String {
+        case test
+    }
+
+    private enum EventTypeName: String {
         case close
-        case showPaywall = "show_paywall"
-        case example
-        case privateExample = "private_example"
+        case openPaywall = "open_paywall"
+        case custom
     }
 
     enum RawEvent: Sendable, Hashable {
         case `public`(PublicEvent)
         case `private`(PrivateEvent)
-        case unknown(name: String)
+        case unknown(chanel: String, type: String?)
 
-        init(name: String, body: Any) throws {
-            switch RawEventName(rawValue: name) {
+        init(chanel: String, body: Any) throws {
+            switch EventChanelName(rawValue: chanel) {
+            case .none:
+                let body = try? BodyDecoder.decode(body).asOptionalDictionary()
+                let type = try? body?["type"].asOptionalString()
+                self = .unknown(chanel: chanel, type: type)
+            case .analytics:
+                self = try RawEvent(chanel, analyticsBody: body)
+            case .event:
+                self = try RawEvent(chanel, eventBody: body)
+            }
+        }
+
+        private init(_ chanel: String, analyticsBody body: Any) throws {
+            let body = try BodyDecoder.decode(body).asDictionary()
+            let type = try body["type"].asString()
+
+            switch AnalyticsTypeName(rawValue: type) {
+            case .none:
+                self = .unknown(chanel: chanel, type: type)
+            case .test:
+                self = .unknown(chanel: chanel, type: type)
+            }
+        }
+
+        private init(_ chanel: String, eventBody body: Any) throws {
+            let body = try BodyDecoder.decode(body).asDictionary()
+            let type = try body["type"].asString()
+
+            switch EventTypeName(rawValue: type) {
+            case .none:
+                self = .unknown(chanel: chanel, type: type)
             case .close:
                 self = try .public(.close(.init(body)))
-            case .showPaywall:
-                self = try .public(.showPaywall(.init(body)))
-            case .example:
-                self = try .public(.example(.init(body)))
-            case .privateExample:
-                self = try .private(.example(.init(body)))
-            default:
-                self = .unknown(name: name)
+            case .openPaywall:
+                self = try .public(.openPaywall(.init(body)))
+            case .custom:
+                self = try .public(.custom(.init(body)))
             }
         }
     }

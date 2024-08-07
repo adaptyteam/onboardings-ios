@@ -1,5 +1,5 @@
 //
-//  PublicEvent+Close.swift
+//  PublicEvent+OpenPaywall.swift
 //
 //
 //  Created by Aleksei Valiano on 01.08.2024
@@ -9,7 +9,7 @@
 import Foundation
 
 extension Onbordings.PublicEvent {
-    public struct CloseParameters: Sendable, Hashable {
+    public struct OpenPaywallParameters: Sendable, Hashable {
         let clientId: String
         let meta: MetaParameters
 
@@ -19,3 +19,5 @@ extension Onbordings.PublicEvent {
         }
     }
 }
+
+
