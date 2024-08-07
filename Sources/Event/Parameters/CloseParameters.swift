@@ -1,5 +1,5 @@
 //
-//  PublicEvent+Close.swift
+//  CloseParameters.swift
 //
 //
 //  Created by Aleksei Valiano on 01.08.2024
@@ -8,10 +8,10 @@
 
 import Foundation
 
-extension Onbordings.PublicEvent {
+extension Onbordings.Event {
     public struct CloseParameters: Sendable, Hashable {
-        let clientId: String
-        let meta: MetaParameters
+        public let clientId: String
+        public let meta: MetaParameters
 
         init(_ body: BodyDecoder.Dictionary) throws {
             self.clientId = try body["cid"].asString()

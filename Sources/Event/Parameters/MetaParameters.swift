@@ -1,5 +1,5 @@
 //
-//  PublicEvent+Menta.swift
+//  MetaParameters.swift
 //
 //
 //  Created by Aleksei Valiano on 01.08.2024
@@ -8,11 +8,11 @@
 
 import Foundation
 
-extension Onbordings.PublicEvent {
+extension Onbordings.Event {
     public struct MetaParameters: Sendable, Hashable {
-        let onboardingId: String
-        let screenClientId: String
-        let screenIndex: Int
+        public let onboardingId: String
+        public let screenClientId: String
+        public let screenIndex: Int
 
         init(_ body: BodyDecoder.Value) throws {
             let body = try body.asDictionary()

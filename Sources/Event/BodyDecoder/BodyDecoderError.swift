@@ -9,10 +9,11 @@
 import Foundation
 
 enum BodyDecoderError: Error {
-    case valueIsNil
-    case valueIsNotDictionary
-    case valueIsNotArray
-    case valueIsNotNSNumber
-    case valueIsNotString
-    case valueIsNotDate
+    case isNil
+    case isNotDictionary
+    case isNotArray
+    case isNotNSNumber
+    case isNotString
+    case isNotDate
+    case wrongValue
 }

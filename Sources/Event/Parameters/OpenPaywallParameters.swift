@@ -1,5 +1,5 @@
 //
-//  PublicEvent+Custom.swift
+//  OpenPaywallParameters.swift
 //
 //
 //  Created by Aleksei Valiano on 01.08.2024
@@ -8,10 +8,10 @@
 
 import Foundation
 
-extension Onbordings.PublicEvent {
-    public struct CustomParameters: Sendable, Hashable {
-        let clientId: String
-        let meta: MetaParameters
+extension Onbordings.Event {
+    public struct OpenPaywallParameters: Sendable, Hashable {
+        public let clientId: String
+        public let meta: MetaParameters
 
         init(_ body: BodyDecoder.Dictionary) throws {
             self.clientId = try body["cid"].asString()
@@ -19,3 +19,5 @@ extension Onbordings.PublicEvent {
         }
     }
 }
+
+

@@ -11,7 +11,7 @@ import Foundation
 enum BodyDecoder {
     private static func dictionary(from value: Any) throws -> [String: Any?] {
         guard let value = value as? [String: Any?] else {
-            throw BodyDecoderError.valueIsNotDictionary
+            throw BodyDecoderError.isNotDictionary
         }
 
         return value
@@ -19,7 +19,7 @@ enum BodyDecoder {
 
     private static func array(from value: Any) throws -> [Any?] {
         guard let value = value as? [Any?] else {
-            throw BodyDecoderError.valueIsNotArray
+            throw BodyDecoderError.isNotArray
         }
 
         return value
@@ -27,7 +27,7 @@ enum BodyDecoder {
 
     private static func string(from value: Any) throws -> String {
         guard let value = value as? String else {
-            throw BodyDecoderError.valueIsNotString
+            throw BodyDecoderError.isNotString
         }
 
         return value
@@ -35,7 +35,7 @@ enum BodyDecoder {
 
     private static func date(from value: Any) throws -> Date {
         guard let value = value as? Date else {
-            throw BodyDecoderError.valueIsNotDate
+            throw BodyDecoderError.isNotDate
         }
 
         return value
@@ -43,7 +43,7 @@ enum BodyDecoder {
 
     private static func number(from value: Any) throws -> NSNumber {
         guard let value = value as? NSNumber else {
-            throw BodyDecoderError.valueIsNotNSNumber
+            throw BodyDecoderError.isNotNSNumber
         }
 
         return value
@@ -104,7 +104,7 @@ enum BodyDecoder {
         }
 
         func asDictionary() throws -> Dictionary {
-            guard let value else { throw BodyDecoderError.valueIsNil }
+            guard let value else { throw BodyDecoderError.isNil }
             return try Dictionary(BodyDecoder.dictionary(from: value))
         }
 
@@ -114,7 +114,7 @@ enum BodyDecoder {
         }
 
         func asArray() throws -> Array {
-            guard let value else { throw BodyDecoderError.valueIsNil }
+            guard let value else { throw BodyDecoderError.isNil }
             return try Array(BodyDecoder.array(from: value))
         }
 
@@ -124,7 +124,7 @@ enum BodyDecoder {
         }
 
         func asString() throws -> String {
-            guard let value else { throw BodyDecoderError.valueIsNil }
+            guard let value else { throw BodyDecoderError.isNil }
             return try BodyDecoder.string(from: value)
         }
 
@@ -134,7 +134,7 @@ enum BodyDecoder {
         }
 
         func asBool() throws -> Bool {
-            guard let value else { throw BodyDecoderError.valueIsNil }
+            guard let value else { throw BodyDecoderError.isNil }
             return try BodyDecoder.bool(from: value)
         }
 
@@ -144,7 +144,7 @@ enum BodyDecoder {
         }
 
         func asInt() throws -> Int {
-            guard let value else { throw BodyDecoderError.valueIsNil }
+            guard let value else { throw BodyDecoderError.isNil }
             return try BodyDecoder.int(from: value)
         }
 
@@ -154,7 +154,7 @@ enum BodyDecoder {
         }
 
         func asDouble() throws -> Double {
-            guard let value else { throw BodyDecoderError.valueIsNil }
+            guard let value else { throw BodyDecoderError.isNil }
             return try BodyDecoder.double(from: value)
         }
 
@@ -164,7 +164,7 @@ enum BodyDecoder {
         }
 
         func asDate() throws -> Date {
-            guard let value else { throw BodyDecoderError.valueIsNil }
+            guard let value else { throw BodyDecoderError.isNil }
             return try BodyDecoder.date(from: value)
         }
 
