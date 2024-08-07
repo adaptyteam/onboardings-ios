@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Octoflows.PublicEvent {
+extension Onbordings.PublicEvent {
     public struct ExampleParameters: Sendable, Hashable {
         let str: String
         let number: Int?

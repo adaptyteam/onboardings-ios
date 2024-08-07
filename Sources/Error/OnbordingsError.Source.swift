@@ -8,9 +8,9 @@
 
 import Foundation
 
-extension OctoflowsError {
+extension OnbordingsError {
     public struct Source: Sendable {
-        public let version = Octoflows.SDKVersion
+        public let version = Onbordings.SDKVersion
         public let file: String
         public let function: String
         public let line: UInt
@@ -23,6 +23,6 @@ extension OctoflowsError {
     }
 }
 
-extension OctoflowsError.Source: CustomStringConvertible {
+extension OnbordingsError.Source: CustomStringConvertible {
     public var description: String { "[\(version)]: \(file)#\(line)" }
 }

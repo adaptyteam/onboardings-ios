@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension Octoflows {
+extension Onbordings {
     @MainActor
     func createOnboardingController(
         name: String,

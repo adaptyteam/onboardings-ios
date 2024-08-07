@@ -8,10 +8,10 @@
 
 import Foundation
 
-public struct Octoflows: Sendable {
+public struct Onbordings: Sendable {
     let configuration: Configuration
 
-    @OctoflowsActor
+    @OnbordingsActor
     private init(configuration: Configuration) async throws {
         self.configuration = configuration
         await Log.set(level: configuration.logLevel, handler: configuration.logHandler)
@@ -19,16 +19,16 @@ public struct Octoflows: Sendable {
     }
 }
 
-extension Octoflows {
+extension Onbordings {
     @MainActor
-    private static var shared: Task<Octoflows, Error>?
+    private static var shared: Task<Onbordings, Error>?
 
-    package static var activated: Octoflows {
+    package static var activated: Onbordings {
         get async throws {
             if let task = await shared {
                 try await task.value
             } else {
-                throw OctoflowsError.notActivated()
+                throw OnbordingsError.notActivated()
             }
         }
     }
@@ -36,11 +36,11 @@ extension Octoflows {
     @MainActor
     static func startActivate(with configuration: Configuration) throws {
         guard shared == nil else {
-            throw OctoflowsError.activateOnce()
+            throw OnbordingsError.activateOnce()
         }
 
         shared = Task {
-            try await Octoflows(configuration: configuration)
+            try await Onbordings(configuration: configuration)
         }
     }
 }

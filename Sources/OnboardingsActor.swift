@@ -9,6 +9,6 @@
 import Foundation
 
 @globalActor
-package actor OctoflowsActor {
-    package static let shared = OctoflowsActor()
+package actor OnbordingsActor {
+    package static let shared = OnbordingsActor()
 }

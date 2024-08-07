@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Octoflows.PublicEvent {
+extension Onbordings.PublicEvent {
     public struct ShowPaywallParameters: Sendable, Hashable {
         init(_: Any) throws {}
     }

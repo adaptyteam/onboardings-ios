@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Octoflows
+import Onbordings
 
 class ViewModel: ObservableObject {
     @Published var onboardingFinished = false
@@ -14,14 +14,14 @@ class ViewModel: ObservableObject {
     @MainActor
     func initialize() {
         do {
-            let configuration = try Octoflows.Configuration
+            let configuration = try Onbordings.Configuration
                 .Builder(withAPIKey: "") // TODO: insert apiKey
                 .with(alternativeBaseUrl: URL(string: "https://x.fnlfx.com/")! ) // TODO: remove
                 .with(loglevel: .verbose)
                 .build()
 
-            try Octoflows.activate(with: configuration)
-        } catch let error as OctoflowsError {
+            try Onbordings.activate(with: configuration)
+        } catch let error as OnbordingsError {
             // handle the error
         }
     }

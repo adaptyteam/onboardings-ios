@@ -8,9 +8,9 @@
 
 import Foundation
 
-extension Octoflows.LogLevel: Codable {
+extension Onbordings.LogLevel: Codable {
     public init(from decoder: Decoder) throws {
-        self = try Octoflows.LogLevel(stringLiteral: decoder.singleValueContainer().decode(String.self))
+        self = try Onbordings.LogLevel(stringLiteral: decoder.singleValueContainer().decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

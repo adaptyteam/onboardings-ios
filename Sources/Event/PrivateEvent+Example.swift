@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Octoflows.PrivateEvent {
+extension Onbordings.PrivateEvent {
     struct ExampleParameters: Sendable, Hashable {
         let date: Date
 

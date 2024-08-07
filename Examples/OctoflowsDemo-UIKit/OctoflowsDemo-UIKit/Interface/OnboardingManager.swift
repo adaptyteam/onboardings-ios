@@ -5,7 +5,7 @@
 //  Created by Aleksey Goncharov on 02.08.2024.
 //
 
-import Octoflows
+import Onbordings
 import UIKit
 
 final class OnboardingManager: NSObject {
@@ -15,7 +15,7 @@ final class OnboardingManager: NSObject {
 
     @MainActor
     func initialize(scene: UIScene) -> UIWindow? {
-        activateOctoflows()
+        activateOnbordings()
 
         guard let windowScene = (scene as? UIWindowScene) else { return nil }
 
@@ -23,12 +23,12 @@ final class OnboardingManager: NSObject {
         presentOnboarding()
         return window
     }
-    
-    @MainActor 
+
+    @MainActor
     func presentOnboarding() {
         guard let window else { return }
 
-        window.rootViewController = Octoflows.createSplashController(
+        window.rootViewController = Onbordings.createSplashController(
             name: "funnel_a",
             delegate: self,
             splashDelegate: self
@@ -37,23 +37,23 @@ final class OnboardingManager: NSObject {
     }
 
     @MainActor
-    private func activateOctoflows() {
+    private func activateOnbordings() {
         do {
-            let configuration = try Octoflows.Configuration
+            let configuration = try Onbordings.Configuration
                 .Builder(withAPIKey: "")  // TODO: insert apiKey
                 .with(alternativeBaseUrl: URL(string: "https://x.fnlfx.com/")! ) // TODO: remove
                 .with(loglevel: .verbose)
                 .build()
 
-            try Octoflows.activate(with: configuration)
-        } catch let error as OctoflowsError {
+            try Onbordings.activate(with: configuration)
+        } catch let error as OnbordingsError {
             // handle the error
         }
     }
 }
 
 extension OnboardingManager: OnboardingDelegate {
-    func octoflowsCloseAction() {
+    func onbordingsCloseAction() {
         guard let window else { return }
 
         window.rootViewController = ViewController.instantiate()
@@ -68,7 +68,7 @@ extension OnboardingManager: OnboardingDelegate {
 }
 
 extension OnboardingManager: OnboardingSplashDelegate {
-    func octoflowsSplashViewController() -> UIViewController? {
+    func onbordingsSplashViewController() -> UIViewController? {
         SplashController.instantiate()
     }
 }

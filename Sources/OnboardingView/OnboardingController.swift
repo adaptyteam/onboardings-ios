@@ -1,6 +1,6 @@
 //
 //  OnboardingController.swift
-//  OctoflowsDemo-UIKit
+//
 //
 //  Created by Aleksey Goncharov on 02.08.2024.
 //
@@ -43,7 +43,7 @@ public class OnboardingController: UIViewController {
         viewModel.configureWebView(webView)
         viewModel.onFinishLoading = onFinishLoading
         viewModel.onClose = { [weak self] in
-            self?.delegate.octoflowsCloseAction()
+            self?.delegate.onboardingsCloseAction()
         }
     }
 

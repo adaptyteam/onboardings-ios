@@ -8,13 +8,13 @@
 
 import Foundation
 
-public enum OctoflowsError: Error, Sendable {
+public enum OnbordingsError: Error, Sendable {
     case wrongApiKey(Source, description: String)
     case notActivated(Source)
     case activateOnce(Source)
 }
 
-extension OctoflowsError {
+extension OnbordingsError {
     public var source: Source {
         switch self {
         case let .wrongApiKey(src, _),
@@ -32,14 +32,14 @@ extension OctoflowsError {
     }
 }
 
-extension OctoflowsError {
+extension OnbordingsError {
     static func wrongApiKey(
         description: String,
         file: String = #fileID,
         function: String = #function,
         line: UInt = #line
     ) -> Self {
-        .wrongApiKey(OctoflowsError.Source(file: file, function: function, line: line), description: description)
+        .wrongApiKey(OnbordingsError.Source(file: file, function: function, line: line), description: description)
     }
 
     static func activateOnce(
@@ -47,7 +47,7 @@ extension OctoflowsError {
         function: String = #function,
         line: UInt = #line
     ) -> Self {
-        .activateOnce(OctoflowsError.Source(file: file, function: function, line: line))
+        .activateOnce(OnbordingsError.Source(file: file, function: function, line: line))
     }
 
     static func notActivated(
@@ -55,6 +55,6 @@ extension OctoflowsError {
         function: String = #function,
         line: UInt = #line
     ) -> Self {
-        .notActivated(OctoflowsError.Source(file: file, function: function, line: line))
+        .notActivated(OnbordingsError.Source(file: file, function: function, line: line))
     }
 }

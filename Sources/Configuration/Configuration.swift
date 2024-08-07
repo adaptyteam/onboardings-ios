@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Octoflows {
+extension Onbordings {
     public struct Configuration: Sendable {
         let apiKey: String
         let baseUrl: URL
@@ -17,13 +17,13 @@ extension Octoflows {
     }
 }
 
-extension Octoflows.Configuration {
+extension Onbordings.Configuration {
     static func createBaseUrl(apiKey: String) -> URL? {
         URL(string: "https://\(apiKey).fnlfx.com/")
     }
 }
 
-extension Octoflows.Configuration: CustomDebugStringConvertible {
+extension Onbordings.Configuration: CustomDebugStringConvertible {
     public var debugDescription: String {
         "{baseUrl: \(baseUrl.absoluteString), logLevel: \(logLevel.description)}"
     }

@@ -12,7 +12,7 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             VStack {
-                Text("Welcome to Octoflows SDK!")
+                Text("Welcome to Onbordings SDK!")
             }
             .padding()
         }

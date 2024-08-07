@@ -8,6 +8,6 @@
 
 import Foundation
 
-extension Octoflows {
+extension Onbordings {
     public static let SDKVersion = "1.0.0-SNAPSHOT"
 }

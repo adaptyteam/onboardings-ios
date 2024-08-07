@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Octoflows {
+extension Onbordings {
     public enum LogLevel: Int, Sendable {
         public static let `default` = LogLevel.info
 

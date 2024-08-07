@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension Octoflows {
+public extension Onbordings {
     @MainActor
     static func activate(_ apiKey: String) throws {
         try activate(
@@ -19,12 +19,12 @@ public extension Octoflows {
     }
 
     @MainActor
-    static func activate(with builder: Octoflows.Configuration.Builder) throws {
+    static func activate(with builder: Onbordings.Configuration.Builder) throws {
         try activate(with: builder.build())
     }
 
     @MainActor
-    static func activate(with configuration: Octoflows.Configuration) throws {
+    static func activate(with configuration: Onbordings.Configuration) throws {
         try startActivate(with: configuration)
     }
 

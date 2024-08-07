@@ -5,7 +5,7 @@
 //  Created by Aleksey Goncharov on 02.08.2024.
 //
 
-import Octoflows
+import Onbordings
 import UIKit
 
 @main

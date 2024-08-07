@@ -8,16 +8,16 @@
 
 import Foundation
 
-extension Octoflows {
+extension Onbordings {
     public struct LogMessage: Sendable {
         public let date: Date
-        public let level: Octoflows.LogLevel
+        public let level: Onbordings.LogLevel
         public let message: String
         public let source: Source
     }
 }
 
-extension Octoflows.LogMessage {
+extension Onbordings.LogMessage {
     public struct Source: Sendable {
         public let sdkVersion: String
         public let threadName: String
@@ -27,7 +27,7 @@ extension Octoflows.LogMessage {
     }
 }
 
-extension Octoflows.LogMessage: CustomStringConvertible, CustomDebugStringConvertible {
+extension Onbordings.LogMessage: CustomStringConvertible, CustomDebugStringConvertible {
     private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .iso8601)
@@ -50,12 +50,12 @@ extension Octoflows.LogMessage: CustomStringConvertible, CustomDebugStringConver
     }
 }
 
-extension Octoflows.LogMessage.Source: CustomStringConvertible, CustomDebugStringConvertible {
+extension Onbordings.LogMessage.Source: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {
-        "[Octoflows v\(sdkVersion)]"
+        "[Onbordings v\(sdkVersion)]"
     }
 
     public var debugDescription: String {
-        "[Octoflows v\(sdkVersion)]  thrd: \(threadName), func: \(functionName)]\t \(fileName)#\(lineNumber)]"
+        "[Onbordings v\(sdkVersion)]  thrd: \(threadName), func: \(functionName)]\t \(fileName)#\(lineNumber)]"
     }
 }

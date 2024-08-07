@@ -8,8 +8,8 @@
 
 import Foundation
 
-extension OctoflowsError: CustomNSError {
-    public static let errorDomain = "OctoflowsErrorDomain"
+extension OnbordingsError: CustomNSError {
+    public static let errorDomain = "OnbordingsErrorDomain"
 
     public var errorCode: Int { code.rawValue }
 

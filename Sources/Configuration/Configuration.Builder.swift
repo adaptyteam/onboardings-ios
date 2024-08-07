@@ -8,11 +8,11 @@
 
 import Foundation
 
-extension Octoflows.Configuration {
+extension Onbordings.Configuration {
     init(with builder: Builder) throws {
         let apiKey = builder.apiKey
         guard let baseUrl = builder.alternativeBaseUrl ?? Self.createBaseUrl(apiKey: apiKey) else {
-            throw OctoflowsError.wrongApiKey(description: "unable to create baseUrl.")
+            throw OnbordingsError.wrongApiKey(description: "unable to create baseUrl.")
         }
 
         self.init(
@@ -30,23 +30,23 @@ extension Octoflows.Configuration {
     public final class Builder {
         public private(set) var apiKey: String
         public private(set) var alternativeBaseUrl: URL?
-        public private(set) var logLevel: Octoflows.LogLevel
-        public private(set) var logHandler: Octoflows.LogHandler
+        public private(set) var logLevel: Onbordings.LogLevel
+        public private(set) var logHandler: Onbordings.LogHandler
 
         public convenience init(withAPIKey key: String) {
             self.init(
                 apiKey: key,
                 alternativeBaseUrl: nil,
                 logLevel: .default,
-                logHandler: Octoflows.defaultLogHandler
+                logHandler: Onbordings.defaultLogHandler
             )
         }
 
         init(
             apiKey: String,
             alternativeBaseUrl: URL? = nil,
-            logLevel: Octoflows.LogLevel,
-            logHandler: @escaping Octoflows.LogHandler
+            logLevel: Onbordings.LogLevel,
+            logHandler: @escaping Onbordings.LogHandler
         ) {
             self.apiKey = apiKey
             self.alternativeBaseUrl = alternativeBaseUrl
@@ -54,14 +54,14 @@ extension Octoflows.Configuration {
             self.logHandler = logHandler
         }
 
-        /// Call this method to get the ``Octoflows.Configuration`` object.
-        public func build() throws -> Octoflows.Configuration {
+        /// Call this method to get the ``Onbordings.Configuration`` object.
+        public func build() throws -> Onbordings.Configuration {
             try .init(with: self)
         }
     }
 }
 
-extension Octoflows.Configuration.Builder: Decodable {
+extension Onbordings.Configuration.Builder: Decodable {
     enum CodingKeys: String, CodingKey {
         case apiKey = "api_key"
         case alternativeBaseUrl = "base_url"
@@ -74,13 +74,13 @@ extension Octoflows.Configuration.Builder: Decodable {
         try self.init(
             apiKey: container.decode(String.self, forKey: .apiKey),
             alternativeBaseUrl: container.decodeIfPresent(URL.self, forKey: .alternativeBaseUrl),
-            logLevel: container.decode(Octoflows.LogLevel.self, forKey: .logLevel),
-            logHandler: Octoflows.defaultLogHandler
+            logLevel: container.decode(Onbordings.LogLevel.self, forKey: .logLevel),
+            logHandler: Onbordings.defaultLogHandler
         )
     }
 }
 
-extension Octoflows.Configuration.Builder {
+extension Onbordings.Configuration.Builder {
     public func with(apiKey key: String) -> Self {
         apiKey = key
         return self
@@ -91,12 +91,12 @@ extension Octoflows.Configuration.Builder {
         return self
     }
 
-    public func with(loglevel level: Octoflows.LogLevel) -> Self {
+    public func with(loglevel level: Onbordings.LogLevel) -> Self {
         logLevel = level
         return self
     }
 
-    public func with(logHandler handler: @escaping Octoflows.LogHandler) -> Self {
+    public func with(logHandler handler: @escaping Onbordings.LogHandler) -> Self {
         logHandler = handler
         return self
     }

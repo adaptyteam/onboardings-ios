@@ -1,6 +1,6 @@
 //
 //  OnboardingViewModel.swift
-//  Octoflows
+//  Onbordings
 //
 //  Created by Aleksey Goncharov on 05.08.2024.
 //
@@ -25,7 +25,7 @@ class OnboardingViewModel: NSObject, ObservableObject {
 
         // Inject JavaScript
         let userScript = WKUserScript(
-            source: Octoflows.jsCodeInjection,
+            source: Onbordings.jsCodeInjection,
             injectionTime: .atDocumentEnd,
             forMainFrameOnly: true
         )
@@ -58,7 +58,7 @@ extension OnboardingViewModel: WKNavigationDelegate, WKScriptMessageHandler {
     }
 }
 
-private extension Octoflows {
+private extension Onbordings {
     static let jsCodeInjection = """
     // Create a new meta element
     var metaTag = document.createElement('meta');

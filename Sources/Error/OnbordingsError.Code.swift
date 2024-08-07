@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension OctoflowsError {
+public extension OnbordingsError {
     enum Code: Int {
         case unknown = 0
         case wrongApiKey = 1

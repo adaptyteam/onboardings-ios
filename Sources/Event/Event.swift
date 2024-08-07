@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Octoflows {
+extension Onbordings {
     public enum Event: Sendable, Hashable {
         case close(CloseParameters)
         case showPaywall(ShowPaywallParameters)
@@ -22,7 +22,7 @@ extension Octoflows {
     }
 }
 
-extension Octoflows {
+extension Onbordings {
     private enum RawEventName: String {
         case close
         case showPaywall = "show_paywall"

@@ -13,10 +13,10 @@ import os.log
     extension OSLog: @unchecked Sendable {}
 #endif
 
-extension Octoflows {
+extension Onbordings {
     public typealias LogHandler = @Sendable (LogMessage) -> Void
 
-    private static let logger = OSLog(subsystem: "io.adapty.octoflows", category: "sdk")
+    private static let logger = OSLog(subsystem: "io.adapty.onbordings", category: "sdk")
 
     @Sendable
     static func defaultLogHandler(_ msg: LogMessage) {
@@ -24,7 +24,7 @@ extension Octoflows {
     }
 }
 
-private extension Octoflows.LogLevel {
+private extension Onbordings.LogLevel {
     var asOSLogType: OSLogType {
         switch self {
         case .error:

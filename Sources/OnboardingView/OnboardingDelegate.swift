@@ -9,9 +9,9 @@
 import UIKit
 
 public protocol OnboardingDelegate: NSObjectProtocol {
-    func octoflowsCloseAction()
+    func onboardingsCloseAction()
 }
 
 public protocol OnboardingSplashDelegate: NSObjectProtocol {
-    func octoflowsSplashViewController() -> UIViewController?
+    func onboardingsSplashViewController() -> UIViewController?
 }

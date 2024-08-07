@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Octoflows.LogMessage: Codable {
+extension Onbordings.LogMessage: Codable {
     enum CodingKeys: String, CodingKey {
         case date
         case level
@@ -19,9 +19,9 @@ extension Octoflows.LogMessage: Codable {
     public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         date = try Date(timeIntervalSince1970: container.decode(Double.self, forKey: .date) / 1000.0)
-        level = try container.decode(Octoflows.LogLevel.self, forKey: .level)
+        level = try container.decode(Onbordings.LogLevel.self, forKey: .level)
         message = try container.decode(String.self, forKey: .message)
-        source = try container.decode(Octoflows.LogMessage.Source.self, forKey: .source)
+        source = try container.decode(Onbordings.LogMessage.Source.self, forKey: .source)
     }
 
     public func encode(to encoder: any Encoder) throws {
@@ -33,7 +33,7 @@ extension Octoflows.LogMessage: Codable {
     }
 }
 
-extension Octoflows.LogMessage.Source: Codable {
+extension Onbordings.LogMessage.Source: Codable {
     enum CodingKeys: String, CodingKey {
         case sdkVersion = "sdk_version"
         case threadName = "thread"

@@ -1,6 +1,6 @@
 //
 //  OnboardingSplashController.swift
-//  Octoflows
+//  Onbordings
 //
 //  Created by Aleksey Goncharov on 05.08.2024.
 //
@@ -69,7 +69,7 @@ public class OnboardingSplashController: UIViewController {
     }
 
     private func layoutOnboarding() async throws -> OnboardingController {
-        let onboardingVC = try await Octoflows.createOnboardingController(
+        let onboardingVC = try await Onbordings.createOnboardingController(
             name: name,
             delegate: delegate,
             onFinishLoading: { [weak self] _ in
@@ -103,7 +103,7 @@ public class OnboardingSplashController: UIViewController {
 
     private func layoutApplicationSplash() -> UIViewController? {
         guard let splashDelegate,
-              let childVC = splashDelegate.octoflowsSplashViewController()
+              let childVC = splashDelegate.onboardingsSplashViewController()
         else {
             return nil
         }
