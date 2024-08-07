@@ -1,5 +1,5 @@
 //
-//  OctoflowsActor.swift
+//  OnboardingsActor.swift
 //
 //
 //  Created by Aleksei Valiano on 06.08.2024

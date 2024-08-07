@@ -1,5 +1,5 @@
 //
-//  OctoflowsError.Code.swift
+//  OnbordingsError.Code.swift
 //
 //
 //  Created by Aleksei Valiano on 30.07.2024

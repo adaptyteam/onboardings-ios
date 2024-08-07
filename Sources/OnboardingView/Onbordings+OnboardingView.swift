@@ -1,5 +1,5 @@
 //
-//  Octoflows+OnboardingView.swift
+//  Onbordings+OnboardingView.swift
 //
 //
 //  Created by Aleksei Valiano on 01.08.2024

@@ -1,5 +1,5 @@
 //
-//  OctoflowsError+CustomDebugStringConvertible.swift
+//  OnbordingsError+CustomDebugStringConvertible.swift
 //
 //
 //  Created by Aleksei Valiano on 30.07.2024
