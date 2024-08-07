@@ -1,5 +1,5 @@
 //
-//  StateUpdatedParameters.swift
+//  StateUpdatedEvent.swift
 //
 //
 //  Created by Aleksei Valiano on 01.08.2024
@@ -9,7 +9,7 @@
 import Foundation
 
 extension Onbordings {
-    public struct StateUpdatedParameters: Sendable, Hashable {
+    public struct StateUpdatedEvent: Sendable, Hashable {
         public let clientId: String
         public let meta: MetaParameters
         public let value: Value
@@ -46,7 +46,7 @@ extension Onbordings {
     }
 }
 
-extension Onbordings.StateUpdatedParameters {
+extension Onbordings.StateUpdatedEvent {
     public enum Value: Sendable, Hashable {
         case select(SelectValue)
         case multiSelect([SelectValue])

@@ -10,7 +10,8 @@ import Foundation
 
 extension Onbordings {
     public enum Event: Sendable, Hashable {
-        case stateUpdated(StateUpdatedParameters)
+        case analytics(AnalyticsEvent)
+        case stateUpdated(StateUpdatedEvent)
     }
 
     typealias PublicEvent = Event

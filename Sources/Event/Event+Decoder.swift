@@ -40,7 +40,7 @@ extension Onbordings.RawEvent {
         case .none:
             throw Onbordings.UnknownEventError(chanel: chanel, type: type)
         case .analytics:
-            self = try .public(.stateUpdated(.init(body)))
+            self = try .public(.analytics(.init(body)))
         case .stateUpdated:
             self = try .public(.stateUpdated(.init(body)))
         case .close:
