@@ -2,20 +2,20 @@
 import PackageDescription
 
 let package = Package(
-    name: "Octoflows",
+    name: "Onbordings",
 
     platforms: [
         .iOS("13"),
     ],
     products: [
         .library(
-            name: "Octoflows",
-            targets: ["Octoflows"]
+            name: "Onbordings",
+            targets: ["Onbordings"]
         ),
     ],
     targets: [
         .target(
-            name: "Octoflows",
+            name: "Onbordings",
             dependencies: [],
             resources: [.copy("PrivacyInfo.xcprivacy")]
         ),
