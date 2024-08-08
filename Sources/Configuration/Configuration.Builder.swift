@@ -8,11 +8,11 @@
 
 import Foundation
 
-extension Onbordings.Configuration {
+extension Onboardings.Configuration {
     init(with builder: Builder) throws {
         let apiKey = builder.apiKey
         guard let baseUrl = builder.alternativeBaseUrl ?? Self.createBaseUrl(apiKey: apiKey) else {
-            throw OnbordingsError.wrongApiKey(description: "unable to create baseUrl.")
+            throw OnboardingsError.wrongApiKey(description: "unable to create baseUrl.")
         }
 
         self.init(
@@ -30,23 +30,23 @@ extension Onbordings.Configuration {
     public final class Builder {
         public private(set) var apiKey: String
         public private(set) var alternativeBaseUrl: URL?
-        public private(set) var logLevel: Onbordings.LogLevel
-        public private(set) var logHandler: Onbordings.LogHandler
+        public private(set) var logLevel: Onboardings.LogLevel
+        public private(set) var logHandler: Onboardings.LogHandler
 
         public convenience init(withAPIKey key: String) {
             self.init(
                 apiKey: key,
                 alternativeBaseUrl: nil,
                 logLevel: .default,
-                logHandler: Onbordings.defaultLogHandler
+                logHandler: Onboardings.defaultLogHandler
             )
         }
 
         init(
             apiKey: String,
             alternativeBaseUrl: URL? = nil,
-            logLevel: Onbordings.LogLevel,
-            logHandler: @escaping Onbordings.LogHandler
+            logLevel: Onboardings.LogLevel,
+            logHandler: @escaping Onboardings.LogHandler
         ) {
             self.apiKey = apiKey
             self.alternativeBaseUrl = alternativeBaseUrl
@@ -54,14 +54,14 @@ extension Onbordings.Configuration {
             self.logHandler = logHandler
         }
 
-        /// Call this method to get the ``Onbordings.Configuration`` object.
-        public func build() throws -> Onbordings.Configuration {
+        /// Call this method to get the ``Onboardings.Configuration`` object.
+        public func build() throws -> Onboardings.Configuration {
             try .init(with: self)
         }
     }
 }
 
-extension Onbordings.Configuration.Builder: Decodable {
+extension Onboardings.Configuration.Builder: Decodable {
     enum CodingKeys: String, CodingKey {
         case apiKey = "api_key"
         case alternativeBaseUrl = "base_url"
@@ -74,13 +74,13 @@ extension Onbordings.Configuration.Builder: Decodable {
         try self.init(
             apiKey: container.decode(String.self, forKey: .apiKey),
             alternativeBaseUrl: container.decodeIfPresent(URL.self, forKey: .alternativeBaseUrl),
-            logLevel: container.decode(Onbordings.LogLevel.self, forKey: .logLevel),
-            logHandler: Onbordings.defaultLogHandler
+            logLevel: container.decode(Onboardings.LogLevel.self, forKey: .logLevel),
+            logHandler: Onboardings.defaultLogHandler
         )
     }
 }
 
-extension Onbordings.Configuration.Builder {
+extension Onboardings.Configuration.Builder {
     public func with(apiKey key: String) -> Self {
         apiKey = key
         return self
@@ -91,12 +91,12 @@ extension Onbordings.Configuration.Builder {
         return self
     }
 
-    public func with(loglevel level: Onbordings.LogLevel) -> Self {
+    public func with(loglevel level: Onboardings.LogLevel) -> Self {
         logLevel = level
         return self
     }
 
-    public func with(logHandler handler: @escaping Onbordings.LogHandler) -> Self {
+    public func with(logHandler handler: @escaping Onboardings.LogHandler) -> Self {
         logHandler = handler
         return self
     }

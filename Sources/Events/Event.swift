@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Onbordings {
+extension Onboardings {
     enum Event: Sendable, Hashable {
         case analytics(AnalyticsEvent)
         case stateUpdated(StateUpdatedEvent)
@@ -23,7 +23,7 @@ extension Onbordings {
     }
 }
 
-extension Onbordings.Event: CustomDebugStringConvertible {
+extension Onboardings.Event: CustomDebugStringConvertible {
     var debugDescription: String {
         switch self {
         case let .analytics(event):

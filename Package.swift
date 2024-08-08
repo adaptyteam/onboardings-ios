@@ -2,20 +2,20 @@
 import PackageDescription
 
 let package = Package(
-    name: "Onbordings",
+    name: "Onboardings",
 
     platforms: [
         .iOS("13"),
     ],
     products: [
         .library(
-            name: "Onbordings",
-            targets: ["Onbordings"]
+            name: "Onboardings",
+            targets: ["Onboardings"]
         ),
     ],
     targets: [
         .target(
-            name: "Onbordings",
+            name: "Onboardings",
             dependencies: [],
             resources: [.copy("PrivacyInfo.xcprivacy")]
         ),

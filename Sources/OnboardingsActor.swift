@@ -9,6 +9,6 @@
 import Foundation
 
 @globalActor
-package actor OnbordingsActor {
-    package static let shared = OnbordingsActor()
+package actor OnboardingsActor {
+    package static let shared = OnboardingsActor()
 }

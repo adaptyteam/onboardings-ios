@@ -1,5 +1,5 @@
 //
-//  OnbordingsError+NSError.swift
+//  OnboardingsError+NSError.swift
 //
 //
 //  Created by Aleksei Valiano on 30.07.2024
@@ -8,8 +8,8 @@
 
 import Foundation
 
-extension OnbordingsError: CustomNSError {
-    public static let errorDomain = "OnbordingsErrorDomain"
+extension OnboardingsError: CustomNSError {
+    public static let errorDomain = "OnboardingsErrorDomain"
 
     public var errorCode: Int { code.rawValue }
 

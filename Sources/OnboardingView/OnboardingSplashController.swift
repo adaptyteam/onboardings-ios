@@ -1,13 +1,13 @@
 //
 //  OnboardingSplashController.swift
-//  Onbordings
+//  Onboardings
 //
 //  Created by Aleksey Goncharov on 05.08.2024.
 //
 
 import UIKit
 
-public class OnboardingSplashController: UIViewController {
+public final class OnboardingSplashController: UIViewController {
     private let id: String
 
     private weak var applicationSplashVC: UIViewController?
@@ -69,7 +69,7 @@ public class OnboardingSplashController: UIViewController {
     }
 
     private func layoutOnboarding() async throws -> OnboardingController {
-        let onboardingVC = try await Onbordings.createOnboardingController(
+        let onboardingVC = try await Onboardings.createOnboardingController(
             id: id,
             delegate: delegate,
             onFinishLoading: { [weak self] in

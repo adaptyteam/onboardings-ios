@@ -1,5 +1,5 @@
 //
-//  OnbordingsError.Source.swift
+//  OnboardingsError.Source.swift
 //
 //
 //  Created by Aleksei Valiano on 30.07.2024
@@ -8,9 +8,9 @@
 
 import Foundation
 
-extension OnbordingsError {
+extension OnboardingsError {
     public struct Source: Sendable {
-        public let version = Onbordings.SDKVersion
+        public let version = Onboardings.SDKVersion
         public let file: String
         public let function: String
         public let line: UInt
@@ -23,6 +23,6 @@ extension OnbordingsError {
     }
 }
 
-extension OnbordingsError.Source: CustomStringConvertible {
+extension OnboardingsError.Source: CustomStringConvertible {
     public var description: String { "[\(version)]: \(file)#\(line)" }
 }

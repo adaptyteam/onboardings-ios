@@ -1,16 +1,16 @@
 PODS:
-  - Onbordings (1.0.0-SNAPSHOT)
+  - Onboardings (1.0.0-SNAPSHOT)
 
 DEPENDENCIES:
-  - Onbordings (from `../../`)
+  - Onboardings (from `../../`)
 
 EXTERNAL SOURCES:
-  Onbordings:
+  Onboardings:
     :path: "../../"
 
 SPEC CHECKSUMS:
-  Onbordings: e3c9b4aa2a80a9f4a9359379e11b5299e9307a75
+  Onboardings: e9e471a610a9b838fa4e7350b8b9c62833f4f159
 
-PODFILE CHECKSUM: d7241e961d373222841516bfd86ac6804be8c263
+PODFILE CHECKSUM: 69994fc278eef44cf6a9fb8b61ee6e64e67c4e7d
 
 COCOAPODS: 1.15.2

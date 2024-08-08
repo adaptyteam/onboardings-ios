@@ -1,5 +1,5 @@
 //
-//  OnbordingsError.swift
+//  OnboardingsError.swift
 //
 //
 //  Created by Aleksei Valiano on 30.07.2024
@@ -8,13 +8,13 @@
 
 import Foundation
 
-public enum OnbordingsError: Error, Sendable {
+public enum OnboardingsError: Error, Sendable {
     case wrongApiKey(Source, description: String)
     case notActivated(Source)
     case activateOnce(Source)
 }
 
-extension OnbordingsError {
+extension OnboardingsError {
     public var source: Source {
         switch self {
         case let .wrongApiKey(src, _),
@@ -32,14 +32,14 @@ extension OnbordingsError {
     }
 }
 
-extension OnbordingsError {
+extension OnboardingsError {
     static func wrongApiKey(
         description: String,
         file: String = #fileID,
         function: String = #function,
         line: UInt = #line
     ) -> Self {
-        .wrongApiKey(OnbordingsError.Source(file: file, function: function, line: line), description: description)
+        .wrongApiKey(OnboardingsError.Source(file: file, function: function, line: line), description: description)
     }
 
     static func activateOnce(
@@ -47,7 +47,7 @@ extension OnbordingsError {
         function: String = #function,
         line: UInt = #line
     ) -> Self {
-        .activateOnce(OnbordingsError.Source(file: file, function: function, line: line))
+        .activateOnce(OnboardingsError.Source(file: file, function: function, line: line))
     }
 
     static func notActivated(
@@ -55,6 +55,6 @@ extension OnbordingsError {
         function: String = #function,
         line: UInt = #line
     ) -> Self {
-        .notActivated(OnbordingsError.Source(file: file, function: function, line: line))
+        .notActivated(OnboardingsError.Source(file: file, function: function, line: line))
     }
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Onbordings {
+extension Onboardings {
     public enum LogLevel: Int, Sendable {
         public static let `default` = LogLevel.info
 

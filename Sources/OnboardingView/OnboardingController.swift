@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
-public class OnboardingController: UIViewController {
+public final class OnboardingController: UIViewController {
     let stamp: String
     let viewModel: OnboardingViewModel
     var delegate: OnboardingDelegate
@@ -17,7 +17,7 @@ public class OnboardingController: UIViewController {
 
     private var webView: WKWebView!
 
-    public init( // TODO: init must be internal , the URL of the onbording's data must not be publicly available for setup
+    init(
         url: URL,
         delegate: OnboardingDelegate,
         onFinishLoading: @escaping () -> Void
@@ -36,7 +36,7 @@ public class OnboardingController: UIViewController {
         }
 
         viewModel.onEvent = { [weak delegate] event in
-            // TODO: bad design for react to analytics events, should make action|event finishLoading|startOnbording
+            // TODO: bad design for react to analytics events, should make action|event finishLoading|startOnboarding
             if case let .analytics(event) = event, case .onboardingStarted = event {
                 onFinishLoading()
             }

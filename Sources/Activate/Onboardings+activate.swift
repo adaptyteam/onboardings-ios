@@ -1,5 +1,5 @@
 //
-//  Onbordings+activate.swift
+//  Onboardings+activate.swift
 //
 //
 //  Created by Aleksei Valiano on 01.08.2024
@@ -8,10 +8,10 @@
 
 import Foundation
 
-public struct Onbordings: Sendable {
+public struct Onboardings: Sendable {
     let configuration: Configuration
 
-    @OnbordingsActor
+    @OnboardingsActor
     private init(configuration: Configuration) async throws {
         self.configuration = configuration
         await Log.set(level: configuration.logLevel, handler: configuration.logHandler)
@@ -19,16 +19,16 @@ public struct Onbordings: Sendable {
     }
 }
 
-extension Onbordings {
+extension Onboardings {
     @MainActor
-    private static var shared: Task<Onbordings, Error>?
+    private static var shared: Task<Onboardings, Error>?
 
-    package static var activated: Onbordings {
+    package static var activated: Onboardings {
         get async throws {
             if let task = await shared {
                 try await task.value
             } else {
-                throw OnbordingsError.notActivated()
+                throw OnboardingsError.notActivated()
             }
         }
     }
@@ -36,11 +36,11 @@ extension Onbordings {
     @MainActor
     static func startActivate(with configuration: Configuration) throws {
         guard shared == nil else {
-            throw OnbordingsError.activateOnce()
+            throw OnboardingsError.activateOnce()
         }
 
         shared = Task {
-            try await Onbordings(configuration: configuration)
+            try await Onboardings(configuration: configuration)
         }
     }
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Onbordings.Event {
+extension Onboardings.Event {
     init(chanel: String, body: Any) throws {
 //        enum ChanelName: String {
 //            case events
@@ -18,7 +18,7 @@ extension Onbordings.Event {
 //        case .none:
 //            let body = try? BodyDecoder.decode(body).asOptionalDictionary()
 //            let type = try? body?["type"].asOptionalString()
-//            throw Onbordings.UnknownEventError(chanel: chanel, type: type)
+//            throw Onboardings.UnknownEventError(chanel: chanel, type: type)
 //        case .events:
         try self.init(chanel, eventBody: body)
 //        }
@@ -38,7 +38,7 @@ extension Onbordings.Event {
 
         switch TypeName(rawValue: type) {
         case .none:
-            throw Onbordings.UnknownEventError(chanel: chanel, type: type)
+            throw Onboardings.UnknownEventError(chanel: chanel, type: type)
         case .analytics:
             self = try .analytics(.init(body))
         case .stateUpdated:

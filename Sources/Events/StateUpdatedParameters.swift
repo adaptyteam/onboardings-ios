@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Onbordings {
+extension Onboardings {
     public enum StateUpdatedParameters: Sendable, Hashable {
         case select(SelectParameters)
         case multiSelect([SelectParameters])
@@ -73,7 +73,7 @@ extension Onbordings {
     }
 }
 
-extension Onbordings.StateUpdatedParameters: CustomDebugStringConvertible {
+extension Onboardings.StateUpdatedParameters: CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
         case let .select(params):
@@ -88,13 +88,13 @@ extension Onbordings.StateUpdatedParameters: CustomDebugStringConvertible {
     }
 }
 
-extension Onbordings.SelectParameters: CustomDebugStringConvertible {
+extension Onboardings.SelectParameters: CustomDebugStringConvertible {
     public var debugDescription: String {
         "{id: \(id), value: \(value), label: \(label)}"
     }
 }
 
-extension Onbordings.InputParameters: CustomDebugStringConvertible {
+extension Onboardings.InputParameters: CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
         case let .text(value):
@@ -107,7 +107,7 @@ extension Onbordings.InputParameters: CustomDebugStringConvertible {
     }
 }
 
-extension Onbordings.DatePickerParameters: CustomDebugStringConvertible {
+extension Onboardings.DatePickerParameters: CustomDebugStringConvertible {
     public var debugDescription: String {
         "{day: \(day), month: \(month), year: \(year)}"
     }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Onbordings {
+extension Onboardings {
     struct CustomEvent: Sendable, Hashable {
         let clientId: String
         let meta: MetaParameters
@@ -20,7 +20,7 @@ extension Onbordings {
     }
 }
 
-extension Onbordings.CustomEvent: CustomDebugStringConvertible {
+extension Onboardings.CustomEvent: CustomDebugStringConvertible {
     var debugDescription: String {
         "{clientId: \(clientId), meta: \(meta.debugDescription)}"
     }

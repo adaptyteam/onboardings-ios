@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
-  s.name             = 'Onbordings'
+  s.name             = 'Onboardings'
   s.version          = '1.0.0-SNAPSHOT'
-  s.summary          = 'Onbordings SDK for iOS.'
+  s.summary          = 'Onboardings SDK for iOS.'
 
   s.description      = <<-DESC
-Onbordings SDK for iOS.
+Onboardings SDK for iOS.
                        DESC
 
   s.homepage         = 'https://adapty.io/'
@@ -17,11 +17,11 @@ Onbordings SDK for iOS.
   s.swift_version = '5.9'
 
   s.source_files = 'Sources/**/*.swift'
-  s.resource_bundles = {"Onbordings" => ["Sources/PrivacyInfo.xcprivacy"]}
+  s.resource_bundles = {"Onboardings" => ["Sources/PrivacyInfo.xcprivacy"]}
 
   s.ios.framework = 'UIKit'
 
   s.pod_target_xcconfig = {
-    'OTHER_SWIFT_FLAGS' => '-package-name io.adapty.onbordings'
+    'OTHER_SWIFT_FLAGS' => '-package-name io.adapty.onboardings'
   }
 end

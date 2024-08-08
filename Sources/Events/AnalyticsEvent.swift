@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Onbordings {
+extension Onboardings {
     public enum AnalyticsEvent: Sendable, Hashable {
         case unknown(meta: MetaParameters, name: String)
         case onboardingStarted(meta: MetaParameters)
@@ -84,7 +84,7 @@ extension Onbordings {
     }
 }
 
-extension Onbordings.AnalyticsEvent: CustomDebugStringConvertible {
+extension Onboardings.AnalyticsEvent: CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
         case let .unknown(meta, name):

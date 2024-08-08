@@ -10,17 +10,17 @@ import Foundation
 
 package enum Log {
     @LogActor
-    private(set) static var handler: Onbordings.LogHandler = Onbordings.defaultLogHandler
+    private(set) static var handler: Onboardings.LogHandler = Onboardings.defaultLogHandler
     @LogActor
-    private(set) static var level: Onbordings.LogLevel = .default
+    private(set) static var level: Onboardings.LogLevel = .default
 
     @LogActor
-    package static func isLevel(_ value: Onbordings.LogLevel) -> Bool {
+    package static func isLevel(_ value: Onboardings.LogLevel) -> Bool {
         level.rawValue >= value.rawValue
     }
 
     @LogActor
-    static func set(level: Onbordings.LogLevel, handler: @escaping Onbordings.LogHandler) async {
+    static func set(level: Onboardings.LogLevel, handler: @escaping Onboardings.LogHandler) async {
         Log.handler = handler
         Log.level = level
     }
@@ -28,7 +28,7 @@ package enum Log {
     @LogActor
     private static func write(
         date: Date,
-        level: Onbordings.LogLevel,
+        level: Onboardings.LogLevel,
         message: @escaping () -> String,
         threadName: String,
         fileName: String,
@@ -41,7 +41,7 @@ package enum Log {
             level: level,
             message: message(),
             source: .init(
-                sdkVersion: Onbordings.SDKVersion,
+                sdkVersion: Onboardings.SDKVersion,
                 threadName: threadName,
                 fileName: fileName,
                 functionName: functionName,
@@ -53,7 +53,7 @@ package enum Log {
 
 package extension Log {
     @inlinable
-    nonisolated static func message(level: Onbordings.LogLevel, message: @Sendable @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+    nonisolated static func message(level: Onboardings.LogLevel, message: @Sendable @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
         let threadName = Log.currentThreadName
         Task(priority: .utility) {
             await Log.write(date: Date(), level: level, message: message, threadName: threadName, fileName: file, functionName: function, lineNumber: line)
@@ -88,7 +88,7 @@ package extension Log {
 
 package extension Log {
     @inlinable
-    nonisolated static func message(_ level: Onbordings.LogLevel, _ message: @Sendable @autoclosure @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+    nonisolated static func message(_ level: Onboardings.LogLevel, _ message: @Sendable @autoclosure @escaping () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
         Log.message(level: level, message: message, file: file, function: function, line: line)
     }
 

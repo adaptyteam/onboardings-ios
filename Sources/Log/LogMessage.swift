@@ -8,16 +8,16 @@
 
 import Foundation
 
-extension Onbordings {
+extension Onboardings {
     public struct LogMessage: Sendable {
         public let date: Date
-        public let level: Onbordings.LogLevel
+        public let level: Onboardings.LogLevel
         public let message: String
         public let source: Source
     }
 }
 
-extension Onbordings.LogMessage {
+extension Onboardings.LogMessage {
     public struct Source: Sendable {
         public let sdkVersion: String
         public let threadName: String
@@ -27,7 +27,7 @@ extension Onbordings.LogMessage {
     }
 }
 
-extension Onbordings.LogMessage: CustomStringConvertible, CustomDebugStringConvertible {
+extension Onboardings.LogMessage: CustomStringConvertible, CustomDebugStringConvertible {
     private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .iso8601)
@@ -50,12 +50,12 @@ extension Onbordings.LogMessage: CustomStringConvertible, CustomDebugStringConve
     }
 }
 
-extension Onbordings.LogMessage.Source: CustomStringConvertible, CustomDebugStringConvertible {
+extension Onboardings.LogMessage.Source: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {
-        "[Onbordings v\(sdkVersion)]"
+        "[Onboardings v\(sdkVersion)]"
     }
 
     public var debugDescription: String {
-        "[Onbordings v\(sdkVersion)]  thrd: \(threadName), func: \(functionName)]\t \(fileName)#\(lineNumber)]"
+        "[Onboardings v\(sdkVersion)]  thrd: \(threadName), func: \(functionName)]\t \(fileName)#\(lineNumber)]"
     }
 }

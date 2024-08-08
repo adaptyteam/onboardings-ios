@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Onbordings {
+extension Onboardings {
     public struct Configuration: Sendable {
         let apiKey: String
         let baseUrl: URL
@@ -17,17 +17,17 @@ extension Onbordings {
     }
 }
 
-extension Onbordings.Configuration {
+extension Onboardings.Configuration {
     static func createBaseUrl(apiKey: String) -> URL? {
         URL(string: "https://\(apiKey).fnlfx.com/")
     }
 
-    func onbordingUrl(onbordingId id: String) -> URL {
+    func onboardingUrl(onboardingId id: String) -> URL {
         baseUrl.appendingPathComponent(id)
     }
 }
 
-extension Onbordings.Configuration: CustomDebugStringConvertible {
+extension Onboardings.Configuration: CustomDebugStringConvertible {
     public var debugDescription: String {
         "{baseUrl: \(baseUrl.absoluteString), logLevel: \(logLevel.description)}"
     }

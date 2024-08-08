@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Onbordings.LogLevel: ExpressibleByStringLiteral {
+extension Onboardings.LogLevel: ExpressibleByStringLiteral {
     enum CodingValues: String {
         case error
         case warn
@@ -42,6 +42,6 @@ extension Onbordings.LogLevel: ExpressibleByStringLiteral {
     }
 }
 
-extension Onbordings.LogLevel: CustomStringConvertible {
+extension Onboardings.LogLevel: CustomStringConvertible {
     public var description: String { stringLiteral.uppercased() }
 }

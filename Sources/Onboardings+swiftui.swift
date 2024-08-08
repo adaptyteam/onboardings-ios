@@ -7,31 +7,31 @@
 
 import SwiftUI
 
-public typealias OnboardingActionParams = (clientId: String, meta: Onbordings.MetaParameters)
-public typealias OnboardingStateUpdatedParams = (clientId: String, params: Onbordings.StateUpdatedParameters, meta: Onbordings.MetaParameters)
+public typealias OnboardingActionParams = (clientId: String, meta: Onboardings.MetaParameters)
+public typealias OnboardingStateUpdatedParams = (clientId: String, params: Onboardings.StateUpdatedParameters, meta: Onboardings.MetaParameters)
 
 public struct OnboardingSplashView<Splash: View>: View {
     private let url: URL
-    
+
     private let splashViewBuilder: () -> Splash
     private let onCloseAction: (OnboardingActionParams) -> Void
     private let onOpenPaywallAction: ((OnboardingActionParams) -> Void)?
     private let onCustomAction: ((OnboardingActionParams) -> Void)?
     private let onStateUpdated: ((OnboardingStateUpdatedParams) -> Void)?
-    private let onAnalyticsEvent: ((Onbordings.AnalyticsEvent) -> Void)?
+    private let onAnalyticsEvent: ((Onboardings.AnalyticsEvent) -> Void)?
     private let onLoadingError: (Error) -> Void // TODO: change to SDK Error
 
     @State
     private var isLoading = true
 
-    public init( // TODO: init must be internal , the URL of the onbording's data must not be publicly available for setup
+    public init( // TODO: init must be internal , the URL of the onboarding's data must not be publicly available for setup
         url: URL,
         splashViewBuilder: @escaping () -> Splash,
         onCloseAction: @escaping (OnboardingActionParams) -> Void,
         onOpenPaywallAction: ((OnboardingActionParams) -> Void)?,
         onCustomAction: ((OnboardingActionParams) -> Void)?,
         onStateUpdated: ((OnboardingStateUpdatedParams) -> Void)?,
-        onAnalyticsEvent: ((Onbordings.AnalyticsEvent) -> Void)?,
+        onAnalyticsEvent: ((Onboardings.AnalyticsEvent) -> Void)?,
         onLoadingError: @escaping (Error) -> Void
     ) {
         self.url = url
@@ -82,14 +82,14 @@ public struct OnboardingView: UIViewControllerRepresentable {
     private let url: URL
     private let onFinishLoading: () -> Void
 
-    public init( // TODO: init must be internal , the URL of the onbording's data must not be publicly available for setup
-        url: URL, 
+    public init( // TODO: init must be internal , the URL of the onboarding's data must not be publicly available for setup
+        url: URL,
         onFinishLoading: @escaping () -> Void,
         onCloseAction: @escaping (OnboardingActionParams) -> Void,
         onOpenPaywallAction: ((OnboardingActionParams) -> Void)?,
         onCustomAction: ((OnboardingActionParams) -> Void)?,
         onStateUpdated: ((OnboardingStateUpdatedParams) -> Void)?,
-        onAnalyticsEvent: ((Onbordings.AnalyticsEvent) -> Void)?,
+        onAnalyticsEvent: ((Onboardings.AnalyticsEvent) -> Void)?,
         onLoadingError: @escaping (Error) -> Void
     ) {
         self.url = url
@@ -120,7 +120,7 @@ final class OnboardinViewDelegateImpl: NSObject, OnboardingDelegate {
     private let onOpenPaywallAction: ((OnboardingActionParams) -> Void)?
     private let onCustomAction: ((OnboardingActionParams) -> Void)?
     private let onStateUpdated: ((OnboardingStateUpdatedParams) -> Void)?
-    private let onAnalyticsEvent: ((Onbordings.AnalyticsEvent) -> Void)?
+    private let onAnalyticsEvent: ((Onboardings.AnalyticsEvent) -> Void)?
     private let onLoadingError: (Error) -> Void // TODO: change to SDK Error
 
     init(
@@ -128,7 +128,7 @@ final class OnboardinViewDelegateImpl: NSObject, OnboardingDelegate {
         onOpenPaywallAction: ((OnboardingActionParams) -> Void)?,
         onCustomAction: ((OnboardingActionParams) -> Void)?,
         onStateUpdated: ((OnboardingStateUpdatedParams) -> Void)?,
-        onAnalyticsEvent: ((Onbordings.AnalyticsEvent) -> Void)?,
+        onAnalyticsEvent: ((Onboardings.AnalyticsEvent) -> Void)?,
         onLoadingError: @escaping (Error) -> Void
     ) {
         self.onCloseAction = onCloseAction
@@ -139,11 +139,11 @@ final class OnboardinViewDelegateImpl: NSObject, OnboardingDelegate {
         self.onLoadingError = onLoadingError
     }
 
-    func onboardingsCloseAction(clientId: String, withMeta: Onbordings.MetaParameters) {
+    func onboardingsCloseAction(clientId: String, withMeta: Onboardings.MetaParameters) {
         onCloseAction((clientId: clientId, meta: withMeta))
     }
 
-    func openPaywallAction(clientId: String, withMeta: Onbordings.MetaParameters) {
+    func openPaywallAction(clientId: String, withMeta: Onboardings.MetaParameters) {
         if let onOpenPaywallAction {
             onOpenPaywallAction((clientId: clientId, meta: withMeta))
         } else {
@@ -151,7 +151,7 @@ final class OnboardinViewDelegateImpl: NSObject, OnboardingDelegate {
         }
     }
 
-    func customAction(clientId: String, withMeta: Onbordings.MetaParameters) {
+    func customAction(clientId: String, withMeta: Onboardings.MetaParameters) {
         if let onCustomAction {
             onCustomAction((clientId: clientId, meta: withMeta))
         } else {
@@ -159,7 +159,7 @@ final class OnboardinViewDelegateImpl: NSObject, OnboardingDelegate {
         }
     }
 
-    func stateUpdated(clientId: String, params: Onbordings.StateUpdatedParameters, withMeta: Onbordings.MetaParameters) {
+    func stateUpdated(clientId: String, params: Onboardings.StateUpdatedParameters, withMeta: Onboardings.MetaParameters) {
         if let onStateUpdated {
             onStateUpdated((clientId: clientId, params: params, meta: withMeta))
         } else {
@@ -167,7 +167,7 @@ final class OnboardinViewDelegateImpl: NSObject, OnboardingDelegate {
         }
     }
 
-    func onAnalyticsEvent(event: Onbordings.AnalyticsEvent) {
+    func onAnalyticsEvent(event: Onboardings.AnalyticsEvent) {
         if let onAnalyticsEvent {
             onAnalyticsEvent(event)
         } else {

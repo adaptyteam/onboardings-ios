@@ -5,7 +5,7 @@
 //  Created by Aleksey Goncharov on 05.08.2024.
 //
 
-import Onbordings
+import Onboardings
 import SwiftUI
 
 enum Storage {
@@ -17,7 +17,7 @@ enum Storage {
             UserDefaults.standard.setValue(newValue, forKey: "app.baseurl")
         }
     }
-    
+
     static var onboardingId: String? {
         get {
             UserDefaults.standard.string(forKey: "app.onboarding.id")
@@ -31,37 +31,37 @@ enum Storage {
 class ViewModel: ObservableObject {
     @Published var onboardingFinished = false
     @Published var onboardingURL: URL?
-    
+
     @MainActor
     func initialize() {
         do {
-            var configurationBuilder = Onbordings.Configuration
+            var configurationBuilder = Onboardings.Configuration
                 .Builder(withAPIKey: "") // TODO: insert apiKey
                 .with(loglevel: .verbose)
-            
+
             let baseUrl = Storage.customBaseUrl ?? "https://1a.fnlfx.dev/"
 
             if let url = URL(string: baseUrl) {
                 configurationBuilder = configurationBuilder.with(alternativeBaseUrl: url)
             }
 
-            try Onbordings.activate(with: try configurationBuilder.build())
-            
+            try Onboardings.activate(with: try configurationBuilder.build())
+
             loadData()
         } catch {
             // handle the error
-            if let error = error as? OnbordingsError {}
+            if let error = error as? OnboardingsError {}
         }
     }
-    
+
     private func loadData() {
         Task { @MainActor in
             do {
-                onboardingURL = try await Onbordings.getOnboardingURL(id: Storage.onboardingId ?? "7-aug")
+                onboardingURL = try await Onboardings.getOnboardingURL(id: Storage.onboardingId ?? "7-aug")
                 print("")
             } catch {
                 // handle the error
-                if let error = error as? OnbordingsError {}
+                if let error = error as? OnboradingsError {}
             }
         }
     }
@@ -70,7 +70,7 @@ class ViewModel: ObservableObject {
 @main
 struct OnboardingsDemoApp: App {
     let viewModel = ViewModel()
-    
+
     var body: some Scene {
         WindowGroup {
             ApplicationMainView()
@@ -81,19 +81,19 @@ struct OnboardingsDemoApp: App {
 
 struct ApplicationMainView: View {
     @EnvironmentObject var viewModel: ViewModel
-    
+
     var body: some View {
         ZStack {
             ContentView()
-            
+
             splashOrOnboardingView
         }
         .onAppear {
             viewModel.initialize()
         }
     }
-    
-    @ViewBuilder 
+
+    @ViewBuilder
     private var splashOrOnboardingView: some View {
         if !viewModel.onboardingFinished, let url = viewModel.onboardingURL {
             OnboardingSplashView(
@@ -107,16 +107,16 @@ struct ApplicationMainView: View {
                     }
                 },
                 onOpenPaywallAction: { _ in
-                    
+
                 },
                 onCustomAction: { _ in
-                    
+
                 },
                 onStateUpdated: { _ in
-                    
+
                 },
                 onAnalyticsEvent: { _ in
-                    
+
                 },
                 onLoadingError: { _ in
                 }

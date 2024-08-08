@@ -1,6 +1,6 @@
 //
 //  OnboardingViewModel.swift
-//  Onbordings
+//  Onboardings
 //
 //  Created by Aleksey Goncharov on 05.08.2024.
 //
@@ -8,12 +8,12 @@
 import Foundation
 import WebKit
 
-class OnboardingViewModel: NSObject, ObservableObject {
+final class OnboardingViewModel: NSObject, ObservableObject {
     let stamp: String
     let url: URL
 
     // TODO: change `var` to `let` , and dont use "!". this params can be @Sendable and setup in init
-    var onEvent: ((Onbordings.Event) -> Void)!
+    var onEvent: ((Onboardings.Event) -> Void)!
     // TODO: change `var` to `let` , and dont use "!". this params can be @Sendable and setup in init
     var onError: ((Error) -> Void)!
 
@@ -22,7 +22,7 @@ class OnboardingViewModel: NSObject, ObservableObject {
         self.url = url
     }
 
-    @MainActor 
+    @MainActor
     func configureWebView(_ webView: WKWebView) {
         let stamp = self.stamp
         Log.verbose("#OnboardingViewModel_\(stamp)# configureWebView")
@@ -31,7 +31,7 @@ class OnboardingViewModel: NSObject, ObservableObject {
         webView.configuration.userContentController.add(self, name: "postEvent")
 
         let userScript = WKUserScript(
-            source: Onbordings.jsCodeInjection,
+            source: Onboardings.jsCodeInjection,
             injectionTime: .atDocumentEnd,
             forMainFrameOnly: true
         )
@@ -63,10 +63,10 @@ extension OnboardingViewModel: WKNavigationDelegate, WKScriptMessageHandler {
     public func userContentController(_: WKUserContentController, didReceive message: WKScriptMessage) {
         let stamp = self.stamp
         do {
-            let event = try Onbordings.Event(chanel: message.name, body: message.body)
+            let event = try Onboardings.Event(chanel: message.name, body: message.body)
             Log.verbose("#OnboardingViewModel_\(stamp)# On event: \(event)")
             onEvent(event)
-        } catch let error as Onbordings.UnknownEventError {
+        } catch let error as Onboardings.UnknownEventError {
             let message = String(describing: message.body)
             Log.warn("#OnboardingViewModel_\(stamp)# Unknown event \(error.type.map { "with type \"\($0)\"" } ?? "with name \"\(error.chanel)\""): \(message)")
         } catch {
@@ -75,7 +75,7 @@ extension OnboardingViewModel: WKNavigationDelegate, WKScriptMessageHandler {
     }
 }
 
-private extension Onbordings {
+private extension Onboardings {
     static let jsCodeInjection = """
     function waitForElm(selector, callback) {
         var selectedElement = document.querySelector(selector);

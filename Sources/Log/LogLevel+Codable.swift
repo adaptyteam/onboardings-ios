@@ -8,9 +8,9 @@
 
 import Foundation
 
-extension Onbordings.LogLevel: Codable {
+extension Onboardings.LogLevel: Codable {
     public init(from decoder: Decoder) throws {
-        self = try Onbordings.LogLevel(stringLiteral: decoder.singleValueContainer().decode(String.self))
+        self = try Onboardings.LogLevel(stringLiteral: decoder.singleValueContainer().decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

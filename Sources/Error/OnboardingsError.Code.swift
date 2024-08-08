@@ -1,5 +1,5 @@
 //
-//  OnbordingsError.Code.swift
+//  OnboardingsError.Code.swift
 //
 //
 //  Created by Aleksei Valiano on 30.07.2024
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension OnbordingsError {
+public extension OnboardingsError {
     enum Code: Int {
         case unknown = 0
         case wrongApiKey = 1

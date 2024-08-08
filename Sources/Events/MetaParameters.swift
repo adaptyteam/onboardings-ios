@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Onbordings {
+extension Onboardings {
     public struct MetaParameters: Sendable, Hashable {
         public let onboardingId: String
         public let screenClientId: String
@@ -23,7 +23,7 @@ extension Onbordings {
     }
 }
 
-extension Onbordings.MetaParameters: CustomDebugStringConvertible {
+extension Onboardings.MetaParameters: CustomDebugStringConvertible {
     public var debugDescription: String {
         "{onboardingId: \(onboardingId), screenClientId: \(screenClientId), screenIndex: \(screenIndex)}"
     }

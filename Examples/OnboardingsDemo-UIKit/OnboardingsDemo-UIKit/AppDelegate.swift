@@ -5,7 +5,7 @@
 //  Created by Aleksey Goncharov on 02.08.2024.
 //
 
-import Onbordings
+import Onboardings
 import UIKit
 
 @main

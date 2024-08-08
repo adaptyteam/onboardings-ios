@@ -13,10 +13,10 @@ import os.log
     extension OSLog: @unchecked Sendable {}
 #endif
 
-extension Onbordings {
+extension Onboardings {
     public typealias LogHandler = @Sendable (LogMessage) -> Void
 
-    private static let logger = OSLog(subsystem: "io.adapty.onbordings", category: "sdk")
+    private static let logger = OSLog(subsystem: "io.adapty.onboardings", category: "sdk")
 
     @Sendable
     static func defaultLogHandler(_ msg: LogMessage) {
@@ -24,7 +24,7 @@ extension Onbordings {
     }
 }
 
-private extension Onbordings.LogLevel {
+private extension Onboardings.LogLevel {
     var asOSLogType: OSLogType {
         switch self {
         case .error:

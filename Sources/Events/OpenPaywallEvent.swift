@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Onbordings {
+extension Onboardings {
     struct OpenPaywallEvent: Sendable, Hashable {
         let clientId: String
         let meta: MetaParameters
@@ -20,7 +20,7 @@ extension Onbordings {
     }
 }
 
-extension Onbordings.OpenPaywallEvent: CustomDebugStringConvertible {
+extension Onboardings.OpenPaywallEvent: CustomDebugStringConvertible {
     var debugDescription: String {
         "{clientId: \(clientId), meta: \(meta.debugDescription)}"
     }

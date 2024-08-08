@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension Onbordings {
+public extension Onboardings {
     @MainActor
     static func activate(_ apiKey: String) throws {
         try activate(
@@ -19,18 +19,18 @@ public extension Onbordings {
     }
 
     @MainActor
-    static func activate(with builder: Onbordings.Configuration.Builder) throws {
+    static func activate(with builder: Onboardings.Configuration.Builder) throws {
         try activate(with: builder.build())
     }
 
     @MainActor
-    static func activate(with configuration: Onbordings.Configuration) throws {
+    static func activate(with configuration: Onboardings.Configuration) throws {
         try startActivate(with: configuration)
     }
 
-    static func getOnboardingURL(id: String) async throws -> URL { // TODO: remove , the URL of the onbording's data must be internal
+    static func getOnboardingURL(id: String) async throws -> URL { // TODO: remove , the URL of the onboarding's data must be internal
         let instance = try await activated
-        return instance.configuration.onbordingUrl(onbordingId: id)
+        return instance.configuration.onboardingUrl(onboardingId: id)
     }
 
     @MainActor

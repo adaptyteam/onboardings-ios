@@ -5,7 +5,7 @@
 //  Created by Aleksey Goncharov on 02.08.2024.
 //
 
-import Onbordings
+import Onboardings
 import UIKit
 
 final class OnboardingManager: NSObject {
@@ -15,7 +15,7 @@ final class OnboardingManager: NSObject {
 
     @MainActor
     func initialize(scene: UIScene) -> UIWindow? {
-        activateOnbordings()
+        activateOnboardings()
 
         guard let windowScene = (scene as? UIWindowScene) else { return nil }
 
@@ -28,7 +28,7 @@ final class OnboardingManager: NSObject {
     func presentOnboarding() {
         guard let window else { return }
 
-        window.rootViewController = Onbordings.createSplashController(
+        window.rootViewController = Onboardings.createSplashController(
             id: "7-aug",
             delegate: self,
             splashDelegate: self
@@ -37,18 +37,18 @@ final class OnboardingManager: NSObject {
     }
 
     @MainActor
-    private func activateOnbordings() {
+    private func activateOnboardings() {
         do {
-            let configuration = try Onbordings.Configuration
+            let configuration = try Onboardings.Configuration
                 .Builder(withAPIKey: "") // TODO: insert apiKey
                 .with(alternativeBaseUrl: URL(string: "https://1a.fnlfx.dev/")!) // TODO: remove
                 .with(loglevel: .verbose)
                 .build()
 
-            try Onbordings.activate(with: configuration)
+            try Onboardings.activate(with: configuration)
         } catch {
             // handle the error
-            if let error = error as? OnbordingsError {
+            if let error = error as? OnboardingsError {
                 // TODO: Log
             }
         }
@@ -56,7 +56,7 @@ final class OnboardingManager: NSObject {
 }
 
 extension OnboardingManager: OnboardingDelegate {
-    func onboardingsCloseAction(clientId _: String, withMeta _: Onbordings.MetaParameters) {
+    func onboardingsCloseAction(clientId _: String, withMeta _: Onboardings.MetaParameters) {
         guard let window else { return }
 
         window.rootViewController = ViewController.instantiate()
@@ -69,19 +69,19 @@ extension OnboardingManager: OnboardingDelegate {
         )
     }
 
-    func openPaywallAction(clientId _: String, withMeta _: Onbordings.MetaParameters) {
+    func openPaywallAction(clientId _: String, withMeta _: Onboardings.MetaParameters) {
         // TODO: Log
     }
 
-    func customAction(clientId _: String, withMeta _: Onbordings.MetaParameters) {
+    func customAction(clientId _: String, withMeta _: Onboardings.MetaParameters) {
         // TODO: Log
     }
 
-    func stateUpdated(clientId _: String, params _: Onbordings.StateUpdatedParameters, withMeta _: Onbordings.MetaParameters) {
+    func stateUpdated(clientId _: String, params _: Onboardings.StateUpdatedParameters, withMeta _: Onboardings.MetaParameters) {
         // TODO: Log
     }
 
-    func onAnalyticsEvent(event _: Onbordings.AnalyticsEvent) {
+    func onAnalyticsEvent(event _: Onboardings.AnalyticsEvent) {
         // TODO: Log
     }
 
