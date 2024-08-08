@@ -10,7 +10,7 @@ import Foundation
 
 extension Onbordings {
     public enum AnalyticsEvent: Sendable, Hashable {
-        case unknown(meta: MetaParameters)
+        case unknown(meta: MetaParameters, name: String)
         case onboardingStarted(meta: MetaParameters)
         case screenPresented(meta: MetaParameters)
         case screenCompleted(meta: MetaParameters, formClientId: String?, reply: String?)
@@ -22,7 +22,7 @@ extension Onbordings {
 
         public var meta: MetaParameters {
             switch self {
-            case let .unknown(meta),
+            case let .unknown(meta, _),
                  let .onboardingStarted(meta),
                  let .screenPresented(meta),
                  let .screenCompleted(meta, _, _),
@@ -35,26 +35,30 @@ extension Onbordings {
             }
         }
 
+        private enum Name: String, Sendable {
+            case onboardingStarted = "onboarding_started"
+            case screenPresented = "screen_presented"
+            case screenCompleted = "screen_completed"
+            case secondScreenPresented = "second_screen_presented"
+            case registrationScreenPresented = "registration_screen_presented"
+            case productsScreenPresented = "products_screen_presented"
+            case userEmailCollected = "user_email_collected"
+            case onboardingCompleted = "onboarding_completed"
+        }
+
         init(_ body: BodyDecoder.Dictionary) throws {
             let meta = try MetaParameters(body["meta"])
-
-            enum Name: String, Sendable {
-                case onboardingStarted = "onboarding_started"
-                case screenPresented = "screen_presented"
-                case screenCompleted = "screen_completed"
-                case secondScreenPresented = "second_screen_presented"
-                case registrationScreenPresented = "registration_screen_presented"
-                case productsScreenPresented = "products_screen_presented"
-                case userEmailCollected = "user_email_collected"
-                case onboardingCompleted = "onboarding_completed"
-            }
 
             let name = try body["name"].asString()
             let params = try body["params"].asOptionalDictionary()
 
-            self = switch Name(rawValue: name) {
-            case .none:
-                .unknown(meta: meta)
+            guard let name = Name(rawValue: name) else {
+                self = .unknown(meta: meta, name: name)
+                Log.warn("Uncnown analitycs event with name: \(name), meta: \(meta.debugDescription)")
+                return
+            }
+
+            self = switch name {
             case .onboardingStarted:
                 .onboardingStarted(meta: meta)
             case .screenPresented:
@@ -76,6 +80,31 @@ extension Onbordings {
             case .onboardingCompleted:
                 .onboardingCompleted(meta: meta)
             }
+        }
+    }
+}
+
+extension Onbordings.AnalyticsEvent: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        switch self {
+        case let .unknown(meta, name):
+            "{name: \(name), meta: \(meta.debugDescription)}"
+        case let .onboardingStarted(meta):
+            "{name: \(Name.onboardingStarted.rawValue), meta: \(meta.debugDescription)}"
+        case let .screenPresented(meta):
+            "{name: \(Name.screenPresented.rawValue), meta: \(meta.debugDescription)}"
+        case let .screenCompleted(meta, formClientId, reply):
+            "{name: \(Name.screenCompleted.rawValue), formClientId: \(formClientId ?? "nil"), reply: \(reply ?? "nil"), meta: \(meta.debugDescription)}"
+        case let .secondScreenPresented(meta):
+            "{name: \(Name.secondScreenPresented.rawValue), meta: \(meta.debugDescription)}"
+        case let .registrationScreenPresented(meta):
+            "{name: \(Name.registrationScreenPresented.rawValue), meta: \(meta.debugDescription)}"
+        case let .productsScreenPresented(meta):
+            "{name: \(Name.productsScreenPresented.rawValue), meta: \(meta.debugDescription)}"
+        case let .userEmailCollected(meta):
+            "{name: \(Name.userEmailCollected.rawValue), meta: \(meta.debugDescription)}"
+        case let .onboardingCompleted(meta):
+            "{name: \(Name.onboardingCompleted.rawValue), meta: \(meta.debugDescription)}"
         }
     }
 }

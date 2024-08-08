@@ -9,26 +9,33 @@
 import Foundation
 
 extension Onbordings {
-    public enum Event: Sendable, Hashable {
+    enum Event: Sendable, Hashable {
         case analytics(AnalyticsEvent)
         case stateUpdated(StateUpdatedEvent)
-    }
-
-    typealias PublicEvent = Event
-
-    enum PrivateEvent: Sendable, Hashable {
         case openPaywall(OpenPaywallParameters)
         case custom(CustomParameters)
         case close(CloseParameters)
     }
 
-    enum RawEvent: Sendable, Hashable {
-        case `public`(PublicEvent)
-        case `private`(PrivateEvent)
-    }
-
     struct UnknownEventError: Error {
         let chanel: String
         let type: String?
+    }
+}
+
+extension Onbordings.Event: CustomDebugStringConvertible {
+    var debugDescription: String {
+        switch self {
+        case let .analytics(event):
+            "{type: \(TypeName.analytics.rawValue), data: \(event.debugDescription)}"
+        case let .stateUpdated(event):
+            "{type: \(TypeName.stateUpdated.rawValue), data: \(event.debugDescription)}"
+        case let .openPaywall(params):
+            "{type: \(TypeName.openPaywall.rawValue), data: \(params.debugDescription)}"
+        case let .custom(params):
+            "{type: \(TypeName.custom.rawValue), data: \(params.debugDescription)}"
+        case let .close(params):
+            "{type: \(TypeName.close.rawValue), data: \(params.debugDescription)}"
+        }
     }
 }

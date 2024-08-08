@@ -12,7 +12,7 @@ class OnboardingViewModel: NSObject, ObservableObject {
     let url: URL
 
     var onFinishLoading: ((Error?) -> Void)?
-    var onEvent: ((Onbordings.RawEvent) -> Void)?
+    var onEvent: ((Onbordings.Event) -> Void)?
 
     init(url: URL) {
         self.url = url
@@ -51,7 +51,9 @@ extension OnboardingViewModel: WKNavigationDelegate, WKScriptMessageHandler {
 
     public func userContentController(_: WKUserContentController, didReceive message: WKScriptMessage) {
         do {
-            try onEvent?(.init(chanel: message.name, body: message.body))
+            let event = try Onbordings.Event(chanel: message.name, body: message.body)
+            Log.verbose("On event: \(event)")
+            onEvent?(event)
         } catch let error as Onbordings.UnknownEventError {
             let message = String(describing: message.body)
             Log.warn("Unknown event \(error.type.map { "with type \"\($0)\"" } ?? "with name \"\(error.chanel)\""): \(message)")

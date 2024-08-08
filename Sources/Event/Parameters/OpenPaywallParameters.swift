@@ -20,4 +20,8 @@ extension Onbordings {
     }
 }
 
-
+extension Onbordings.OpenPaywallParameters: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        "{clientId: \(clientId), meta: \(meta.debugDescription)}"
+    }
+}

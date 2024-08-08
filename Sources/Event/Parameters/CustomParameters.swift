@@ -19,3 +19,9 @@ extension Onbordings {
         }
     }
 }
+
+extension Onbordings.CustomParameters: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        "{clientId: \(clientId), meta: \(meta.debugDescription)}"
+    }
+}

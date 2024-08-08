@@ -29,15 +29,17 @@ public extension OnboardingDelegate {
 }
 
 extension OnboardingDelegate {
-    func apply(event: Onbordings.RawEvent) {
+    func apply(event: Onbordings.Event) {
         switch event {
-        case let .private(.close(params)):
+        case let .close(params):
             onboardingsCloseAction(clientId: params.clientId, withMeta: params.meta)
-        case let .private(.custom(params)):
+        case let .custom(params):
             onboardingsCloseAction(clientId: params.clientId, withMeta: params.meta)
-        case let .private(.openPaywall(params)):
+        case let .openPaywall(params):
             onboardingsCloseAction(clientId: params.clientId, withMeta: params.meta)
-        case .public:
+        case let .analytics(event):
+            break
+        case let .stateUpdated(event):
             break
         }
     }

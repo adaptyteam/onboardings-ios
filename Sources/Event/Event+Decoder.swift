@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Onbordings.RawEvent {
+extension Onbordings.Event {
     init(chanel: String, body: Any) throws {
 //        enum ChanelName: String {
 //            case events
@@ -24,31 +24,31 @@ extension Onbordings.RawEvent {
 //        }
     }
 
+    enum TypeName: String {
+        case close
+        case openPaywall = "open_paywall"
+        case custom
+        case stateUpdated = "state_updated"
+        case analytics
+    }
+
     private init(_ chanel: String, eventBody body: Any) throws {
         let body = try BodyDecoder.decode(body).asDictionary()
         let type = try body["type"].asString()
-
-        enum TypeName: String {
-            case close
-            case openPaywall = "open_paywall"
-            case custom
-            case stateUpdated = "state_updated"
-            case analytics
-        }
 
         switch TypeName(rawValue: type) {
         case .none:
             throw Onbordings.UnknownEventError(chanel: chanel, type: type)
         case .analytics:
-            self = try .public(.analytics(.init(body)))
+            self = try .analytics(.init(body))
         case .stateUpdated:
-            self = try .public(.stateUpdated(.init(body)))
+            self = try .stateUpdated(.init(body))
         case .close:
-            self = try .private(.close(.init(body)))
+            self = try .close(.init(body))
         case .openPaywall:
-            self = try .private(.openPaywall(.init(body)))
+            self = try .openPaywall(.init(body))
         case .custom:
-            self = try .private(.custom(.init(body)))
+            self = try .custom(.init(body))
         }
     }
 }

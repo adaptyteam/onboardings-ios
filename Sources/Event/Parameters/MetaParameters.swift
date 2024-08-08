@@ -22,3 +22,9 @@ extension Onbordings {
         }
     }
 }
+
+extension Onbordings.MetaParameters: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        "{onboardingId: \(onboardingId), screenClientId: \(screenClientId), screenIndex: \(screenIndex)}"
+    }
+}
