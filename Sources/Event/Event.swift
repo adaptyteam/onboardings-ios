@@ -12,9 +12,9 @@ extension Onbordings {
     enum Event: Sendable, Hashable {
         case analytics(AnalyticsEvent)
         case stateUpdated(StateUpdatedEvent)
-        case openPaywall(OpenPaywallParameters)
-        case custom(CustomParameters)
-        case close(CloseParameters)
+        case openPaywall(OpenPaywallEvent)
+        case custom(CustomEvent)
+        case close(CloseEvent)
     }
 
     struct UnknownEventError: Error {
@@ -30,12 +30,12 @@ extension Onbordings.Event: CustomDebugStringConvertible {
             "{type: \(TypeName.analytics.rawValue), data: \(event.debugDescription)}"
         case let .stateUpdated(event):
             "{type: \(TypeName.stateUpdated.rawValue), data: \(event.debugDescription)}"
-        case let .openPaywall(params):
-            "{type: \(TypeName.openPaywall.rawValue), data: \(params.debugDescription)}"
-        case let .custom(params):
-            "{type: \(TypeName.custom.rawValue), data: \(params.debugDescription)}"
-        case let .close(params):
-            "{type: \(TypeName.close.rawValue), data: \(params.debugDescription)}"
+        case let .openPaywall(event):
+            "{type: \(TypeName.openPaywall.rawValue), data: \(event.debugDescription)}"
+        case let .custom(event):
+            "{type: \(TypeName.custom.rawValue), data: \(event.debugDescription)}"
+        case let .close(event):
+            "{type: \(TypeName.close.rawValue), data: \(event.debugDescription)}"
         }
     }
 }

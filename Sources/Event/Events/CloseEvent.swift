@@ -1,5 +1,5 @@
 //
-//  CustomParameters.swift
+//  CloseEvent.swift
 //
 //
 //  Created by Aleksei Valiano on 01.08.2024
@@ -9,9 +9,9 @@
 import Foundation
 
 extension Onbordings {
-    public struct CustomParameters: Sendable, Hashable {
-        public let clientId: String
-        public let meta: MetaParameters
+    struct CloseEvent: Sendable, Hashable {
+        let clientId: String
+        let meta: MetaParameters
 
         init(_ body: BodyDecoder.Dictionary) throws {
             self.clientId = try body["cid"].asString()
@@ -20,8 +20,8 @@ extension Onbordings {
     }
 }
 
-extension Onbordings.CustomParameters: CustomDebugStringConvertible {
-    public var debugDescription: String {
+extension Onbordings.CloseEvent: CustomDebugStringConvertible {
+    var debugDescription: String {
         "{clientId: \(clientId), meta: \(meta.debugDescription)}"
     }
 }
