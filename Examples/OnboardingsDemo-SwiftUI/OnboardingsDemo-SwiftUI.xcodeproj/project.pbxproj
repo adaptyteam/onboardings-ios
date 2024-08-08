@@ -7,25 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		74152F562C615575007F4EFF /* OctoflowsDemo_SwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74152F552C615575007F4EFF /* OctoflowsDemo_SwiftUIApp.swift */; };
-		74152F582C615575007F4EFF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74152F572C615575007F4EFF /* ContentView.swift */; };
-		74152F5A2C615576007F4EFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74152F592C615576007F4EFF /* Assets.xcassets */; };
-		74152F5E2C615576007F4EFF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74152F5D2C615576007F4EFF /* Preview Assets.xcassets */; };
-		744C9B4C2C6159DA005D6E5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 744C9B4B2C6159DA005D6E5A /* LaunchScreen.storyboard */; };
-		74B5ECCA2C6284F500B0CCCF /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B5ECC92C6284F500B0CCCF /* SplashView.swift */; };
-		74B5ECD02C6288A100B0CCCF /* Octoflows in Frameworks */ = {isa = PBXBuildFile; productRef = 74B5ECCF2C6288A100B0CCCF /* Octoflows */; };
-		74B5ECD32C62893100B0CCCF /* Octoflows in Frameworks */ = {isa = PBXBuildFile; productRef = 74B5ECD22C62893100B0CCCF /* Octoflows */; };
+		74D547662C64FA7B00F18E2E /* Onbordings in Frameworks */ = {isa = PBXBuildFile; productRef = 74D547652C64FA7B00F18E2E /* Onbordings */; };
+		74E1B3E22C64FB350090EDEA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74E1B3D82C64FB350090EDEA /* Preview Assets.xcassets */; };
+		74E1B3E32C64FB350090EDEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74E1B3DA2C64FB350090EDEA /* Assets.xcassets */; };
+		74E1B3E42C64FB350090EDEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74E1B3DB2C64FB350090EDEA /* LaunchScreen.storyboard */; };
+		74E1B3E52C64FB350090EDEA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E1B3DE2C64FB350090EDEA /* ContentView.swift */; };
+		74E1B3E62C64FB350090EDEA /* OnboardingsDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E1B3DF2C64FB350090EDEA /* OnboardingsDemoApp.swift */; };
+		74E1B3E72C64FB350090EDEA /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E1B3E02C64FB350090EDEA /* SplashView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		74152F522C615575007F4EFF /* OctoflowsDemo-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OctoflowsDemo-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		74152F552C615575007F4EFF /* OctoflowsDemo_SwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OctoflowsDemo_SwiftUIApp.swift; sourceTree = "<group>"; };
-		74152F572C615575007F4EFF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		74152F592C615576007F4EFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		74152F5B2C615576007F4EFF /* OctoflowsDemo_SwiftUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OctoflowsDemo_SwiftUI.entitlements; sourceTree = "<group>"; };
-		74152F5D2C615576007F4EFF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		744C9B4B2C6159DA005D6E5A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		74B5ECC92C6284F500B0CCCF /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		74152F522C615575007F4EFF /* OnboardingsDemo-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OnboardingsDemo-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		74E1B3D82C64FB350090EDEA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		74E1B3DA2C64FB350090EDEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		74E1B3DB2C64FB350090EDEA /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		74E1B3DC2C64FB350090EDEA /* OnboardingsDemo_SwiftUI.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = OnboardingsDemo_SwiftUI.entitlements; sourceTree = "<group>"; };
+		74E1B3DE2C64FB350090EDEA /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		74E1B3DF2C64FB350090EDEA /* OnboardingsDemoApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingsDemoApp.swift; sourceTree = "<group>"; };
+		74E1B3E02C64FB350090EDEA /* SplashView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,8 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74B5ECD02C6288A100B0CCCF /* Octoflows in Frameworks */,
-				74B5ECD32C62893100B0CCCF /* Octoflows in Frameworks */,
+				74D547662C64FA7B00F18E2E /* Onbordings in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,7 +42,7 @@
 		74152F492C615575007F4EFF = {
 			isa = PBXGroup;
 			children = (
-				74152F542C615575007F4EFF /* OctoflowsDemo-SwiftUI */,
+				74E1B3E12C64FB350090EDEA /* OnboardingsDemo-SwiftUI */,
 				74152F532C615575007F4EFF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,47 +50,47 @@
 		74152F532C615575007F4EFF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				74152F522C615575007F4EFF /* OctoflowsDemo-SwiftUI.app */,
+				74152F522C615575007F4EFF /* OnboardingsDemo-SwiftUI.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		74152F542C615575007F4EFF /* OctoflowsDemo-SwiftUI */ = {
+		74E1B3D92C64FB350090EDEA /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				74152F552C615575007F4EFF /* OctoflowsDemo_SwiftUIApp.swift */,
-				74152F572C615575007F4EFF /* ContentView.swift */,
-				74B5ECC92C6284F500B0CCCF /* SplashView.swift */,
-				744C9B4A2C6159A1005D6E5A /* Supporting Files */,
-				74152F5C2C615576007F4EFF /* Preview Content */,
-			);
-			path = "OctoflowsDemo-SwiftUI";
-			sourceTree = "<group>";
-		};
-		74152F5C2C615576007F4EFF /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				74152F5D2C615576007F4EFF /* Preview Assets.xcassets */,
+				74E1B3D82C64FB350090EDEA /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		744C9B4A2C6159A1005D6E5A /* Supporting Files */ = {
+		74E1B3DD2C64FB350090EDEA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				74152F592C615576007F4EFF /* Assets.xcassets */,
-				74152F5B2C615576007F4EFF /* OctoflowsDemo_SwiftUI.entitlements */,
-				744C9B4B2C6159DA005D6E5A /* LaunchScreen.storyboard */,
+				74E1B3DA2C64FB350090EDEA /* Assets.xcassets */,
+				74E1B3DB2C64FB350090EDEA /* LaunchScreen.storyboard */,
+				74E1B3DC2C64FB350090EDEA /* OnboardingsDemo_SwiftUI.entitlements */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		74E1B3E12C64FB350090EDEA /* OnboardingsDemo-SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				74E1B3DF2C64FB350090EDEA /* OnboardingsDemoApp.swift */,
+				74E1B3E02C64FB350090EDEA /* SplashView.swift */,
+				74E1B3DE2C64FB350090EDEA /* ContentView.swift */,
+				74E1B3D92C64FB350090EDEA /* Preview Content */,
+				74E1B3DD2C64FB350090EDEA /* Supporting Files */,
+			);
+			path = "OnboardingsDemo-SwiftUI";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		74152F512C615575007F4EFF /* OctoflowsDemo-SwiftUI */ = {
+		74152F512C615575007F4EFF /* OnboardingsDemo-SwiftUI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 74152F612C615576007F4EFF /* Build configuration list for PBXNativeTarget "OctoflowsDemo-SwiftUI" */;
+			buildConfigurationList = 74152F612C615576007F4EFF /* Build configuration list for PBXNativeTarget "OnboardingsDemo-SwiftUI" */;
 			buildPhases = (
 				74152F4E2C615575007F4EFF /* Sources */,
 				74152F4F2C615575007F4EFF /* Frameworks */,
@@ -102,13 +100,12 @@
 			);
 			dependencies = (
 			);
-			name = "OctoflowsDemo-SwiftUI";
+			name = "OnboardingsDemo-SwiftUI";
 			packageProductDependencies = (
-				74B5ECCF2C6288A100B0CCCF /* Octoflows */,
-				74B5ECD22C62893100B0CCCF /* Octoflows */,
+				74D547652C64FA7B00F18E2E /* Onbordings */,
 			);
 			productName = "OctoflowsDemo-SwiftUI";
-			productReference = 74152F522C615575007F4EFF /* OctoflowsDemo-SwiftUI.app */;
+			productReference = 74152F522C615575007F4EFF /* OnboardingsDemo-SwiftUI.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -126,7 +123,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 74152F4D2C615575007F4EFF /* Build configuration list for PBXProject "OctoflowsDemo-SwiftUI" */;
+			buildConfigurationList = 74152F4D2C615575007F4EFF /* Build configuration list for PBXProject "OnboardingsDemo-SwiftUI" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -136,13 +133,13 @@
 			);
 			mainGroup = 74152F492C615575007F4EFF;
 			packageReferences = (
-				74B5ECD12C62893100B0CCCF /* XCLocalSwiftPackageReference "../../" */,
+				74D547642C64FA7B00F18E2E /* XCLocalSwiftPackageReference "../../" */,
 			);
 			productRefGroup = 74152F532C615575007F4EFF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				74152F512C615575007F4EFF /* OctoflowsDemo-SwiftUI */,
+				74152F512C615575007F4EFF /* OnboardingsDemo-SwiftUI */,
 			);
 		};
 /* End PBXProject section */
@@ -152,9 +149,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				744C9B4C2C6159DA005D6E5A /* LaunchScreen.storyboard in Resources */,
-				74152F5E2C615576007F4EFF /* Preview Assets.xcassets in Resources */,
-				74152F5A2C615576007F4EFF /* Assets.xcassets in Resources */,
+				74E1B3E42C64FB350090EDEA /* LaunchScreen.storyboard in Resources */,
+				74E1B3E32C64FB350090EDEA /* Assets.xcassets in Resources */,
+				74E1B3E22C64FB350090EDEA /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,9 +162,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74152F582C615575007F4EFF /* ContentView.swift in Sources */,
-				74152F562C615575007F4EFF /* OctoflowsDemo_SwiftUIApp.swift in Sources */,
-				74B5ECCA2C6284F500B0CCCF /* SplashView.swift in Sources */,
+				74E1B3E52C64FB350090EDEA /* ContentView.swift in Sources */,
+				74E1B3E62C64FB350090EDEA /* OnboardingsDemoApp.swift in Sources */,
+				74E1B3E72C64FB350090EDEA /* SplashView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,10 +290,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "OctoflowsDemo-SwiftUI/Supporting Files/OctoflowsDemo_SwiftUI.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "OnboardingsDemo-SwiftUI/Supporting Files/OnboardingsDemo_SwiftUI.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"OctoflowsDemo-SwiftUI/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"OnboardingsDemo-SwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = KGK5UKQJ46;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -333,10 +330,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "OctoflowsDemo-SwiftUI/Supporting Files/OctoflowsDemo_SwiftUI.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "OnboardingsDemo-SwiftUI/Supporting Files/OnboardingsDemo_SwiftUI.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"OctoflowsDemo-SwiftUI/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"OnboardingsDemo-SwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = KGK5UKQJ46;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -371,7 +368,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		74152F4D2C615575007F4EFF /* Build configuration list for PBXProject "OctoflowsDemo-SwiftUI" */ = {
+		74152F4D2C615575007F4EFF /* Build configuration list for PBXProject "OnboardingsDemo-SwiftUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				74152F5F2C615576007F4EFF /* Debug */,
@@ -380,7 +377,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		74152F612C615576007F4EFF /* Build configuration list for PBXNativeTarget "OctoflowsDemo-SwiftUI" */ = {
+		74152F612C615576007F4EFF /* Build configuration list for PBXNativeTarget "OnboardingsDemo-SwiftUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				74152F622C615576007F4EFF /* Debug */,
@@ -392,20 +389,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		74B5ECD12C62893100B0CCCF /* XCLocalSwiftPackageReference "../../" */ = {
+		74D547642C64FA7B00F18E2E /* XCLocalSwiftPackageReference "../../" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../";
+			relativePath = ../../;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		74B5ECCF2C6288A100B0CCCF /* Octoflows */ = {
+		74D547652C64FA7B00F18E2E /* Onbordings */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Octoflows;
-		};
-		74B5ECD22C62893100B0CCCF /* Octoflows */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Octoflows;
+			productName = Onbordings;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
