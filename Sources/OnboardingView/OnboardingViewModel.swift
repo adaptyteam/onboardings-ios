@@ -13,7 +13,7 @@ final class OnboardingViewModel: NSObject, ObservableObject {
     let url: URL
 
     // TODO: change `var` to `let` , and dont use "!". this params can be @Sendable and setup in init
-    var onEvent: ((Onboardings.Event) -> Void)!
+    var onMessage: ((Onboardings.Message) -> Void)!
     // TODO: change `var` to `let` , and dont use "!". this params can be @Sendable and setup in init
     var onError: ((Error) -> Void)!
 
@@ -60,15 +60,15 @@ extension OnboardingViewModel: WKNavigationDelegate, WKScriptMessageHandler {
         onError(error)
     }
 
-    public func userContentController(_: WKUserContentController, didReceive message: WKScriptMessage) {
+    public func userContentController(_: WKUserContentController, didReceive wkMessage: WKScriptMessage) {
         let stamp = self.stamp
         do {
-            let event = try Onboardings.Event(chanel: message.name, body: message.body)
-            Log.verbose("#OnboardingViewModel_\(stamp)# On event: \(event)")
-            onEvent(event)
-        } catch let error as Onboardings.UnknownEventError {
-            let message = String(describing: message.body)
-            Log.warn("#OnboardingViewModel_\(stamp)# Unknown event \(error.type.map { "with type \"\($0)\"" } ?? "with name \"\(error.chanel)\""): \(message)")
+            let message = try Onboardings.Message(chanel: wkMessage.name, body: wkMessage.body)
+            Log.verbose("#OnboardingViewModel_\(stamp)# On message: \(message)")
+            onMessage(message)
+        } catch let error as Onboardings.UnknownMessageError {
+            let wkMessageBody = String(describing: wkMessage.body)
+            Log.warn("#OnboardingViewModel_\(stamp)# Unknown message \(error.type.map { "with type \"\($0)\"" } ?? "with name \"\(error.chanel)\""): \(wkMessageBody)")
         } catch {
             Log.error("#OnboardingViewModel_\(stamp)# Error on decoding event: \(error)")
         }

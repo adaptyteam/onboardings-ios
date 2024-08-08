@@ -1,5 +1,5 @@
 //
-//  Event.swift
+//  Message.swift
 //
 //
 //  Created by Aleksei Valiano on 30.07.2024
@@ -9,21 +9,21 @@
 import Foundation
 
 extension Onboardings {
-    enum Event: Sendable, Hashable {
+    enum Message: Sendable, Hashable {
         case analytics(AnalyticsEvent)
-        case stateUpdated(StateUpdatedEvent)
-        case openPaywall(OpenPaywallEvent)
-        case custom(CustomEvent)
-        case close(CloseEvent)
+        case stateUpdated(StateUpdatedAction)
+        case openPaywall(OpenPaywallAction)
+        case custom(CustomAction)
+        case close(CloseAction)
     }
 
-    struct UnknownEventError: Error {
+    struct UnknownMessageError: Error {
         let chanel: String
         let type: String?
     }
 }
 
-extension Onboardings.Event: CustomDebugStringConvertible {
+extension Onboardings.Message: CustomDebugStringConvertible {
     var debugDescription: String {
         switch self {
         case let .analytics(event):

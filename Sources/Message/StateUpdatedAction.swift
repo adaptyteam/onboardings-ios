@@ -1,5 +1,5 @@
 //
-//  StateUpdatedEvent.swift
+//  StateUpdatedAction.swift
 //
 //
 //  Created by Aleksei Valiano on 01.08.2024
@@ -9,7 +9,7 @@
 import Foundation
 
 extension Onboardings {
-    struct StateUpdatedEvent: Sendable, Hashable {
+    struct StateUpdatedAction: Sendable, Hashable {
         let clientId: String
         let meta: MetaParameters
         let params: StateUpdatedParameters
@@ -46,7 +46,7 @@ extension Onboardings {
     }
 }
 
-extension Onboardings.StateUpdatedEvent: CustomDebugStringConvertible {
+extension Onboardings.StateUpdatedAction: CustomDebugStringConvertible {
     public var debugDescription: String {
         "{clientId: \(clientId), params: \(params.debugDescription), meta: \(meta.debugDescription)}"
     }

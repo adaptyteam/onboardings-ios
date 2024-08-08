@@ -1,5 +1,5 @@
 //
-//  CloseEvent.swift
+//  OpenPaywallAction.swift
 //
 //
 //  Created by Aleksei Valiano on 01.08.2024
@@ -9,7 +9,7 @@
 import Foundation
 
 extension Onboardings {
-    struct CloseEvent: Sendable, Hashable {
+    struct OpenPaywallAction: Sendable, Hashable {
         let clientId: String
         let meta: MetaParameters
 
@@ -20,7 +20,7 @@ extension Onboardings {
     }
 }
 
-extension Onboardings.CloseEvent: CustomDebugStringConvertible {
+extension Onboardings.OpenPaywallAction: CustomDebugStringConvertible {
     var debugDescription: String {
         "{clientId: \(clientId), meta: \(meta.debugDescription)}"
     }

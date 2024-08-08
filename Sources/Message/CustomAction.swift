@@ -1,5 +1,5 @@
 //
-//  CustomEvent.swift
+//  CustomAction.swift
 //
 //
 //  Created by Aleksei Valiano on 01.08.2024
@@ -9,7 +9,7 @@
 import Foundation
 
 extension Onboardings {
-    struct CustomEvent: Sendable, Hashable {
+    struct CustomAction: Sendable, Hashable {
         let clientId: String
         let meta: MetaParameters
 
@@ -20,7 +20,7 @@ extension Onboardings {
     }
 }
 
-extension Onboardings.CustomEvent: CustomDebugStringConvertible {
+extension Onboardings.CustomAction: CustomDebugStringConvertible {
     var debugDescription: String {
         "{clientId: \(clientId), meta: \(meta.debugDescription)}"
     }

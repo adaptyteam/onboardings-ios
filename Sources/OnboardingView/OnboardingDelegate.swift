@@ -40,16 +40,16 @@ public extension OnboardingDelegate {
 }
 
 extension OnboardingDelegate {
-    func apply(event: Onboardings.Event) {
-        switch event {
-        case let .close(event):
-            onboardingsCloseAction(clientId: event.clientId, withMeta: event.meta)
-        case let .custom(event):
-            onboardingsCloseAction(clientId: event.clientId, withMeta: event.meta)
-        case let .openPaywall(event):
-            onboardingsCloseAction(clientId: event.clientId, withMeta: event.meta)
-        case let .stateUpdated(event):
-            stateUpdated(clientId: event.clientId, params: event.params, withMeta: event.meta)
+    func apply(message: Onboardings.Message) {
+        switch message {
+        case let .close(action):
+            onboardingsCloseAction(clientId: action.clientId, withMeta: action.meta)
+        case let .custom(action):
+            onboardingsCloseAction(clientId: action.clientId, withMeta: action.meta)
+        case let .openPaywall(action):
+            onboardingsCloseAction(clientId: action.clientId, withMeta: action.meta)
+        case let .stateUpdated(action):
+            stateUpdated(clientId: action.clientId, params: action.params, withMeta: action.meta)
         case let .analytics(event):
             onAnalyticsEvent(event: event)
         }

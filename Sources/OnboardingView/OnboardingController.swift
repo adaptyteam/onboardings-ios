@@ -35,13 +35,13 @@ public final class OnboardingController: UIViewController {
             delegate?.apply(error: error)
         }
 
-        viewModel.onEvent = { [weak delegate] event in
-            // TODO: bad design for react to analytics events, should make action|event finishLoading|startOnboarding
-            if case let .analytics(event) = event, case .onboardingStarted = event {
+        viewModel.onMessage = { [weak delegate] message in
+            // TODO: bad design for react to analytics events, should make finishLoadingAction xor startOnboardingAction
+            if case .analytics(.onboardingStarted) = message {
                 onFinishLoading()
             }
 
-            delegate?.apply(event: event)
+            delegate?.apply(message: message)
         }
     }
 
