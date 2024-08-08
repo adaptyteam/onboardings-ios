@@ -7,150 +7,128 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		74152F462C6147C8007F4EFF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74152F452C6147C8007F4EFF /* ViewController.swift */; };
-		7499027A2C5D5363009063A8 /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749902792C5D5363009063A8 /* OnboardingManager.swift */; };
-		7499027E2C5D55EC009063A8 /* SplashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7499027D2C5D55EC009063A8 /* SplashController.swift */; };
-		74B2297F2C5CD9A90030EDA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B2297E2C5CD9A90030EDA6 /* AppDelegate.swift */; };
-		74B229812C5CD9A90030EDA6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B229802C5CD9A90030EDA6 /* SceneDelegate.swift */; };
-		74B229862C5CD9A90030EDA6 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 74B229852C5CD9A90030EDA6 /* Base */; };
-		74B229882C5CD9AB0030EDA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74B229872C5CD9AA0030EDA6 /* Assets.xcassets */; };
-		74B2298B2C5CD9AB0030EDA6 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 74B2298A2C5CD9AB0030EDA6 /* Base */; };
-		D3F091C06B5A5BC61800EF74 /* Pods_OctoflowsDemo_UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DC52B253CD81367D06E6F22 /* Pods_OctoflowsDemo_UIKit.framework */; };
+		74E1B4482C650E190090EDEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E1B4472C650E190090EDEA /* AppDelegate.swift */; };
+		74E1B44A2C650E190090EDEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E1B4492C650E190090EDEA /* SceneDelegate.swift */; };
+		74E1B44C2C650E190090EDEA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E1B44B2C650E190090EDEA /* ViewController.swift */; };
+		74E1B44F2C650E190090EDEA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 74E1B44E2C650E190090EDEA /* Base */; };
+		74E1B4512C650E1A0090EDEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74E1B4502C650E1A0090EDEA /* Assets.xcassets */; };
+		74E1B4542C650E1A0090EDEA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 74E1B4532C650E1A0090EDEA /* Base */; };
+		F6539149680BEDFB9E9AC80A /* Pods_OnboardingsDemo_UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE57B6799D54C987184845C /* Pods_OnboardingsDemo_UIKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		05615424E648FFDACE008ECF /* Pods-OctoflowsDemo-UIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OctoflowsDemo-UIKit.release.xcconfig"; path = "Target Support Files/Pods-OctoflowsDemo-UIKit/Pods-OctoflowsDemo-UIKit.release.xcconfig"; sourceTree = "<group>"; };
-		3DC52B253CD81367D06E6F22 /* Pods_OctoflowsDemo_UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OctoflowsDemo_UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		60EAD33DA247BE742A726F0F /* Pods-OctoflowsDemo-UIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OctoflowsDemo-UIKit.debug.xcconfig"; path = "Target Support Files/Pods-OctoflowsDemo-UIKit/Pods-OctoflowsDemo-UIKit.debug.xcconfig"; sourceTree = "<group>"; };
-		74152F452C6147C8007F4EFF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		749902792C5D5363009063A8 /* OnboardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
-		7499027D2C5D55EC009063A8 /* SplashController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashController.swift; sourceTree = "<group>"; };
-		74B2297B2C5CD9A90030EDA6 /* OctoflowsDemo-UIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OctoflowsDemo-UIKit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		74B2297E2C5CD9A90030EDA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		74B229802C5CD9A90030EDA6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		74B229852C5CD9A90030EDA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		74B229872C5CD9AA0030EDA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		74B2298A2C5CD9AB0030EDA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		74B2298C2C5CD9AB0030EDA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		323A3CDDFC353D4B68A451A7 /* Pods-OnboardingsDemo-UIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnboardingsDemo-UIKit.release.xcconfig"; path = "Target Support Files/Pods-OnboardingsDemo-UIKit/Pods-OnboardingsDemo-UIKit.release.xcconfig"; sourceTree = "<group>"; };
+		74E1B4442C650E190090EDEA /* OnboardingsDemo-UIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OnboardingsDemo-UIKit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		74E1B4472C650E190090EDEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		74E1B4492C650E190090EDEA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		74E1B44B2C650E190090EDEA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		74E1B44E2C650E190090EDEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		74E1B4502C650E1A0090EDEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		74E1B4532C650E1A0090EDEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		74E1B4552C650E1A0090EDEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ADE57B6799D54C987184845C /* Pods_OnboardingsDemo_UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnboardingsDemo_UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D78D7C32C94B97DE4AEC5BFD /* Pods-OnboardingsDemo-UIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnboardingsDemo-UIKit.debug.xcconfig"; path = "Target Support Files/Pods-OnboardingsDemo-UIKit/Pods-OnboardingsDemo-UIKit.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		74B229782C5CD9A90030EDA6 /* Frameworks */ = {
+		74E1B4412C650E190090EDEA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3F091C06B5A5BC61800EF74 /* Pods_OctoflowsDemo_UIKit.framework in Frameworks */,
+				F6539149680BEDFB9E9AC80A /* Pods_OnboardingsDemo_UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		22312AE581E0C4E54F03236D /* Pods */ = {
+		74E1B43B2C650E190090EDEA = {
 			isa = PBXGroup;
 			children = (
-				60EAD33DA247BE742A726F0F /* Pods-OctoflowsDemo-UIKit.debug.xcconfig */,
-				05615424E648FFDACE008ECF /* Pods-OctoflowsDemo-UIKit.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
-		72658E020CD1CAA926B343F9 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3DC52B253CD81367D06E6F22 /* Pods_OctoflowsDemo_UIKit.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		74152F472C614CDF007F4EFF /* Interface */ = {
-			isa = PBXGroup;
-			children = (
-				74B229842C5CD9A90030EDA6 /* Main.storyboard */,
-				749902792C5D5363009063A8 /* OnboardingManager.swift */,
-				7499027D2C5D55EC009063A8 /* SplashController.swift */,
-				74152F452C6147C8007F4EFF /* ViewController.swift */,
-			);
-			path = Interface;
-			sourceTree = "<group>";
-		};
-		74152F482C614D2A007F4EFF /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				74B229872C5CD9AA0030EDA6 /* Assets.xcassets */,
-				74B229892C5CD9AB0030EDA6 /* LaunchScreen.storyboard */,
-				74B2298C2C5CD9AB0030EDA6 /* Info.plist */,
-			);
-			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		74B229722C5CD9A90030EDA6 = {
-			isa = PBXGroup;
-			children = (
-				74B2297D2C5CD9A90030EDA6 /* OctoflowsDemo-UIKit */,
-				74B2297C2C5CD9A90030EDA6 /* Products */,
-				22312AE581E0C4E54F03236D /* Pods */,
-				72658E020CD1CAA926B343F9 /* Frameworks */,
+				74E1B4462C650E190090EDEA /* OnboardingsDemo-UIKit */,
+				74E1B4452C650E190090EDEA /* Products */,
+				94DBBDCC0C2A14EEEB3EEE5F /* Pods */,
+				ADD2884141BE5ADB6A839569 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		74B2297C2C5CD9A90030EDA6 /* Products */ = {
+		74E1B4452C650E190090EDEA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				74B2297B2C5CD9A90030EDA6 /* OctoflowsDemo-UIKit.app */,
+				74E1B4442C650E190090EDEA /* OnboardingsDemo-UIKit.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		74B2297D2C5CD9A90030EDA6 /* OctoflowsDemo-UIKit */ = {
+		74E1B4462C650E190090EDEA /* OnboardingsDemo-UIKit */ = {
 			isa = PBXGroup;
 			children = (
-				74B2297E2C5CD9A90030EDA6 /* AppDelegate.swift */,
-				74B229802C5CD9A90030EDA6 /* SceneDelegate.swift */,
-				74152F472C614CDF007F4EFF /* Interface */,
-				74152F482C614D2A007F4EFF /* Supporting Files */,
+				74E1B4472C650E190090EDEA /* AppDelegate.swift */,
+				74E1B4492C650E190090EDEA /* SceneDelegate.swift */,
+				74E1B44B2C650E190090EDEA /* ViewController.swift */,
+				74E1B44D2C650E190090EDEA /* Main.storyboard */,
+				74E1B4502C650E1A0090EDEA /* Assets.xcassets */,
+				74E1B4522C650E1A0090EDEA /* LaunchScreen.storyboard */,
+				74E1B4552C650E1A0090EDEA /* Info.plist */,
 			);
-			path = "OctoflowsDemo-UIKit";
+			path = "OnboardingsDemo-UIKit";
+			sourceTree = "<group>";
+		};
+		94DBBDCC0C2A14EEEB3EEE5F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D78D7C32C94B97DE4AEC5BFD /* Pods-OnboardingsDemo-UIKit.debug.xcconfig */,
+				323A3CDDFC353D4B68A451A7 /* Pods-OnboardingsDemo-UIKit.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		ADD2884141BE5ADB6A839569 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ADE57B6799D54C987184845C /* Pods_OnboardingsDemo_UIKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		74B2297A2C5CD9A90030EDA6 /* OctoflowsDemo-UIKit */ = {
+		74E1B4432C650E190090EDEA /* OnboardingsDemo-UIKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 74B2298F2C5CD9AB0030EDA6 /* Build configuration list for PBXNativeTarget "OctoflowsDemo-UIKit" */;
+			buildConfigurationList = 74E1B4582C650E1A0090EDEA /* Build configuration list for PBXNativeTarget "OnboardingsDemo-UIKit" */;
 			buildPhases = (
-				AF0956CD16733262ECA1EAAB /* [CP] Check Pods Manifest.lock */,
-				74B229772C5CD9A90030EDA6 /* Sources */,
-				74B229782C5CD9A90030EDA6 /* Frameworks */,
-				74B229792C5CD9A90030EDA6 /* Resources */,
-				05A2B5336EA3D252FD6BFEB2 /* [CP] Embed Pods Frameworks */,
+				C70AA3E80097723C68240C53 /* [CP] Check Pods Manifest.lock */,
+				74E1B4402C650E190090EDEA /* Sources */,
+				74E1B4412C650E190090EDEA /* Frameworks */,
+				74E1B4422C650E190090EDEA /* Resources */,
+				EB97400DFE76EC444AB8D258 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "OctoflowsDemo-UIKit";
-			productName = "OctoflowsDemo-UIKit";
-			productReference = 74B2297B2C5CD9A90030EDA6 /* OctoflowsDemo-UIKit.app */;
+			name = "OnboardingsDemo-UIKit";
+			productName = "OnboardingsDemo-UIKit";
+			productReference = 74E1B4442C650E190090EDEA /* OnboardingsDemo-UIKit.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		74B229732C5CD9A90030EDA6 /* Project object */ = {
+		74E1B43C2C650E190090EDEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
-					74B2297A2C5CD9A90030EDA6 = {
+					74E1B4432C650E190090EDEA = {
 						CreatedOnToolsVersion = 15.4;
 					};
 				};
 			};
-			buildConfigurationList = 74B229762C5CD9A90030EDA6 /* Build configuration list for PBXProject "OctoflowsDemo-UIKit" */;
+			buildConfigurationList = 74E1B43F2C650E190090EDEA /* Build configuration list for PBXProject "OnboardingsDemo-UIKit" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -158,48 +136,31 @@
 				en,
 				Base,
 			);
-			mainGroup = 74B229722C5CD9A90030EDA6;
-			productRefGroup = 74B2297C2C5CD9A90030EDA6 /* Products */;
+			mainGroup = 74E1B43B2C650E190090EDEA;
+			productRefGroup = 74E1B4452C650E190090EDEA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				74B2297A2C5CD9A90030EDA6 /* OctoflowsDemo-UIKit */,
+				74E1B4432C650E190090EDEA /* OnboardingsDemo-UIKit */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		74B229792C5CD9A90030EDA6 /* Resources */ = {
+		74E1B4422C650E190090EDEA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74B229882C5CD9AB0030EDA6 /* Assets.xcassets in Resources */,
-				74B2298B2C5CD9AB0030EDA6 /* Base in Resources */,
-				74B229862C5CD9A90030EDA6 /* Base in Resources */,
+				74E1B4512C650E1A0090EDEA /* Assets.xcassets in Resources */,
+				74E1B4542C650E1A0090EDEA /* Base in Resources */,
+				74E1B44F2C650E190090EDEA /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		05A2B5336EA3D252FD6BFEB2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OctoflowsDemo-UIKit/Pods-OctoflowsDemo-UIKit-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OctoflowsDemo-UIKit/Pods-OctoflowsDemo-UIKit-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OctoflowsDemo-UIKit/Pods-OctoflowsDemo-UIKit-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AF0956CD16733262ECA1EAAB /* [CP] Check Pods Manifest.lock */ = {
+		C70AA3E80097723C68240C53 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -214,43 +175,58 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-OctoflowsDemo-UIKit-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-OnboardingsDemo-UIKit-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		EB97400DFE76EC444AB8D258 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OnboardingsDemo-UIKit/Pods-OnboardingsDemo-UIKit-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OnboardingsDemo-UIKit/Pods-OnboardingsDemo-UIKit-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OnboardingsDemo-UIKit/Pods-OnboardingsDemo-UIKit-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		74B229772C5CD9A90030EDA6 /* Sources */ = {
+		74E1B4402C650E190090EDEA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74152F462C6147C8007F4EFF /* ViewController.swift in Sources */,
-				7499027A2C5D5363009063A8 /* OnboardingManager.swift in Sources */,
-				7499027E2C5D55EC009063A8 /* SplashController.swift in Sources */,
-				74B2297F2C5CD9A90030EDA6 /* AppDelegate.swift in Sources */,
-				74B229812C5CD9A90030EDA6 /* SceneDelegate.swift in Sources */,
+				74E1B44C2C650E190090EDEA /* ViewController.swift in Sources */,
+				74E1B4482C650E190090EDEA /* AppDelegate.swift in Sources */,
+				74E1B44A2C650E190090EDEA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		74B229842C5CD9A90030EDA6 /* Main.storyboard */ = {
+		74E1B44D2C650E190090EDEA /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				74B229852C5CD9A90030EDA6 /* Base */,
+				74E1B44E2C650E190090EDEA /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		74B229892C5CD9AB0030EDA6 /* LaunchScreen.storyboard */ = {
+		74E1B4522C650E1A0090EDEA /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				74B2298A2C5CD9AB0030EDA6 /* Base */,
+				74E1B4532C650E1A0090EDEA /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -258,7 +234,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		74B2298D2C5CD9AB0030EDA6 /* Debug */ = {
+		74E1B4562C650E1A0090EDEA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -321,7 +297,7 @@
 			};
 			name = Debug;
 		};
-		74B2298E2C5CD9AB0030EDA6 /* Release */ = {
+		74E1B4572C650E1A0090EDEA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -377,18 +353,17 @@
 			};
 			name = Release;
 		};
-		74B229902C5CD9AB0030EDA6 /* Debug */ = {
+		74E1B4592C650E1A0090EDEA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 60EAD33DA247BE742A726F0F /* Pods-OctoflowsDemo-UIKit.debug.xcconfig */;
+			baseConfigurationReference = D78D7C32C94B97DE4AEC5BFD /* Pods-OnboardingsDemo-UIKit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KGK5UKQJ46;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "OctoflowsDemo-UIKit/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "OnboardingsDemo-UIKit/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -412,18 +387,17 @@
 			};
 			name = Debug;
 		};
-		74B229912C5CD9AB0030EDA6 /* Release */ = {
+		74E1B45A2C650E1A0090EDEA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 05615424E648FFDACE008ECF /* Pods-OctoflowsDemo-UIKit.release.xcconfig */;
+			baseConfigurationReference = 323A3CDDFC353D4B68A451A7 /* Pods-OnboardingsDemo-UIKit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KGK5UKQJ46;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "OctoflowsDemo-UIKit/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "OnboardingsDemo-UIKit/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -450,25 +424,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		74B229762C5CD9A90030EDA6 /* Build configuration list for PBXProject "OctoflowsDemo-UIKit" */ = {
+		74E1B43F2C650E190090EDEA /* Build configuration list for PBXProject "OnboardingsDemo-UIKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				74B2298D2C5CD9AB0030EDA6 /* Debug */,
-				74B2298E2C5CD9AB0030EDA6 /* Release */,
+				74E1B4562C650E1A0090EDEA /* Debug */,
+				74E1B4572C650E1A0090EDEA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		74B2298F2C5CD9AB0030EDA6 /* Build configuration list for PBXNativeTarget "OctoflowsDemo-UIKit" */ = {
+		74E1B4582C650E1A0090EDEA /* Build configuration list for PBXNativeTarget "OnboardingsDemo-UIKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				74B229902C5CD9AB0030EDA6 /* Debug */,
-				74B229912C5CD9AB0030EDA6 /* Release */,
+				74E1B4592C650E1A0090EDEA /* Debug */,
+				74E1B45A2C650E1A0090EDEA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 74B229732C5CD9A90030EDA6 /* Project object */;
+	rootObject = 74E1B43C2C650E190090EDEA /* Project object */;
 }

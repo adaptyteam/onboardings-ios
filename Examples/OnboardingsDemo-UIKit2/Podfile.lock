@@ -1,0 +1,16 @@
+PODS:
+  - Onbordings (1.0.0-SNAPSHOT)
+
+DEPENDENCIES:
+  - Onbordings (from `../../`)
+
+EXTERNAL SOURCES:
+  Onbordings:
+    :path: "../../"
+
+SPEC CHECKSUMS:
+  Onbordings: e3c9b4aa2a80a9f4a9359379e11b5299e9307a75
+
+PODFILE CHECKSUM: d7241e961d373222841516bfd86ac6804be8c263
+
+COCOAPODS: 1.15.2

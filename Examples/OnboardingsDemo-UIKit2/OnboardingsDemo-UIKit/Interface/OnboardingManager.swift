@@ -19,7 +19,7 @@ final class OnboardingManager: NSObject {
 
         guard let windowScene = (scene as? UIWindowScene) else { return nil }
 
-        self.window = UIWindow(windowScene: windowScene)
+        window = UIWindow(windowScene: windowScene)
         presentOnboarding()
         return window
     }
@@ -40,20 +40,21 @@ final class OnboardingManager: NSObject {
     private func activateOnbordings() {
         do {
             let configuration = try Onbordings.Configuration
-                .Builder(withAPIKey: "")  // TODO: insert apiKey
-                .with(alternativeBaseUrl: URL(string: "https://x.fnlfx.com/")! ) // TODO: remove
+                .Builder(withAPIKey: "") // TODO: insert apiKey
+                .with(alternativeBaseUrl: URL(string: "https://x.fnlfx.com/")!) // TODO: remove
                 .with(loglevel: .verbose)
                 .build()
 
             try Onbordings.activate(with: configuration)
-        } catch let error as OnbordingsError {
+        } catch {
             // handle the error
+            if let error = error as? OnbordingsError {}
         }
     }
 }
 
 extension OnboardingManager: OnboardingDelegate {
-    func onbordingsCloseAction() {
+    func onboardingsCloseAction(clientId: String, withMeta: Onbordings.MetaParameters) {
         guard let window else { return }
 
         window.rootViewController = ViewController.instantiate()
@@ -65,10 +66,18 @@ extension OnboardingManager: OnboardingDelegate {
             animations: {}
         )
     }
+
+    func openPaywallAction(clientId: String, withMeta: Onbordings.MetaParameters) {}
+
+    func customAction(clientId: String, withMeta: Onbordings.MetaParameters) {}
+
+    func stateUpdated(clientId: String, params: Onbordings.StateUpdatedParameters, withMeta: Onbordings.MetaParameters) {}
+
+    func onAnalyticsEvent(event: Onbordings.AnalyticsEvent) {}
 }
 
 extension OnboardingManager: OnboardingSplashDelegate {
-    func onbordingsSplashViewController() -> UIViewController? {
+    func onboardingsSplashViewController() -> UIViewController? {
         SplashController.instantiate()
     }
 }
