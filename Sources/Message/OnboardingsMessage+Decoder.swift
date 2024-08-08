@@ -1,5 +1,5 @@
 //
-//  Message+Decoder.swift
+//  OnboardingsMessage+Decoder.swift
 //
 //
 //  Created by Aleksei Valiano on 07.08.2024
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Onboardings.Message {
+extension OnboardingsMessage {
     init(chanel: String, body: Any) throws {
 //        enum ChanelName: String {
 //            case events
@@ -38,7 +38,7 @@ extension Onboardings.Message {
 
         switch TypeName(rawValue: type) {
         case .none:
-            throw Onboardings.UnknownMessageError(chanel: chanel, type: type)
+            throw OnboardingsUnknownMessageError(chanel: chanel, type: type)
         case .analytics:
             self = try .analytics(.init(body))
         case .stateUpdated:

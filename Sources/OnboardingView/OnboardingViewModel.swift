@@ -13,7 +13,7 @@ final class OnboardingViewModel: NSObject, ObservableObject {
     let url: URL
 
     // TODO: change `var` to `let` , and dont use "!". this params can be @Sendable and setup in init
-    var onMessage: ((Onboardings.Message) -> Void)!
+    var onMessage: ((OnboardingsMessage) -> Void)!
     // TODO: change `var` to `let` , and dont use "!". this params can be @Sendable and setup in init
     var onError: ((Error) -> Void)!
 
@@ -63,10 +63,10 @@ extension OnboardingViewModel: WKNavigationDelegate, WKScriptMessageHandler {
     public func userContentController(_: WKUserContentController, didReceive wkMessage: WKScriptMessage) {
         let stamp = self.stamp
         do {
-            let message = try Onboardings.Message(chanel: wkMessage.name, body: wkMessage.body)
+            let message = try OnboardingsMessage(chanel: wkMessage.name, body: wkMessage.body)
             Log.verbose("#OnboardingViewModel_\(stamp)# On message: \(message)")
             onMessage(message)
-        } catch let error as Onboardings.UnknownMessageError {
+        } catch let error as OnboardingsUnknownMessageError {
             let wkMessageBody = String(describing: wkMessage.body)
             Log.warn("#OnboardingViewModel_\(stamp)# Unknown message \(error.type.map { "with type \"\($0)\"" } ?? "with name \"\(error.chanel)\""): \(wkMessageBody)")
         } catch {

@@ -28,7 +28,8 @@ public extension Onboardings {
         try startActivate(with: configuration)
     }
 
-    static func getOnboardingURL(id: String) async throws -> URL { // TODO: remove , the URL of the onboarding's data must be internal
+    // TODO: remove , the URL of the onboarding's data must be internal
+    static func getOnboardingURL(id: String) async throws -> URL {
         let instance = try await activated
         return instance.configuration.onboardingUrl(onboardingId: id)
     }

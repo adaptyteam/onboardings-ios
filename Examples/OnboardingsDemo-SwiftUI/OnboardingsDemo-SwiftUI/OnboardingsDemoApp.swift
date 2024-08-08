@@ -61,7 +61,7 @@ class ViewModel: ObservableObject {
                 print("")
             } catch {
                 // handle the error
-                if let error = error as? OnboradingsError {}
+                if let error = error as? OnboardingsError {}
             }
         }
     }
@@ -112,7 +112,7 @@ struct ApplicationMainView: View {
                 onCustomAction: { _ in
 
                 },
-                onStateUpdated: { _ in
+                onStateUpdatedAction: { _ in
 
                 },
                 onAnalyticsEvent: { _ in

@@ -10,12 +10,12 @@ import UIKit
 
 // TODO: refactor namings
 public protocol OnboardingDelegate: NSObjectProtocol {
-    func onboardingsCloseAction(clientId: String, withMeta: Onboardings.MetaParameters)
-    func openPaywallAction(clientId: String, withMeta: Onboardings.MetaParameters)
-    func customAction(clientId: String, withMeta: Onboardings.MetaParameters)
-    func stateUpdated(clientId: String, params: Onboardings.StateUpdatedParameters, withMeta: Onboardings.MetaParameters)
+    func onboardingsCloseAction(_ action: OnboardingsCloseAction)
+    func openPaywallAction(_ action: OnboardingsOpenPaywallAction)
+    func customAction(_ action: OnboardingsCustomAction)
+    func stateUpdatedAction(_ action: OnboardingsStateUpdatedAction)
 
-    func onAnalyticsEvent(event: Onboardings.AnalyticsEvent)
+    func onAnalyticsEvent(_ event: OnboardingsAnalyticsEvent)
     func onLoadingError(_ error: Error)
 }
 
@@ -24,34 +24,34 @@ public protocol OnboardingSplashDelegate: NSObjectProtocol {
 }
 
 public extension OnboardingDelegate {
-    func openPaywallAction(clientId _: String, withMeta _: Onboardings.MetaParameters) {
+    func openPaywallAction(_: OnboardingsOpenPaywallAction) {
         Log.warn("Not implemented method 'openPaywallAction' of  OnboardingDelegate ")
     }
 
-    func customAction(clientId _: String, withMeta _: Onboardings.MetaParameters) {
+    func customAction(_: OnboardingsCustomAction) {
         Log.warn("Not implemented method 'customAction' of OnboardingDelegate")
     }
 
-    func stateUpdated(clientId _: String, params _: Onboardings.StateUpdatedParameters, withMeta _: Onboardings.MetaParameters) {
+    func stateUpdatedAction(_: OnboardingsStateUpdatedAction) {
         Log.warn("Not implemented method 'stateUpdated' of OnboardingDelegate")
     }
 
-    func onAnalyticsEvent(event _: Onboardings.AnalyticsEvent) {}
+    func onAnalyticsEvent(_: OnboardingsAnalyticsEvent) {}
 }
 
 extension OnboardingDelegate {
-    func apply(message: Onboardings.Message) {
+    func apply(message: OnboardingsMessage) {
         switch message {
         case let .close(action):
-            onboardingsCloseAction(clientId: action.clientId, withMeta: action.meta)
+            onboardingsCloseAction(action)
         case let .custom(action):
-            onboardingsCloseAction(clientId: action.clientId, withMeta: action.meta)
+            customAction(action)
         case let .openPaywall(action):
-            onboardingsCloseAction(clientId: action.clientId, withMeta: action.meta)
+            openPaywallAction(action)
         case let .stateUpdated(action):
-            stateUpdated(clientId: action.clientId, params: action.params, withMeta: action.meta)
+            stateUpdatedAction(action)
         case let .analytics(event):
-            onAnalyticsEvent(event: event)
+            onAnalyticsEvent(event)
         }
     }
 

@@ -1,5 +1,5 @@
 //
-//  Message.swift
+//  OnboardingsMessage.swift
 //
 //
 //  Created by Aleksei Valiano on 30.07.2024
@@ -8,22 +8,15 @@
 
 import Foundation
 
-extension Onboardings {
-    enum Message: Sendable, Hashable {
-        case analytics(AnalyticsEvent)
-        case stateUpdated(StateUpdatedAction)
-        case openPaywall(OpenPaywallAction)
-        case custom(CustomAction)
-        case close(CloseAction)
-    }
-
-    struct UnknownMessageError: Error {
-        let chanel: String
-        let type: String?
-    }
+enum OnboardingsMessage: Sendable, Hashable {
+    case analytics(OnboardingsAnalyticsEvent)
+    case stateUpdated(OnboardingsStateUpdatedAction)
+    case openPaywall(OnboardingsOpenPaywallAction)
+    case custom(OnboardingsCustomAction)
+    case close(OnboardingsCloseAction)
 }
 
-extension Onboardings.Message: CustomDebugStringConvertible {
+extension OnboardingsMessage: CustomDebugStringConvertible {
     var debugDescription: String {
         switch self {
         case let .analytics(event):
