@@ -27,10 +27,10 @@ public extension Onbordings {
     static func activate(with configuration: Onbordings.Configuration) throws {
         try startActivate(with: configuration)
     }
-    
-    static func getOnboardingURL(id: String) async throws -> URL {
+
+    static func getOnboardingURL(id: String) async throws -> URL { // TODO: remove , the URL of the onbording's data must be internal
         let instance = try await activated
-        return instance.configuration.baseUrl.appendingPathComponent(id)
+        return instance.configuration.onbordingUrl(onbordingId: id)
     }
 
     @MainActor

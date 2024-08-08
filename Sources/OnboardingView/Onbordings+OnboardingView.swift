@@ -15,7 +15,7 @@ extension Onbordings {
         delegate: OnboardingDelegate,
         onFinishLoading: @escaping () -> Void
     ) throws -> OnboardingController {
-        let url = configuration.baseUrl.appendingPathComponent(id)
+        let url = configuration.onbordingUrl(onbordingId: id)
 
         let vc = OnboardingController(
             url: url,

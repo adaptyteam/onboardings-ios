@@ -24,7 +24,7 @@ public struct OnboardingSplashView<Splash: View>: View {
     @State
     private var isLoading = true
 
-    public init(
+    public init( // TODO: init must be internal , the URL of the onbording's data must not be publicly available for setup
         url: URL,
         splashViewBuilder: @escaping () -> Splash,
         onCloseAction: @escaping (OnboardingActionParams) -> Void,
@@ -82,8 +82,8 @@ public struct OnboardingView: UIViewControllerRepresentable {
     private let url: URL
     private let onFinishLoading: () -> Void
 
-    public init(
-        url: URL,
+    public init( // TODO: init must be internal , the URL of the onbording's data must not be publicly available for setup
+        url: URL, 
         onFinishLoading: @escaping () -> Void,
         onCloseAction: @escaping (OnboardingActionParams) -> Void,
         onOpenPaywallAction: ((OnboardingActionParams) -> Void)?,

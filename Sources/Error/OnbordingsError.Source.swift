@@ -15,7 +15,7 @@ extension OnbordingsError {
         public let function: String
         public let line: UInt
 
-        public init(file: String = #fileID, function: String = #function, line: UInt = #line) {
+        package init(file: String = #fileID, function: String = #function, line: UInt = #line) {
             self.file = file
             self.function = function
             self.line = line

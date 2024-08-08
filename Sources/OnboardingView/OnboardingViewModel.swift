@@ -11,17 +11,21 @@ import WebKit
 class OnboardingViewModel: NSObject, ObservableObject {
     let stamp: String
     let url: URL
-    
+
+    // TODO: change `var` to `let` , and dont use "!". this params can be @Sendable and setup in init
     var onEvent: ((Onbordings.Event) -> Void)!
+    // TODO: change `var` to `let` , and dont use "!". this params can be @Sendable and setup in init
     var onError: ((Error) -> Void)!
 
-    init( stamp: String,  url: URL   ) {
+    init(stamp: String, url: URL) {
         self.stamp = stamp
         self.url = url
     }
 
+    @MainActor 
     func configureWebView(_ webView: WKWebView) {
-        Log.verbose("#OnboardingViewModel_\(self.stamp)# configureWebView")
+        let stamp = self.stamp
+        Log.verbose("#OnboardingViewModel_\(stamp)# configureWebView")
 
         webView.navigationDelegate = self
         webView.configuration.userContentController.add(self, name: "postEvent")
@@ -41,29 +45,32 @@ class OnboardingViewModel: NSObject, ObservableObject {
 
 extension OnboardingViewModel: WKNavigationDelegate, WKScriptMessageHandler {
     public func webView(_: WKWebView, didStartProvisionalNavigation _: WKNavigation!) {
-        Log.verbose("#OnboardingViewModel_\(self.stamp)# webView didStartProvisionalNavigation")
+        let stamp = self.stamp
+        Log.verbose("#OnboardingViewModel_\(stamp)# webView didStartProvisionalNavigation")
     }
 
     public func webView(_: WKWebView, didFinish _: WKNavigation!) {
-        Log.verbose("#OnboardingViewModel_\(self.stamp)# webView didFinish navigation")
+        let stamp = self.stamp
+        Log.verbose("#OnboardingViewModel_\(stamp)# webView didFinish navigation")
     }
 
     public func webView(_: WKWebView, didFail _: WKNavigation!, withError error: Error) {
-        Log.error("#OnboardingViewModel_\(self.stamp)# didFail navigation withError \(error)")
+        let stamp = self.stamp
+        Log.error("#OnboardingViewModel_\(stamp)# didFail navigation withError \(error)")
         onError(error)
     }
 
     public func userContentController(_: WKUserContentController, didReceive message: WKScriptMessage) {
+        let stamp = self.stamp
         do {
             let event = try Onbordings.Event(chanel: message.name, body: message.body)
-            
-            Log.verbose("#OnboardingViewModel_\(self.stamp)# On event: \(event)")
+            Log.verbose("#OnboardingViewModel_\(stamp)# On event: \(event)")
             onEvent(event)
         } catch let error as Onbordings.UnknownEventError {
             let message = String(describing: message.body)
-            Log.warn("#OnboardingViewModel_\(self.stamp)# Unknown event \(error.type.map { "with type \"\($0)\"" } ?? "with name \"\(error.chanel)\""): \(message)")
+            Log.warn("#OnboardingViewModel_\(stamp)# Unknown event \(error.type.map { "with type \"\($0)\"" } ?? "with name \"\(error.chanel)\""): \(message)")
         } catch {
-            Log.error("#OnboardingViewModel_\(self.stamp)# Error on decoding event: \(error)")
+            Log.error("#OnboardingViewModel_\(stamp)# Error on decoding event: \(error)")
         }
     }
 }

@@ -21,6 +21,10 @@ extension Onbordings.Configuration {
     static func createBaseUrl(apiKey: String) -> URL? {
         URL(string: "https://\(apiKey).fnlfx.com/")
     }
+
+    func onbordingUrl(onbordingId id: String) -> URL {
+        baseUrl.appendingPathComponent(id)
+    }
 }
 
 extension Onbordings.Configuration: CustomDebugStringConvertible {

@@ -17,7 +17,7 @@ public class OnboardingController: UIViewController {
 
     private var webView: WKWebView!
 
-    public init(
+    public init( // TODO: init must be internal , the URL of the onbording's data must not be publicly available for setup
         url: URL,
         delegate: OnboardingDelegate,
         onFinishLoading: @escaping () -> Void
@@ -34,9 +34,10 @@ public class OnboardingController: UIViewController {
         viewModel.onError = { [weak delegate] error in
             delegate?.apply(error: error)
         }
-        
+
         viewModel.onEvent = { [weak delegate] event in
-            if case .analytics(let event) = event, case .onboardingStarted(let meta) = event {
+            // TODO: bad design for react to analytics events, should make action|event finishLoading|startOnbording
+            if case let .analytics(event) = event, case .onboardingStarted = event {
                 onFinishLoading()
             }
 

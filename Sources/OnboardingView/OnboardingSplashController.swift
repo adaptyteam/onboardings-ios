@@ -13,8 +13,8 @@ public class OnboardingSplashController: UIViewController {
     private weak var applicationSplashVC: UIViewController?
     private weak var onboardingVC: OnboardingController?
 
-    private weak var delegate: OnboardingDelegate!
-    private weak var splashDelegate: OnboardingSplashDelegate!
+    private weak var delegate: OnboardingDelegate!  // TODO: "weak" + "!" = fatalError
+    private weak var splashDelegate: OnboardingSplashDelegate! // TODO: "weak" + "!" = fatalError
 
     @MainActor
     init(
