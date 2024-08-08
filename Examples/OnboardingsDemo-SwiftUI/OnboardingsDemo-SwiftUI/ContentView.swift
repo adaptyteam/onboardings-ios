@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  OctoflowsDemo-SwiftUI
+//  OnboardingsDemo-SwiftUI
 //
 //  Created by Aleksey Goncharov on 05.08.2024.
 //

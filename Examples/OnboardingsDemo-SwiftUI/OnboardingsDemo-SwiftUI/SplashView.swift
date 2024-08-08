@@ -1,6 +1,6 @@
 //
 //  SplashView.swift
-//  OctoflowsDemo-SwiftUI
+//  OnboardingsDemo-SwiftUI
 //
 //  Created by Aleksey Goncharov on 06.08.2024.
 //

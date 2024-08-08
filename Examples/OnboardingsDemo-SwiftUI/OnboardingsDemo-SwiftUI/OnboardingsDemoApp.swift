@@ -1,6 +1,6 @@
 //
-//  OctoflowsDemo_SwiftUIApp.swift
-//  OctoflowsDemo-SwiftUI
+//  OnboardingsDemoApp.swift
+//  OnboardingsDemo-SwiftUI
 //
 //  Created by Aleksey Goncharov on 05.08.2024.
 //
@@ -21,15 +21,18 @@ class ViewModel: ObservableObject {
                 .build()
 
             try Onbordings.activate(with: configuration)
-        } catch let error as OnbordingsError {
+        } catch {
             // handle the error
+            if let error = error as? OnbordingsError {
+                
+            }
         }
     }
     
 }
 
 @main
-struct OctoflowsDemo_SwiftUIApp: App {
+struct OnboardingsDemoApp: App {
     let viewModel = ViewModel()
     
     var body: some Scene {
