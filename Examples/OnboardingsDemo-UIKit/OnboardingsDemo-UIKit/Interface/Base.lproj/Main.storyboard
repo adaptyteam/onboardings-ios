@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Splash Controller-->
+        <scene sceneID="Zp7-RW-DAF">
+            <objects>
+                <viewController storyboardIdentifier="SplashController" id="Tk4-Cb-Xco" customClass="SplashController" customModule="OnboardingsDemo_UIKit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nlU-al-9oh">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashIcon" translatesAutoresizingMaskIntoConstraints="NO" id="VwH-zf-nfD">
+                                <rect key="frame" x="96.666666666666686" y="226" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="M1N-2Y-zMV"/>
+                                    <constraint firstAttribute="height" constant="200" id="RM7-Dh-TVP"/>
+                                </constraints>
+                            </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Vg8-fw-6C5">
+                                <rect key="frame" x="178" y="458" width="37" height="37"/>
+                                <color key="color" name="AccentColor"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="PwQ-0J-bWL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Vg8-fw-6C5" firstAttribute="top" secondItem="VwH-zf-nfD" secondAttribute="bottom" constant="32" id="03t-3k-FNx"/>
+                            <constraint firstItem="VwH-zf-nfD" firstAttribute="centerX" secondItem="nlU-al-9oh" secondAttribute="centerX" id="23j-yZ-oD4"/>
+                            <constraint firstItem="VwH-zf-nfD" firstAttribute="bottom" secondItem="nlU-al-9oh" secondAttribute="centerY" id="Mzf-42-M1m"/>
+                            <constraint firstItem="Vg8-fw-6C5" firstAttribute="centerX" secondItem="nlU-al-9oh" secondAttribute="centerX" id="Vt5-j7-Xx1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="Vg8-fw-6C5" id="2Mq-an-dGk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tfY-5R-zay" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1169" y="-342"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="cUz-IT-8nO">
+            <objects>
+                <viewController storyboardIdentifier="ViewController" id="vxg-74-jO6" customClass="ViewController" customModule="OnboardingsDemo_UIKit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PIN-GA-vio">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uEA-NW-PgP">
+                                <rect key="frame" x="157.66666666666666" y="408.66666666666669" width="78" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Logout"/>
+                                <connections>
+                                    <action selector="logoutPressed:" destination="vxg-74-jO6" eventType="touchUpInside" id="LZe-Nf-l21"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="bqH-hg-a3m"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="uEA-NW-PgP" firstAttribute="centerX" secondItem="PIN-GA-vio" secondAttribute="centerX" id="Ghb-ut-Yh3"/>
+                            <constraint firstItem="uEA-NW-PgP" firstAttribute="centerY" secondItem="PIN-GA-vio" secondAttribute="centerY" id="XEg-I4-Gng"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="440-OG-I8g"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PRU-xN-WMx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-202" y="-342"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="SplashIcon" width="200" height="200"/>
+        <namedColor name="AccentColor">
+            <color red="0.58039215686274515" green="0.078431372549019607" blue="0.7686274509803922" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

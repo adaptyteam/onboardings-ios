@@ -13,6 +13,8 @@
 		74E1B44F2C650E190090EDEA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 74E1B44E2C650E190090EDEA /* Base */; };
 		74E1B4512C650E1A0090EDEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74E1B4502C650E1A0090EDEA /* Assets.xcassets */; };
 		74E1B4542C650E1A0090EDEA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 74E1B4532C650E1A0090EDEA /* Base */; };
+		74FE59232C6512D500098BB2 /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74FE59222C6512D500098BB2 /* OnboardingManager.swift */; };
+		74FE59252C6512E600098BB2 /* SplashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74FE59242C6512E600098BB2 /* SplashController.swift */; };
 		F6539149680BEDFB9E9AC80A /* Pods_OnboardingsDemo_UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE57B6799D54C987184845C /* Pods_OnboardingsDemo_UIKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +28,8 @@
 		74E1B4502C650E1A0090EDEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		74E1B4532C650E1A0090EDEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		74E1B4552C650E1A0090EDEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		74FE59222C6512D500098BB2 /* OnboardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
+		74FE59242C6512E600098BB2 /* SplashController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashController.swift; sourceTree = "<group>"; };
 		ADE57B6799D54C987184845C /* Pods_OnboardingsDemo_UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnboardingsDemo_UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D78D7C32C94B97DE4AEC5BFD /* Pods-OnboardingsDemo-UIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnboardingsDemo-UIKit.debug.xcconfig"; path = "Target Support Files/Pods-OnboardingsDemo-UIKit/Pods-OnboardingsDemo-UIKit.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,15 +67,33 @@
 		74E1B4462C650E190090EDEA /* OnboardingsDemo-UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				74FE59212C6512C500098BB2 /* Interface */,
+				74FE59202C65124300098BB2 /* Supporting Files */,
 				74E1B4472C650E190090EDEA /* AppDelegate.swift */,
 				74E1B4492C650E190090EDEA /* SceneDelegate.swift */,
-				74E1B44B2C650E190090EDEA /* ViewController.swift */,
-				74E1B44D2C650E190090EDEA /* Main.storyboard */,
+			);
+			path = "OnboardingsDemo-UIKit";
+			sourceTree = "<group>";
+		};
+		74FE59202C65124300098BB2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
 				74E1B4502C650E1A0090EDEA /* Assets.xcassets */,
 				74E1B4522C650E1A0090EDEA /* LaunchScreen.storyboard */,
 				74E1B4552C650E1A0090EDEA /* Info.plist */,
 			);
-			path = "OnboardingsDemo-UIKit";
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		74FE59212C6512C500098BB2 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				74E1B44D2C650E190090EDEA /* Main.storyboard */,
+				74FE59222C6512D500098BB2 /* OnboardingManager.swift */,
+				74FE59242C6512E600098BB2 /* SplashController.swift */,
+				74E1B44B2C650E190090EDEA /* ViewController.swift */,
+			);
+			path = Interface;
 			sourceTree = "<group>";
 		};
 		94DBBDCC0C2A14EEEB3EEE5F /* Pods */ = {
@@ -102,7 +124,7 @@
 				74E1B4402C650E190090EDEA /* Sources */,
 				74E1B4412C650E190090EDEA /* Frameworks */,
 				74E1B4422C650E190090EDEA /* Resources */,
-				EB97400DFE76EC444AB8D258 /* [CP] Embed Pods Frameworks */,
+				B30099EF309151BA3474BBC7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -160,6 +182,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		B30099EF309151BA3474BBC7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OnboardingsDemo-UIKit/Pods-OnboardingsDemo-UIKit-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OnboardingsDemo-UIKit/Pods-OnboardingsDemo-UIKit-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OnboardingsDemo-UIKit/Pods-OnboardingsDemo-UIKit-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		C70AA3E80097723C68240C53 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -182,23 +221,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EB97400DFE76EC444AB8D258 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OnboardingsDemo-UIKit/Pods-OnboardingsDemo-UIKit-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OnboardingsDemo-UIKit/Pods-OnboardingsDemo-UIKit-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OnboardingsDemo-UIKit/Pods-OnboardingsDemo-UIKit-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -206,9 +228,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74FE59232C6512D500098BB2 /* OnboardingManager.swift in Sources */,
 				74E1B44C2C650E190090EDEA /* ViewController.swift in Sources */,
 				74E1B4482C650E190090EDEA /* AppDelegate.swift in Sources */,
 				74E1B44A2C650E190090EDEA /* SceneDelegate.swift in Sources */,
+				74FE59252C6512E600098BB2 /* SplashController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,10 +386,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KGK5UKQJ46;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "OnboardingsDemo-UIKit/Info.plist";
+				INFOPLIST_FILE = "OnboardingsDemo-UIKit/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -396,10 +421,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KGK5UKQJ46;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "OnboardingsDemo-UIKit/Info.plist";
+				INFOPLIST_FILE = "OnboardingsDemo-UIKit/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
