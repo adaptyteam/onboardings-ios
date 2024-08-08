@@ -8,7 +8,7 @@
 import UIKit
 
 public class OnboardingSplashController: UIViewController {
-    private let name: String
+    private let id: String
 
     private weak var applicationSplashVC: UIViewController?
     private weak var onboardingVC: OnboardingController?
@@ -18,11 +18,11 @@ public class OnboardingSplashController: UIViewController {
 
     @MainActor
     init(
-        name: String,
+        id: String,
         delegate: OnboardingDelegate,
         splashDelegate: OnboardingSplashDelegate
     ) {
-        self.name = name
+        self.id = id
         self.delegate = delegate
         self.splashDelegate = splashDelegate
 
@@ -70,9 +70,9 @@ public class OnboardingSplashController: UIViewController {
 
     private func layoutOnboarding() async throws -> OnboardingController {
         let onboardingVC = try await Onbordings.createOnboardingController(
-            name: name,
+            id: id,
             delegate: delegate,
-            onFinishLoading: { [weak self] _ in
+            onFinishLoading: { [weak self] in
                 self?.removeApplicationSplash()
             }
         )

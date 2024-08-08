@@ -5,30 +5,66 @@
 //  Created by Aleksey Goncharov on 05.08.2024.
 //
 
-import SwiftUI
 import Onbordings
+import SwiftUI
+
+enum Storage {
+    static var customBaseUrl: String? {
+        get {
+            UserDefaults.standard.string(forKey: "app.baseurl")
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "app.baseurl")
+        }
+    }
+    
+    static var onboardingId: String? {
+        get {
+            UserDefaults.standard.string(forKey: "app.onboarding.id")
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "app.onboarding.id")
+        }
+    }
+}
 
 class ViewModel: ObservableObject {
     @Published var onboardingFinished = false
+    @Published var onboardingURL: URL?
     
     @MainActor
     func initialize() {
         do {
-            let configuration = try Onbordings.Configuration
+            var configurationBuilder = Onbordings.Configuration
                 .Builder(withAPIKey: "") // TODO: insert apiKey
-                .with(alternativeBaseUrl: URL(string: "https://x.fnlfx.com/")! ) // TODO: remove
                 .with(loglevel: .verbose)
-                .build()
+            
+            let baseUrl = Storage.customBaseUrl ?? "https://1a.fnlfx.dev/"
 
-            try Onbordings.activate(with: configuration)
+            if let url = URL(string: baseUrl) {
+                configurationBuilder = configurationBuilder.with(alternativeBaseUrl: url)
+            }
+
+            try Onbordings.activate(with: try configurationBuilder.build())
+            
+            loadData()
         } catch {
             // handle the error
-            if let error = error as? OnbordingsError {
-                
-            }
+            if let error = error as? OnbordingsError {}
         }
     }
     
+    private func loadData() {
+        Task { @MainActor in
+            do {
+                onboardingURL = try await Onbordings.getOnboardingURL(id: Storage.onboardingId ?? "7-aug")
+                print("")
+            } catch {
+                // handle the error
+                if let error = error as? OnbordingsError {}
+            }
+        }
+    }
 }
 
 @main
@@ -37,18 +73,56 @@ struct OnboardingsDemoApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ZStack {
-                ContentView()
-                
-                if !viewModel.onboardingFinished {
-                    OnboardingSplashView {
-                        SplashView()
+            ApplicationMainView()
+                .environmentObject(viewModel)
+        }
+    }
+}
+
+struct ApplicationMainView: View {
+    @EnvironmentObject var viewModel: ViewModel
+    
+    var body: some View {
+        ZStack {
+            ContentView()
+            
+            splashOrOnboardingView
+        }
+        .onAppear {
+            viewModel.initialize()
+        }
+    }
+    
+    @ViewBuilder 
+    private var splashOrOnboardingView: some View {
+        if !viewModel.onboardingFinished, let url = viewModel.onboardingURL {
+            OnboardingSplashView(
+                url: url,
+                splashViewBuilder: {
+                    SplashView()
+                },
+                onCloseAction: { _ in
+                    withAnimation {
+                        viewModel.onboardingFinished = true
                     }
+                },
+                onOpenPaywallAction: { _ in
+                    
+                },
+                onCustomAction: { _ in
+                    
+                },
+                onStateUpdated: { _ in
+                    
+                },
+                onAnalyticsEvent: { _ in
+                    
+                },
+                onLoadingError: { _ in
                 }
-            }
-            .onAppear {
-                viewModel.initialize()
-            }
+            )
+        } else if !viewModel.onboardingFinished {
+            SplashView()
         }
     }
 }

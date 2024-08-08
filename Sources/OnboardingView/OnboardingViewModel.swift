@@ -9,21 +9,23 @@ import Foundation
 import WebKit
 
 class OnboardingViewModel: NSObject, ObservableObject {
+    let stamp: String
     let url: URL
+    
+    var onEvent: ((Onbordings.Event) -> Void)!
+    var onError: ((Error) -> Void)!
 
-    var onFinishLoading: ((Error?) -> Void)?
-    var onEvent: ((Onbordings.Event) -> Void)?
-
-    init(url: URL) {
+    init( stamp: String,  url: URL   ) {
+        self.stamp = stamp
         self.url = url
     }
 
     func configureWebView(_ webView: WKWebView) {
-        webView.navigationDelegate = self
-        webView.configuration.userContentController.add(self, name: "closeWebView")
-        webView.configuration.userContentController.add(self, name: "sendData")
+        Log.verbose("#OnboardingViewModel_\(self.stamp)# configureWebView")
 
-        // Inject JavaScript
+        webView.navigationDelegate = self
+        webView.configuration.userContentController.add(self, name: "postEvent")
+
         let userScript = WKUserScript(
             source: Onbordings.jsCodeInjection,
             injectionTime: .atDocumentEnd,
@@ -32,109 +34,68 @@ class OnboardingViewModel: NSObject, ObservableObject {
 
         webView.configuration.userContentController.addUserScript(userScript)
 
-        // Load the URL request
         let request = URLRequest(url: url)
         webView.load(request)
     }
 }
 
 extension OnboardingViewModel: WKNavigationDelegate, WKScriptMessageHandler {
-    public func webView(_: WKWebView, didStartProvisionalNavigation _: WKNavigation!) {}
+    public func webView(_: WKWebView, didStartProvisionalNavigation _: WKNavigation!) {
+        Log.verbose("#OnboardingViewModel_\(self.stamp)# webView didStartProvisionalNavigation")
+    }
 
     public func webView(_: WKWebView, didFinish _: WKNavigation!) {
-        onFinishLoading?(nil)
+        Log.verbose("#OnboardingViewModel_\(self.stamp)# webView didFinish navigation")
     }
 
     public func webView(_: WKWebView, didFail _: WKNavigation!, withError error: Error) {
-        onFinishLoading?(error)
+        Log.error("#OnboardingViewModel_\(self.stamp)# didFail navigation withError \(error)")
+        onError(error)
     }
 
     public func userContentController(_: WKUserContentController, didReceive message: WKScriptMessage) {
         do {
             let event = try Onbordings.Event(chanel: message.name, body: message.body)
-            Log.verbose("On event: \(event)")
-            onEvent?(event)
+            
+            Log.verbose("#OnboardingViewModel_\(self.stamp)# On event: \(event)")
+            onEvent(event)
         } catch let error as Onbordings.UnknownEventError {
             let message = String(describing: message.body)
-            Log.warn("Unknown event \(error.type.map { "with type \"\($0)\"" } ?? "with name \"\(error.chanel)\""): \(message)")
+            Log.warn("#OnboardingViewModel_\(self.stamp)# Unknown event \(error.type.map { "with type \"\($0)\"" } ?? "with name \"\(error.chanel)\""): \(message)")
         } catch {
-            Log.error("Error on decoding event: \(error)")
+            Log.error("#OnboardingViewModel_\(self.stamp)# Error on decoding event: \(error)")
         }
     }
 }
 
 private extension Onbordings {
     static let jsCodeInjection = """
-    // Create a new meta element
-    var metaTag = document.createElement('meta');
-
-    // Set the name attribute
-    metaTag.setAttribute('name', 'viewport');
-
-    // Set the content attribute
-    metaTag.setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no');
-
-    // Append the meta tag to the head of the document
-    document.getElementsByTagName('head')[0].appendChild(metaTag);
-
-
-    document.addEventListener('click', function (event) {
-      if (event && event.target) {
-        window.webkit.messageHandlers.sendData.postMessage(event.target.tagName);
-      }
-    });
-
-
-    function showPaywall() {
-      sendDataToApp('show paywall')
-    }
-
-    function closeWebView() {
-      window.webkit.messageHandlers.closeWebView.postMessage('close');
-    }
-
-    function sendDataToApp(data) {
-      window.webkit.messageHandlers.sendData.postMessage(data);
-    }
-
     function waitForElm(selector, callback) {
-      var selectedElement = document.querySelector(selector);
-      if (selectedElement) {
-
-        return callback(selectedElement);
-      }
-
-      var observer = new MutationObserver(function (mutations) {
         var selectedElement = document.querySelector(selector);
-        sendDataToApp('observer')
         if (selectedElement) {
-          observer.disconnect();
-          callback(selectedElement);
+            return callback(selectedElement);
         }
-      });
 
-      // Observes the document body for changes in the DOM
-      observer.observe(document.body, {
-        childList: true,
-        subtree: true
-      });
+        var observer = new MutationObserver(function (mutations) {
+            var selectedElement = window.fox
+
+            if (selectedElement) {
+                observer.disconnect();
+                callback(selectedElement);
+            }
+        });
+
+        // Observes the document body for changes in the DOM
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
     }
 
     waitForElm('main', function (element) {
-      sendDataToApp('element main found')
-      fox.inputs.subscribeAll((k, v) => {
-        window.webkit.messageHandlers.sendData.postMessage(JSON.stringify(v))
-
-        if (v && v.label.toLowerCase() === 'open paywall') {
-          showPaywall()
-        }
-
-        if (v && v.label.toLowerCase()  === 'close onboarding') {
-          closeWebView()
-        }
-
-      })
+        fox.inputs.subscribeAll((k, v) => {
+            window.webkit.messageHandlers.postEvent.postMessage(v)
+        })
     })
-
     """
 }

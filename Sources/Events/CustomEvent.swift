@@ -14,7 +14,7 @@ extension Onbordings {
         let meta: MetaParameters
 
         init(_ body: BodyDecoder.Dictionary) throws {
-            self.clientId = try body["cid"].asString()
+            self.clientId = try body["id"].asString()
             self.meta = try MetaParameters(body["meta"])
         }
     }

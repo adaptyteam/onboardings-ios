@@ -11,11 +11,11 @@ import UIKit
 extension Onbordings {
     @MainActor
     func createOnboardingController(
-        name: String,
+        id: String,
         delegate: OnboardingDelegate,
-        onFinishLoading: @escaping (Error?) -> Void
+        onFinishLoading: @escaping () -> Void
     ) throws -> OnboardingController {
-        let url = configuration.baseUrl.appendingPathComponent(name)
+        let url = configuration.baseUrl.appendingPathComponent(id)
 
         let vc = OnboardingController(
             url: url,

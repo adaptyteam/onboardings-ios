@@ -9,23 +9,39 @@ import UIKit
 import WebKit
 
 public class OnboardingController: UIViewController {
+    let stamp: String
     let viewModel: OnboardingViewModel
     var delegate: OnboardingDelegate
 
-    private let onFinishLoading: (Error?) -> Void
+    private let onFinishLoading: () -> Void
 
     private var webView: WKWebView!
 
     public init(
         url: URL,
         delegate: OnboardingDelegate,
-        onFinishLoading: @escaping (Error?) -> Void
+        onFinishLoading: @escaping () -> Void
     ) {
+        let stamp = Log.stamp
+
+        self.stamp = stamp
         self.delegate = delegate
-        self.viewModel = OnboardingViewModel(url: url)
+        self.viewModel = OnboardingViewModel(stamp: stamp, url: url)
         self.onFinishLoading = onFinishLoading
 
         super.init(nibName: nil, bundle: nil)
+
+        viewModel.onError = { [weak delegate] error in
+            delegate?.apply(error: error)
+        }
+        
+        viewModel.onEvent = { [weak delegate] event in
+            if case .analytics(let event) = event, case .onboardingStarted(let meta) = event {
+                onFinishLoading()
+            }
+
+            delegate?.apply(event: event)
+        }
     }
 
     @available(*, unavailable)
@@ -41,10 +57,6 @@ public class OnboardingController: UIViewController {
         self.webView = webView
 
         viewModel.configureWebView(webView)
-        viewModel.onFinishLoading = onFinishLoading
-        viewModel.onEvent = { [weak self] event in
-            self?.delegate.apply(event: event)
-        }
     }
 
     private func buildWebView() -> WKWebView {

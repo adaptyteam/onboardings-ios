@@ -27,15 +27,20 @@ public extension Onbordings {
     static func activate(with configuration: Onbordings.Configuration) throws {
         try startActivate(with: configuration)
     }
+    
+    static func getOnboardingURL(id: String) async throws -> URL {
+        let instance = try await activated
+        return instance.configuration.baseUrl.appendingPathComponent(id)
+    }
 
     @MainActor
     static func createOnboardingController(
-        name: String,
+        id: String,
         delegate: OnboardingDelegate,
-        onFinishLoading: @escaping (Error?) -> Void
+        onFinishLoading: @escaping () -> Void
     ) async throws -> OnboardingController {
         try await activated.createOnboardingController(
-            name: name,
+            id: id,
             delegate: delegate,
             onFinishLoading: onFinishLoading
         )
@@ -43,12 +48,12 @@ public extension Onbordings {
 
     @MainActor
     static func createSplashController(
-        name: String,
+        id: String,
         delegate: OnboardingDelegate,
         splashDelegate: OnboardingSplashDelegate
     ) -> OnboardingSplashController {
         OnboardingSplashController(
-            name: name,
+            id: id,
             delegate: delegate,
             splashDelegate: splashDelegate
         )

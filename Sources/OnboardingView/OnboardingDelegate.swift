@@ -8,12 +8,15 @@
 
 import UIKit
 
+// TODO: refactor namings
 public protocol OnboardingDelegate: NSObjectProtocol {
     func onboardingsCloseAction(clientId: String, withMeta: Onbordings.MetaParameters)
     func openPaywallAction(clientId: String, withMeta: Onbordings.MetaParameters)
     func customAction(clientId: String, withMeta: Onbordings.MetaParameters)
     func stateUpdated(clientId: String, params: Onbordings.StateUpdatedParameters, withMeta: Onbordings.MetaParameters)
+    
     func onAnalyticsEvent(event: Onbordings.AnalyticsEvent)
+    func onLoadingError(_ error: Error)
 }
 
 public protocol OnboardingSplashDelegate: NSObjectProtocol {
@@ -50,5 +53,9 @@ extension OnboardingDelegate {
         case let .analytics(event):
             onAnalyticsEvent(event: event)
         }
+    }
+    
+    func apply(error: Error) {
+        onLoadingError(error)
     }
 }
