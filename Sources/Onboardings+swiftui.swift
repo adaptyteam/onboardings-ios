@@ -91,7 +91,7 @@ public struct OnboardingView: UIViewControllerRepresentable {
     ) {
         self.url = url
         self.onFinishLoading = onFinishLoading
-        self.delegate = OnboardinViewDelegateImpl(
+        self.delegate = OnboardingDelegateImpl(
             onCloseAction: onCloseAction,
             onOpenPaywallAction: onOpenPaywallAction,
             onCustomAction: onCustomAction,
@@ -112,7 +112,7 @@ public struct OnboardingView: UIViewControllerRepresentable {
     public func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
 }
 
-final class OnboardinViewDelegateImpl: NSObject, OnboardingDelegate {
+final class OnboardingDelegateImpl: NSObject, OnboardingDelegate {
     private let onCloseAction: (OnboardingsCloseAction) -> Void
     private let onOpenPaywallAction: ((OnboardingsOpenPaywallAction) -> Void)?
     private let onCustomAction: ((OnboardingsCustomAction) -> Void)?

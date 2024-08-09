@@ -35,17 +35,17 @@ class ViewModel: ObservableObject {
     @MainActor
     func initialize() {
         do {
-            var configurationBuilder = Onboardings.Configuration
-                .Builder(withAPIKey: "") // TODO: insert apiKey
+            var configuration = OnboardingsConfiguration
+                .builder(withAPIKey: "") // TODO: insert apiKey
                 .with(loglevel: .verbose)
 
             let baseUrl = Storage.customBaseUrl ?? "https://1a.fnlfx.dev/"
 
             if let url = URL(string: baseUrl) {
-                configurationBuilder = configurationBuilder.with(alternativeBaseUrl: url)
+                configuration.with(alternativeBaseUrl: url)
             }
 
-            try Onboardings.activate(with: try configurationBuilder.build())
+            try Onboardings.activate(with: configuration)
 
             loadData()
         } catch {

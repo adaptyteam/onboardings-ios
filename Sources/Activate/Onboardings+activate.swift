@@ -9,10 +9,10 @@
 import Foundation
 
 public struct Onboardings: Sendable {
-    let configuration: Configuration
+    let configuration: OnboardingsConfiguration
 
     @OnboardingsActor
-    private init(configuration: Configuration) async throws {
+    private init(configuration: OnboardingsConfiguration) async throws {
         self.configuration = configuration
         await Log.set(level: configuration.logLevel, handler: configuration.logHandler)
         Log.info("SDK Activated with configuration: \(configuration)")
@@ -34,7 +34,7 @@ extension Onboardings {
     }
 
     @MainActor
-    static func startActivate(with configuration: Configuration) throws {
+    static func startActivate(with configuration: OnboardingsConfiguration) throws {
         guard shared == nil else {
             throw OnboardingsError.activateOnce()
         }

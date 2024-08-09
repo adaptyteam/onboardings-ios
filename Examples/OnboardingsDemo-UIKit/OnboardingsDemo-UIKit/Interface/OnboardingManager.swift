@@ -39,8 +39,8 @@ final class OnboardingManager: NSObject {
     @MainActor
     private func activateOnboardings() {
         do {
-            let configuration = try Onboardings.Configuration
-                .Builder(withAPIKey: "") // TODO: insert apiKey
+            let configuration = try OnboardingsConfiguration
+                .builder(withAPIKey: "") // TODO: insert apiKey
                 .with(alternativeBaseUrl: URL(string: "https://1a.fnlfx.dev/")!) // TODO: remove
                 .with(loglevel: .verbose)
                 .build()

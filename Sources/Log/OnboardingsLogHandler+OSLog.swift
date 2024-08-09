@@ -1,5 +1,5 @@
 //
-//  LogHandler.swift
+//  OnboardingsLogHandler+OSLog.swift
 //
 //
 //  Created by Aleksei Valiano on 30.07.2024
@@ -13,18 +13,16 @@ import os.log
     extension OSLog: @unchecked Sendable {}
 #endif
 
-extension Onboardings {
-    public typealias LogHandler = @Sendable (LogMessage) -> Void
-
+extension Log {
     private static let logger = OSLog(subsystem: "io.adapty.onboardings", category: "sdk")
 
     @Sendable
-    static func defaultLogHandler(_ msg: LogMessage) {
+    static func defaultLogHandler(_ msg: OnboardingsLogMessage) {
         os_log(msg.level.asOSLogType, log: logger, "%@\n%@", msg.message, msg.source.debugDescription)
     }
 }
 
-private extension Onboardings.LogLevel {
+private extension OnboardingsLogLevel {
     var asOSLogType: OSLogType {
         switch self {
         case .error:

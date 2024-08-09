@@ -12,19 +12,19 @@ public extension Onboardings {
     @MainActor
     static func activate(_ apiKey: String) throws {
         try activate(
-            with: Configuration
+            with: OnboardingsConfiguration
                 .builder(withAPIKey: apiKey)
                 .build()
         )
     }
 
     @MainActor
-    static func activate(with builder: Onboardings.Configuration.Builder) throws {
+    static func activate(with builder: OnboardingsConfigurationBuilder) throws {
         try activate(with: builder.build())
     }
 
     @MainActor
-    static func activate(with configuration: Onboardings.Configuration) throws {
+    static func activate(with configuration: OnboardingsConfiguration) throws {
         try startActivate(with: configuration)
     }
 

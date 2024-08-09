@@ -1,5 +1,5 @@
 //
-//  LogMessage.swift
+//  OnboardingsLogMessage.swift
 //
 //
 //  Created by Aleksei Valiano on 06.08.2024
@@ -8,16 +8,14 @@
 
 import Foundation
 
-extension Onboardings {
-    public struct LogMessage: Sendable {
-        public let date: Date
-        public let level: Onboardings.LogLevel
-        public let message: String
-        public let source: Source
-    }
+public struct OnboardingsLogMessage: Sendable {
+    public let date: Date
+    public let level: OnboardingsLogLevel
+    public let message: String
+    public let source: Source
 }
 
-extension Onboardings.LogMessage {
+extension OnboardingsLogMessage {
     public struct Source: Sendable {
         public let sdkVersion: String
         public let threadName: String
@@ -27,7 +25,7 @@ extension Onboardings.LogMessage {
     }
 }
 
-extension Onboardings.LogMessage: CustomStringConvertible, CustomDebugStringConvertible {
+extension OnboardingsLogMessage: CustomStringConvertible, CustomDebugStringConvertible {
     private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .iso8601)
@@ -50,7 +48,7 @@ extension Onboardings.LogMessage: CustomStringConvertible, CustomDebugStringConv
     }
 }
 
-extension Onboardings.LogMessage.Source: CustomStringConvertible, CustomDebugStringConvertible {
+extension OnboardingsLogMessage.Source: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {
         "[Onboardings v\(sdkVersion)]"
     }

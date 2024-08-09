@@ -1,5 +1,5 @@
 //
-//  LogLevel+Codable.swift
+//  OnboardingsLogLevel+Codable.swift
 //
 //
 //  Created by Aleksei Valiano on 30.07.2024
@@ -8,9 +8,9 @@
 
 import Foundation
 
-extension Onboardings.LogLevel: Codable {
+extension OnboardingsLogLevel: Codable {
     public init(from decoder: Decoder) throws {
-        self = try Onboardings.LogLevel(stringLiteral: decoder.singleValueContainer().decode(String.self))
+        self = try OnboardingsLogLevel(stringLiteral: decoder.singleValueContainer().decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {
