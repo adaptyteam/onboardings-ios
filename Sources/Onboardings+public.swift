@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 public extension Onboardings {
     @MainActor
@@ -28,25 +29,19 @@ public extension Onboardings {
         try startActivate(with: configuration)
     }
 
-    // TODO: remove , the URL of the onboarding's data must be internal
-    static func getOnboardingURL(id: String) async throws -> URL {
-        let instance = try await activated
-        return instance.configuration.onboardingUrl(onboardingId: id)
-    }
-
+    // Низкоуровневый UIKIt
     @MainActor
     static func createOnboardingController(
         id: String,
-        delegate: OnboardingDelegate,
-        onFinishLoading: @escaping () -> Void
+        delegate: OnboardingDelegate
     ) async throws -> OnboardingController {
         try await activated.createOnboardingController(
             id: id,
-            delegate: delegate,
-            onFinishLoading: onFinishLoading
+            delegate: delegate
         )
     }
 
+    // Высокоуровневый UIKIt
     @MainActor
     static func createSplashController(
         id: String,
@@ -57,6 +52,29 @@ public extension Onboardings {
             id: id,
             delegate: delegate,
             splashDelegate: splashDelegate
+        )
+    }
+
+    // SwiftUI
+    static func swiftuiView<Splash: View>(
+        id: String,
+        splashViewBuilder: @escaping () -> Splash,
+        onCloseAction: @escaping (OnboardingsCloseAction) -> Void,
+        onOpenPaywallAction: ((OnboardingsOpenPaywallAction) -> Void)? = nil,
+        onCustomAction: ((OnboardingsCustomAction) -> Void)? = nil,
+        onStateUpdatedAction: ((OnboardingsStateUpdatedAction) -> Void)? = nil,
+        onAnalyticsEvent: ((OnboardingsAnalyticsEvent) -> Void)? = nil,
+        onError: @escaping (Error) -> Void
+    ) -> some View {
+        OnboardingSplashView(
+            id: id,
+            splashViewBuilder: splashViewBuilder,
+            onCloseAction: onCloseAction,
+            onOpenPaywallAction: onOpenPaywallAction,
+            onCustomAction: onCustomAction,
+            onStateUpdatedAction: onStateUpdatedAction,
+            onAnalyticsEvent: onAnalyticsEvent,
+            onError: onError
         )
     }
 }

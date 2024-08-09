@@ -15,6 +15,7 @@ extension OnboardingsError: CustomDebugStringConvertible {
             "Wrong ApiKey, " + description
         case .notActivated: "The Onboardings is not activated."
         case .activateOnce: "It is not possible to call `.activate` method more than once."
+        case let .webKit(_, error): "WebKit produced an error: \(error.localizedDescription)"
         }
     }
 }

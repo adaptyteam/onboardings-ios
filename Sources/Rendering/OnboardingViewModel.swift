@@ -11,11 +11,8 @@ import WebKit
 final class OnboardingViewModel: NSObject, ObservableObject {
     let stamp: String
     let url: URL
-
-    // TODO: change `var` to `let` , and dont use "!". this params can be @Sendable and setup in init
-    var onMessage: ((OnboardingsMessage) -> Void)!
-    // TODO: change `var` to `let` , and dont use "!". this params can be @Sendable and setup in init
-    var onError: ((Error) -> Void)!
+    var onMessage: ((OnboardingsMessage) -> Void)?
+    var onError: ((OnboardingsError) -> Void)?
 
     init(stamp: String, url: URL) {
         self.stamp = stamp
@@ -57,15 +54,21 @@ extension OnboardingViewModel: WKNavigationDelegate, WKScriptMessageHandler {
     public func webView(_: WKWebView, didFail _: WKNavigation!, withError error: Error) {
         let stamp = self.stamp
         Log.error("#OnboardingViewModel_\(stamp)# didFail navigation withError \(error)")
-        onError(error)
+        onError?(.webKit(error: error))
     }
 
     public func userContentController(_: WKUserContentController, didReceive wkMessage: WKScriptMessage) {
         let stamp = self.stamp
         do {
             let message = try OnboardingsMessage(chanel: wkMessage.name, body: wkMessage.body)
+
+            if case .analytics(.onboardingStarted) = message {
+                // TODO: move this event to web
+                onMessage?(.onboardingDidFinishLoading)
+            }
+
             Log.verbose("#OnboardingViewModel_\(stamp)# On message: \(message)")
-            onMessage(message)
+            onMessage?(message)
         } catch let error as OnboardingsUnknownMessageError {
             let wkMessageBody = String(describing: wkMessage.body)
             Log.warn("#OnboardingViewModel_\(stamp)# Unknown message \(error.type.map { "with type \"\($0)\"" } ?? "with name \"\(error.chanel)\""): \(wkMessageBody)")

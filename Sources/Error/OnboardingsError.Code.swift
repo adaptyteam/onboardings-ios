@@ -14,6 +14,7 @@ public extension OnboardingsError {
         case wrongApiKey = 1
         case notActivated = 2
         case activateOnce = 3
+        case webKit = 4
     }
 
     var code: Code {
@@ -21,6 +22,7 @@ public extension OnboardingsError {
         case .wrongApiKey: .wrongApiKey
         case .notActivated: .notActivated
         case .activateOnce: .activateOnce
+        case .webKit: .webKit
         }
     }
 }

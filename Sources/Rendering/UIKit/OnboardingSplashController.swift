@@ -13,8 +13,8 @@ public final class OnboardingSplashController: UIViewController {
     private weak var applicationSplashVC: UIViewController?
     private weak var onboardingVC: OnboardingController?
 
-    private weak var delegate: OnboardingDelegate!  // TODO: "weak" + "!" = fatalError
-    private weak var splashDelegate: OnboardingSplashDelegate! // TODO: "weak" + "!" = fatalError
+    private weak var delegate: OnboardingDelegate?
+    private weak var splashDelegate: OnboardingSplashDelegate?
 
     @MainActor
     init(
@@ -71,10 +71,7 @@ public final class OnboardingSplashController: UIViewController {
     private func layoutOnboarding() async throws -> OnboardingController {
         let onboardingVC = try await Onboardings.createOnboardingController(
             id: id,
-            delegate: delegate,
-            onFinishLoading: { [weak self] in
-                self?.removeApplicationSplash()
-            }
+            delegate: self
         )
 
         layoutChildController(onboardingVC, at: 0)
@@ -130,5 +127,35 @@ public final class OnboardingSplashController: UIViewController {
                 self.applicationSplashVC = nil
             }
         )
+    }
+}
+
+extension OnboardingSplashController: OnboardingDelegate {
+    public func onboardingControllerDidFinishLoading(_ controller: UIViewController) {
+        removeApplicationSplash()
+    }
+    
+    public func onboardingController(_ controller: UIViewController, onCloseAction action: OnboardingsCloseAction) {
+        delegate?.onboardingController(controller, onCloseAction: action)
+    }
+
+    public func onboardingController(_ controller: UIViewController, onPaywallAction action: OnboardingsOpenPaywallAction) {
+        delegate?.onboardingController(controller, onPaywallAction: action)
+    }
+
+    public func onboardingController(_ controller: UIViewController, onCustomAction action: OnboardingsCustomAction) {
+        delegate?.onboardingController(controller, onCustomAction: action)
+    }
+
+    public func onboardingController(_ controller: UIViewController, onStateUpdatedAction action: OnboardingsStateUpdatedAction) {
+        delegate?.onboardingController(controller, onStateUpdatedAction: action)
+    }
+
+    public func onboardingController(_ controller: UIViewController, onAnalyticsEvent event: OnboardingsAnalyticsEvent) {
+        delegate?.onboardingController(controller, onAnalyticsEvent: event)
+    }
+
+    public func onboardingController(_ controller: UIViewController, didFailWithError error: OnboardingsError) {
+        delegate?.onboardingController(controller, didFailWithError: error)
     }
 }

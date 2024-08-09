@@ -14,6 +14,8 @@ enum OnboardingsMessage: Sendable, Hashable {
     case openPaywall(OnboardingsOpenPaywallAction)
     case custom(OnboardingsCustomAction)
     case close(OnboardingsCloseAction)
+    
+    case onboardingDidFinishLoading
 }
 
 extension OnboardingsMessage: CustomDebugStringConvertible {
@@ -29,6 +31,8 @@ extension OnboardingsMessage: CustomDebugStringConvertible {
             "{type: \(TypeName.custom.rawValue), data: \(event.debugDescription)}"
         case let .close(event):
             "{type: \(TypeName.close.rawValue), data: \(event.debugDescription)}"
+        case .onboardingDidFinishLoading:
+            "onboardingDidFinishLoading"
         }
     }
 }

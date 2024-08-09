@@ -12,20 +12,23 @@ public enum OnboardingsError: Error, Sendable {
     case wrongApiKey(Source, description: String)
     case notActivated(Source)
     case activateOnce(Source)
+    case webKit(Source, Error)
 }
 
-extension OnboardingsError {
-    public var source: Source {
+public extension OnboardingsError {
+    var source: Source {
         switch self {
         case let .wrongApiKey(src, _),
              let .activateOnce(src),
-             let .notActivated(src):
+             let .notActivated(src),
+             let .webKit(src, _):
             src
         }
     }
 
-    public var underlyingError: Error? {
+    var underlyingError: Error? {
         switch self {
+        case let .webKit(_, error): error
         default:
             nil
         }
@@ -56,5 +59,14 @@ extension OnboardingsError {
         line: UInt = #line
     ) -> Self {
         .notActivated(OnboardingsError.Source(file: file, function: function, line: line))
+    }
+    
+    static func webKit(
+        error: Error,
+        file: String = #fileID,
+        function: String = #function,
+        line: UInt = #line
+    ) -> Self {
+        .webKit(OnboardingsError.Source(file: file, function: function, line: line), error)
     }
 }

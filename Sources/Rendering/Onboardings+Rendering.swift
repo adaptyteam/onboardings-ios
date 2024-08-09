@@ -9,18 +9,21 @@
 import UIKit
 
 extension Onboardings {
+    static func getOnboardingURL(id: String) async throws -> URL {
+        let instance = try await activated
+        return instance.configuration.onboardingUrl(onboardingId: id)
+    }
+    
     @MainActor
     func createOnboardingController(
         id: String,
-        delegate: OnboardingDelegate,
-        onFinishLoading: @escaping () -> Void
+        delegate: OnboardingDelegate
     ) throws -> OnboardingController {
         let url = configuration.onboardingUrl(onboardingId: id)
 
         let vc = OnboardingController(
             url: url,
-            delegate: delegate,
-            onFinishLoading: onFinishLoading
+            delegate: delegate
         )
 
         return vc

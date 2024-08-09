@@ -35,7 +35,7 @@ class ViewModel: ObservableObject {
     @MainActor
     func initialize() {
         do {
-            var configuration = OnboardingsConfiguration
+            let configuration = OnboardingsConfiguration
                 .builder(withAPIKey: "") // TODO: insert apiKey
                 .with(loglevel: .verbose)
 
@@ -46,23 +46,9 @@ class ViewModel: ObservableObject {
             }
 
             try Onboardings.activate(with: configuration)
-
-            loadData()
         } catch {
             // handle the error
-            if let error = error as? OnboardingsError {}
-        }
-    }
-
-    private func loadData() {
-        Task { @MainActor in
-            do {
-                onboardingURL = try await Onboardings.getOnboardingURL(id: Storage.onboardingId ?? "7-aug")
-                print("")
-            } catch {
-                // handle the error
-                if let error = error as? OnboardingsError {}
-            }
+//            if let error = error as? OnboardingsError {}
         }
     }
 }
@@ -86,43 +72,36 @@ struct ApplicationMainView: View {
         ZStack {
             ContentView()
 
-            splashOrOnboardingView
+            if !viewModel.onboardingFinished {
+                Onboardings.swiftuiView(
+                    id: "7-aug",
+                    splashViewBuilder: {
+                        SplashView()
+                    },
+                    onCloseAction: { _ in
+                        withAnimation {
+                            viewModel.onboardingFinished = true
+                        }
+                    },
+//                    onOpenPaywallAction: { _ in
+//
+//                    },
+//                    onCustomAction: { _ in
+//
+//                    },
+//                    onStateUpdatedAction: { _ in
+//
+//                    },
+//                    onAnalyticsEvent: { _ in
+//
+//                    },
+                    onError: { _ in
+                    }
+                )
+            }
         }
         .onAppear {
             viewModel.initialize()
-        }
-    }
-
-    @ViewBuilder
-    private var splashOrOnboardingView: some View {
-        if !viewModel.onboardingFinished, let url = viewModel.onboardingURL {
-            OnboardingSplashView(
-                url: url,
-                splashViewBuilder: {
-                    SplashView()
-                },
-                onCloseAction: { _ in
-                    withAnimation {
-                        viewModel.onboardingFinished = true
-                    }
-                },
-                onOpenPaywallAction: { _ in
-
-                },
-                onCustomAction: { _ in
-
-                },
-                onStateUpdatedAction: { _ in
-
-                },
-                onAnalyticsEvent: { _ in
-
-                },
-                onLoadingError: { _ in
-                }
-            )
-        } else if !viewModel.onboardingFinished {
-            SplashView()
         }
     }
 }

@@ -81,21 +81,25 @@ extension OnboardingsConfigurationBuilder: Decodable {
 }
 
 extension OnboardingsConfigurationBuilder {
+    @discardableResult
     public func with(apiKey key: String) -> Self {
         apiKey = key
         return self
     }
 
+    @discardableResult
     public func with(alternativeBaseUrl url: URL?) -> Self {
         alternativeBaseUrl = url
         return self
     }
 
+    @discardableResult
     public func with(loglevel level: OnboardingsLogLevel) -> Self {
         logLevel = level
         return self
     }
 
+    @discardableResult
     public func with(logHandler handler: @escaping OnboardingsLogHandler) -> Self {
         logHandler = handler
         return self

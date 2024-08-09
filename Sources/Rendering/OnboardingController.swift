@@ -9,40 +9,41 @@ import UIKit
 import WebKit
 
 public final class OnboardingController: UIViewController {
-    let stamp: String
-    let viewModel: OnboardingViewModel
-    var delegate: OnboardingDelegate
-
-    private let onFinishLoading: () -> Void
+    private let stamp: String
+    private let viewModel: OnboardingViewModel
+    private weak var delegate: OnboardingDelegate?
 
     private var webView: WKWebView!
 
     init(
         url: URL,
-        delegate: OnboardingDelegate,
-        onFinishLoading: @escaping () -> Void
+        delegate: OnboardingDelegate
     ) {
         let stamp = Log.stamp
 
         self.stamp = stamp
         self.delegate = delegate
-        self.viewModel = OnboardingViewModel(stamp: stamp, url: url)
-        self.onFinishLoading = onFinishLoading
+        self.viewModel = OnboardingViewModel(
+            stamp: stamp,
+            url: url )
 
         super.init(nibName: nil, bundle: nil)
-
-        viewModel.onError = { [weak delegate] error in
-            delegate?.apply(error: error)
+        
+        self.viewModel.onMessage = { [weak self] message in
+            self?.handleMessage(message)
         }
-
-        viewModel.onMessage = { [weak delegate] message in
-            // TODO: bad design for react to analytics events, should make finishLoadingAction xor startOnboardingAction
-            if case .analytics(.onboardingStarted) = message {
-                onFinishLoading()
-            }
-
-            delegate?.apply(message: message)
+        
+        self.viewModel.onError = { [weak self] error in
+            self?.handleError(error)
         }
+    }
+
+    private func handleMessage(_ message: OnboardingsMessage) {
+        delegate?.apply(message: message, from: self)
+    }
+
+    private func handleError(_ error: OnboardingsError) {
+        delegate?.apply(error: error, from: self)
     }
 
     @available(*, unavailable)
