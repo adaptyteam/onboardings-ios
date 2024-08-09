@@ -9,12 +9,12 @@
 import Foundation
 
 public struct OnboardingsStateUpdatedAction: Sendable, Hashable {
-    public let clientId: String
+    public let elementId: String
     public let meta: OnboardingsMetaParams
     public let params: OnboardingsStateUpdatedParams
 
     init(_ body: BodyDecoder.Dictionary) throws {
-        self.clientId = try body["cid"].asString()
+        self.elementId = try body["element_id"].asString()
         self.meta = try OnboardingsMetaParams(body["meta"])
 
         enum ValueType: String {
@@ -46,6 +46,6 @@ public struct OnboardingsStateUpdatedAction: Sendable, Hashable {
 
 extension OnboardingsStateUpdatedAction: CustomDebugStringConvertible {
     public var debugDescription: String {
-        "{clientId: \(clientId), params: \(params.debugDescription), meta: \(meta.debugDescription)}"
+        "{elementId: \(elementId), params: \(params.debugDescription), meta: \(meta.debugDescription)}"
     }
 }

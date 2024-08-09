@@ -12,7 +12,7 @@ public enum OnboardingsAnalyticsEvent: Sendable, Hashable {
     case unknown(meta: OnboardingsMetaParams, name: String)
     case onboardingStarted(meta: OnboardingsMetaParams)
     case screenPresented(meta: OnboardingsMetaParams)
-    case screenCompleted(meta: OnboardingsMetaParams, formClientId: String?, reply: String?)
+    case screenCompleted(meta: OnboardingsMetaParams, elementId: String?, reply: String?)
     case secondScreenPresented(meta: OnboardingsMetaParams)
     case registrationScreenPresented(meta: OnboardingsMetaParams)
     case productsScreenPresented(meta: OnboardingsMetaParams)
@@ -65,7 +65,7 @@ public enum OnboardingsAnalyticsEvent: Sendable, Hashable {
         case .screenCompleted:
             try .screenCompleted(
                 meta: meta,
-                formClientId: params?["form_cid"].asOptionalString(),
+                elementId: params?["element_id"].asOptionalString(),
                 reply: params?["reply"].asOptionalString()
             )
         case .secondScreenPresented:

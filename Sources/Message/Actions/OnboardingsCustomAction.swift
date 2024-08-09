@@ -9,17 +9,17 @@
 import Foundation
 
 public struct OnboardingsCustomAction: Sendable, Hashable {
-    public let clientId: String
+    public let actionId: String
     public let meta: OnboardingsMetaParams
 
     init(_ body: BodyDecoder.Dictionary) throws {
-        self.clientId = try body["id"].asString()
+        self.actionId = try body["action_id"].asString()
         self.meta = try OnboardingsMetaParams(body["meta"])
     }
 }
 
 extension OnboardingsCustomAction: CustomDebugStringConvertible {
     public var debugDescription: String {
-        "{clientId: \(clientId), meta: \(meta.debugDescription)}"
+        "{actionId: \(actionId), meta: \(meta.debugDescription)}"
     }
 }
