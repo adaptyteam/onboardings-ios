@@ -11,7 +11,7 @@ import WebKit
 public final class OnboardingController: UIViewController {
     private let stamp: String
     private let viewModel: OnboardingViewModel
-    private weak var delegate: OnboardingDelegate?
+    weak var delegate: OnboardingDelegate?
 
     private var webView: WKWebView!
 

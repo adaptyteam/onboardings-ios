@@ -43,5 +43,7 @@ struct OnboardingView: UIViewControllerRepresentable {
         )
     }
 
-    public func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
+    public func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+        (uiViewController as? OnboardingController)?.delegate = delegate
+    }
 }

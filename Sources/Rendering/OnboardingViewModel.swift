@@ -8,6 +8,10 @@
 import Foundation
 import WebKit
 
+private extension Onboardings {
+    static let webViewEventMessageName = "postEvent"
+}
+
 final class OnboardingViewModel: NSObject, ObservableObject {
     let stamp: String
     let url: URL
@@ -25,15 +29,7 @@ final class OnboardingViewModel: NSObject, ObservableObject {
         Log.verbose("#OnboardingViewModel_\(stamp)# configureWebView")
 
         webView.navigationDelegate = self
-        webView.configuration.userContentController.add(self, name: "postEvent")
-
-        let userScript = WKUserScript(
-            source: Onboardings.jsCodeInjection,
-            injectionTime: .atDocumentEnd,
-            forMainFrameOnly: true
-        )
-
-        webView.configuration.userContentController.addUserScript(userScript)
+        webView.configuration.userContentController.add(self, name: Onboardings.webViewEventMessageName)
 
         let request = URLRequest(url: url)
         webView.load(request)
@@ -70,36 +66,4 @@ extension OnboardingViewModel: WKNavigationDelegate, WKScriptMessageHandler {
             Log.error("#OnboardingViewModel_\(stamp)# Error on decoding event: \(error)")
         }
     }
-}
-
-private extension Onboardings {
-    static let jsCodeInjection = """
-    function waitForElm(selector, callback) {
-        var selectedElement = document.querySelector(selector);
-        if (selectedElement) {
-            return callback(selectedElement);
-        }
-
-        var observer = new MutationObserver(function (mutations) {
-            var selectedElement = window.fox
-
-            if (selectedElement) {
-                observer.disconnect();
-                callback(selectedElement);
-            }
-        });
-
-        // Observes the document body for changes in the DOM
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
-    }
-
-    waitForElm('main', function (element) {
-        fox.inputs.subscribeAll((k, v) => {
-            window.webkit.messageHandlers.postEvent.postMessage(v)
-        })
-    })
-    """
 }
