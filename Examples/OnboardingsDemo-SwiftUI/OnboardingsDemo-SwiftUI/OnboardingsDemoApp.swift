@@ -32,11 +32,13 @@ class ViewModel: ObservableObject {
     @Published var onboardingFinished = false
     @Published var onboardingURL: URL?
 
+    var onError: ((Error) -> Void)?
+
     @MainActor
     func initialize() {
         do {
             let configuration = OnboardingsConfiguration
-                .builder(withAPIKey: "") // TODO: insert apiKey
+                .builder(withAPIKey: "YOUR_API_KEY")
                 .with(loglevel: .verbose)
 
             let baseUrl = Storage.customBaseUrl ?? "https://1a.fnlfx.dev/"
@@ -47,8 +49,7 @@ class ViewModel: ObservableObject {
 
             try Onboardings.activate(with: configuration)
         } catch {
-            // handle the error
-//            if let error = error as? OnboardingsError {}
+            onError?(error)
         }
     }
 }
@@ -65,12 +66,21 @@ struct OnboardingsDemoApp: App {
     }
 }
 
+struct IdentifiableErrorWrapper: Identifiable {
+    var id: String = UUID().uuidString
+    var value: Error
+}
+
 struct ApplicationMainView: View {
     @EnvironmentObject var viewModel: ViewModel
 
+    @State var errorAlert: IdentifiableErrorWrapper?
+
     var body: some View {
         ZStack {
-            ContentView()
+            NavigationView {
+                ContentView()
+            }
 
             if !viewModel.onboardingFinished {
                 Onboardings.swiftuiView(
@@ -83,25 +93,30 @@ struct ApplicationMainView: View {
                             viewModel.onboardingFinished = true
                         }
                     },
-//                    onOpenPaywallAction: { _ in
-//
-//                    },
-//                    onCustomAction: { _ in
-//
-//                    },
-//                    onStateUpdatedAction: { _ in
-//
-//                    },
-//                    onAnalyticsEvent: { _ in
-//
-//                    },
-                    onError: { _ in
+                    onError: { error in
+                        errorAlert = .init(value: error)
                     }
                 )
+
+                Button("Force Skip") {
+                    viewModel.onboardingFinished = true
+                }
+                .padding()
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             }
         }
         .onAppear {
+            viewModel.onError = { error in
+                errorAlert = .init(value: error)
+            }
             viewModel.initialize()
+        }
+        .alert(item: $errorAlert) { error in
+            Alert(
+                title: Text("Error!"),
+                message: Text(error.value.localizedDescription),
+                dismissButton: .cancel()
+            )
         }
     }
 }
