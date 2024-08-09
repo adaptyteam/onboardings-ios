@@ -24,6 +24,10 @@ public protocol OnboardingSplashDelegate: NSObjectProtocol {
 }
 
 public extension OnboardingDelegate {
+    func onboardingControllerDidFinishLoading(_ controller: UIViewController) {
+        Log.warn("Not implemented method 'DidFinishLoading' of OnboardingDelegate ")
+    }
+
     func onboardingController(_ controller: UIViewController, onPaywallAction action: OnboardingsOpenPaywallAction) {
         Log.warn("Not implemented method 'openPaywallAction' of OnboardingDelegate ")
     }

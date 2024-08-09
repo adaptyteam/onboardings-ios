@@ -56,7 +56,7 @@ final class OnboardingManager: NSObject {
 }
 
 extension OnboardingManager: OnboardingDelegate {
-    func onboardingsCloseAction(_ action: OnboardingsCloseAction) {
+    func onboardingController(_ controller: UIViewController, onCloseAction action: OnboardingsCloseAction) {
         guard let window else { return }
 
         window.rootViewController = ViewController.instantiate()
@@ -69,23 +69,7 @@ extension OnboardingManager: OnboardingDelegate {
         )
     }
 
-    func openPaywallAction(_ action: OnboardingsOpenPaywallAction) {
-        // TODO: Log
-    }
-
-    func customAction(_ action: OnboardingsCustomAction) {
-        // TODO: Log
-    }
-
-    func stateUpdatedAction(_ action: OnboardingsStateUpdatedAction) {
-        // TODO: Log
-    }
-
-    func onAnalyticsEvent(_ event : OnboardingsAnalyticsEvent) {
-        // TODO: Log
-    }
-
-    func onLoadingError(_: Error) {
+    func onboardingController(_ controller: UIViewController, didFailWithError error: OnboardingsError) {
         // TODO: Show Error
     }
 }
