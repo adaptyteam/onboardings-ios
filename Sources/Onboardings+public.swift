@@ -56,6 +56,7 @@ public extension Onboardings {
     }
 
     // SwiftUI
+    @MainActor
     static func swiftuiView<Splash: View>(
         id: String,
         splashViewBuilder: @escaping () -> Splash,

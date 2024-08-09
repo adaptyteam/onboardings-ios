@@ -8,6 +8,7 @@
 
 import UIKit
 
+@MainActor
 public protocol OnboardingDelegate: NSObjectProtocol {
     func onboardingControllerDidFinishLoading(_ controller: UIViewController)
     func onboardingController(_ controller: UIViewController, onCloseAction action: OnboardingsCloseAction)

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 struct OnboardingSplashView<Splash: View>: View {
     private let id: String
 

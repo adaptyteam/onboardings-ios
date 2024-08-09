@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 struct OnboardingView: UIViewControllerRepresentable {
     private let delegate: OnboardingDelegate
     private let url: URL
