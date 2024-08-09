@@ -160,7 +160,7 @@ final class OnboardingDelegateImpl: NSObject, OnboardingDelegate {
         if let onStateUpdatedAction {
             onStateUpdatedAction(action)
         } else {
-            Log.warn("OnboardingView: Not implimented callback 'onStateUpdated'")
+            Log.warn("OnboardingView: Not implimented callback 'onStateUpdatedAction'")
         }
     }
 
