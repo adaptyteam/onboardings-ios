@@ -14,25 +14,24 @@ enum OnboardingsMessage: Sendable, Hashable {
     case openPaywall(OnboardingsOpenPaywallAction)
     case custom(OnboardingsCustomAction)
     case close(OnboardingsCloseAction)
-    
-    case onboardingDidFinishLoading
+    case didFinishLoading(OnboardingsDidFinishLoadingAction)
 }
 
 extension OnboardingsMessage: CustomDebugStringConvertible {
     var debugDescription: String {
         switch self {
         case let .analytics(event):
-            "{type: \(TypeName.analytics.rawValue), data: \(event.debugDescription)}"
-        case let .stateUpdated(event):
-            "{type: \(TypeName.stateUpdated.rawValue), data: \(event.debugDescription)}"
-        case let .openPaywall(event):
-            "{type: \(TypeName.openPaywall.rawValue), data: \(event.debugDescription)}"
-        case let .custom(event):
-            "{type: \(TypeName.custom.rawValue), data: \(event.debugDescription)}"
-        case let .close(event):
-            "{type: \(TypeName.close.rawValue), data: \(event.debugDescription)}"
-        case .onboardingDidFinishLoading:
-            "onboardingDidFinishLoading"
+            "{\(TypeName.analytics.rawValue) event: \(event.debugDescription)}"
+        case let .stateUpdated(action):
+            "{\(TypeName.stateUpdated.rawValue) action: \(action.debugDescription)}"
+        case let .openPaywall(action):
+            "{\(TypeName.openPaywall.rawValue) action: \(action.debugDescription)}"
+        case let .custom(action):
+            "{\(TypeName.custom.rawValue) action: \(action.debugDescription)}"
+        case let .close(action):
+            "{\(TypeName.close.rawValue) action: \(action.debugDescription)}"
+        case let .didFinishLoading(action):
+            "{\(TypeName.didFinishLoading.rawValue) action: \(action.debugDescription)}"
         }
     }
 }

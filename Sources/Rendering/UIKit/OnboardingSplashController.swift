@@ -131,7 +131,7 @@ public final class OnboardingSplashController: UIViewController {
 }
 
 extension OnboardingSplashController: OnboardingDelegate {
-    public func onboardingControllerDidFinishLoading(_ controller: UIViewController) {
+    public func onboardingController(_ controller: UIViewController, didFinishLoading action: OnboardingsDidFinishLoadingAction) {
         removeApplicationSplash()
     }
     

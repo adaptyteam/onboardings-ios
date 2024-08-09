@@ -61,12 +61,6 @@ extension OnboardingViewModel: WKNavigationDelegate, WKScriptMessageHandler {
         let stamp = self.stamp
         do {
             let message = try OnboardingsMessage(chanel: wkMessage.name, body: wkMessage.body)
-
-            if case .analytics(.onboardingStarted) = message {
-                // TODO: move this event to web
-                onMessage?(.onboardingDidFinishLoading)
-            }
-
             Log.verbose("#OnboardingViewModel_\(stamp)# On message: \(message)")
             onMessage?(message)
         } catch let error as OnboardingsUnknownMessageError {

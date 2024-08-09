@@ -8,7 +8,7 @@
 import SwiftUI
 
 final class OnboardingDelegateImpl: NSObject, OnboardingDelegate {
-    private let onFinishLoading: () -> Void
+    private let onFinishLoading: (OnboardingsDidFinishLoadingAction) -> Void
     private let onCloseAction: (OnboardingsCloseAction) -> Void
     private let onOpenPaywallAction: ((OnboardingsOpenPaywallAction) -> Void)?
     private let onCustomAction: ((OnboardingsCustomAction) -> Void)?
@@ -17,7 +17,7 @@ final class OnboardingDelegateImpl: NSObject, OnboardingDelegate {
     private let onError: (OnboardingsError) -> Void
 
     init(
-        onFinishLoading: @escaping () -> Void,
+        onFinishLoading: @escaping (OnboardingsDidFinishLoadingAction) -> Void,
         onCloseAction: @escaping (OnboardingsCloseAction) -> Void,
         onOpenPaywallAction: ((OnboardingsOpenPaywallAction) -> Void)?,
         onCustomAction: ((OnboardingsCustomAction) -> Void)?,
@@ -34,8 +34,11 @@ final class OnboardingDelegateImpl: NSObject, OnboardingDelegate {
         self.onError = onError
     }
     
-    func onboardingControllerDidFinishLoading(_ controller: UIViewController) {
-        onFinishLoading()
+    func onboardingController(
+        _ controller: UIViewController,
+        didFinishLoading action: OnboardingsDidFinishLoadingAction
+    ) {
+        onFinishLoading(action)
     }
 
     func onboardingController(

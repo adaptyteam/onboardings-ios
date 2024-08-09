@@ -30,6 +30,7 @@ extension OnboardingsMessage {
         case custom
         case stateUpdated = "state_updated"
         case analytics
+        case didFinishLoading = "onboarding_loaded"
     }
 
     private init(_ chanel: String, eventBody body: Any) throws {
@@ -49,6 +50,9 @@ extension OnboardingsMessage {
             self = try .openPaywall(.init(body))
         case .custom:
             self = try .custom(.init(body))
+        case .didFinishLoading:
+            self = try .didFinishLoading(.init(body))
+
         }
     }
 }

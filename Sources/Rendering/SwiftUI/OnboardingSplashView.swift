@@ -48,7 +48,7 @@ struct OnboardingSplashView<Splash: View>: View {
             if let url {
                 OnboardingView(
                     url: url,
-                    onFinishLoading: { isLoading = false },
+                    onFinishLoading: { _ in isLoading = false },
                     onCloseAction: onCloseAction,
                     onOpenPaywallAction: onOpenPaywallAction,
                     onCustomAction: onCustomAction,

@@ -11,11 +11,11 @@ import SwiftUI
 struct OnboardingView: UIViewControllerRepresentable {
     private let delegate: OnboardingDelegate
     private let url: URL
-    private let onFinishLoading: () -> Void
+    private let onFinishLoading: (OnboardingsDidFinishLoadingAction) -> Void
 
     init(
         url: URL,
-        onFinishLoading: @escaping () -> Void,
+        onFinishLoading: @escaping (OnboardingsDidFinishLoadingAction) -> Void,
         onCloseAction: @escaping (OnboardingsCloseAction) -> Void,
         onOpenPaywallAction: ((OnboardingsOpenPaywallAction) -> Void)?,
         onCustomAction: ((OnboardingsCustomAction) -> Void)?,
