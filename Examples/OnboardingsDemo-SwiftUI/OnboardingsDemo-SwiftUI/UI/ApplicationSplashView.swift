@@ -1,5 +1,5 @@
 //
-//  SplashView.swift
+//  ApplicationSplashView.swift
 //  OnboardingsDemo-SwiftUI
 //
 //  Created by Aleksey Goncharov on 06.08.2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SplashView: View {
+struct ApplicationSplashView: View {
     var body: some View {
         ZStack {
             Color.white
@@ -30,5 +30,5 @@ struct SplashView: View {
 }
 
 #Preview {
-    SplashView()
+    ApplicationSplashView()
 }

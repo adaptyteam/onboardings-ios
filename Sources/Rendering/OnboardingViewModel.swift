@@ -26,7 +26,7 @@ final class OnboardingViewModel: NSObject, ObservableObject {
     @MainActor
     func configureWebView(_ webView: WKWebView) {
         let stamp = self.stamp
-        Log.verbose("#OnboardingViewModel_\(stamp)# configureWebView")
+        Log.verbose("#OnboardingViewModel_\(stamp)# configureWebView \(self.url)")
 
         webView.navigationDelegate = self
         webView.configuration.userContentController.add(self, name: Onboardings.webViewEventMessageName)
