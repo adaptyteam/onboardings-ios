@@ -29,7 +29,7 @@ final class OnboardingManager: NSObject {
         guard let window else { return }
 
         window.rootViewController = Onboardings.createSplashController(
-            id: "7-aug",
+            id: "YOUR_ONBOARDING_ID",
             delegate: self,
             splashDelegate: self
         )
@@ -40,17 +40,13 @@ final class OnboardingManager: NSObject {
     private func activateOnboardings() {
         do {
             let configuration = try OnboardingsConfiguration
-                .builder(withAPIKey: "") // TODO: insert apiKey
-                .with(alternativeBaseUrl: URL(string: "https://1a.fnlfx.dev/")!) // TODO: remove
+                .builder(withAPIKey: "YOUR_API_KEY")
                 .with(loglevel: .verbose)
                 .build()
 
             try Onboardings.activate(with: configuration)
         } catch {
             // handle the error
-            if let error = error as? OnboardingsError {
-                // TODO: Log
-            }
         }
     }
 }

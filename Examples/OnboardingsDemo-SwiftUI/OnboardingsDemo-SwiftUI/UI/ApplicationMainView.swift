@@ -22,7 +22,7 @@ struct ApplicationMainView: View {
 
             if !viewModel.onboardingFinished {
                 Onboardings.swiftuiView(
-                    id: viewModel.onboardingId,
+                    id: "YOUR_ONBOARDING_ID",
                     splashViewBuilder: {
                         ApplicationSplashView()
                     },
