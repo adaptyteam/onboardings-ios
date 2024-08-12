@@ -37,14 +37,18 @@ final class OnboardingViewModel: NSObject, ObservableObject {
 }
 
 extension OnboardingViewModel: WKNavigationDelegate, WKScriptMessageHandler {
-    public func webView(_: WKWebView, didStartProvisionalNavigation _: WKNavigation!) {
+    public func webView(_ webView: WKWebView, didStartProvisionalNavigation _: WKNavigation!) {
         let stamp = self.stamp
-        Log.verbose("#OnboardingViewModel_\(stamp)# webView didStartProvisionalNavigation")
+        let url = webView.url?.absoluteString ?? "null"
+        
+        Log.verbose("#OnboardingViewModel_\(stamp)# webView didStartProvisionalNavigation url: \(url)")
     }
 
-    public func webView(_: WKWebView, didFinish _: WKNavigation!) {
+    public func webView(_ webView: WKWebView, didFinish _: WKNavigation!) {
         let stamp = self.stamp
-        Log.verbose("#OnboardingViewModel_\(stamp)# webView didFinish navigation")
+        let url = webView.url?.absoluteString ?? "null"
+        
+        Log.verbose("#OnboardingViewModel_\(stamp)# webView didFinish navigation url: \(url)")
     }
 
     public func webView(_: WKWebView, didFail _: WKNavigation!, withError error: Error) {
