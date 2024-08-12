@@ -48,7 +48,11 @@ struct OnboardingSplashView<Splash: View>: View {
             if let url {
                 OnboardingView(
                     url: url,
-                    onFinishLoading: { _ in isLoading = false },
+                    onFinishLoading: { _ in
+                        withAnimation {
+                            isLoading = false
+                        }
+                    },
                     onCloseAction: onCloseAction,
                     onOpenPaywallAction: onOpenPaywallAction,
                     onCustomAction: onCustomAction,
@@ -56,10 +60,13 @@ struct OnboardingSplashView<Splash: View>: View {
                     onAnalyticsEvent: onAnalyticsEvent,
                     onError: onError
                 )
+                .zIndex(0)
             }
 
             if isLoading || url == nil {
                 splashViewBuilder()
+                    .transition(.opacity)
+                    .zIndex(1)
             }
         }
         .onAppear {

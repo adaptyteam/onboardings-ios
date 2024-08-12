@@ -14,7 +14,6 @@ class ViewModel: ObservableObject {
     
     
     @Published var onboardingFinished = false
-    @Published var onboardingURL: URL?
 
     var onError: ((Error) -> Void)?
 

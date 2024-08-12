@@ -29,7 +29,6 @@ public extension Onboardings {
         try startActivate(with: configuration)
     }
 
-    // Низкоуровневый UIKIt
     @MainActor
     static func createOnboardingController(
         id: String,
@@ -41,7 +40,6 @@ public extension Onboardings {
         )
     }
 
-    // Высокоуровневый UIKIt
     @MainActor
     static func createSplashController(
         id: String,
@@ -55,7 +53,6 @@ public extension Onboardings {
         )
     }
 
-    // SwiftUI
     @MainActor
     static func swiftuiView<Splash: View>(
         id: String,

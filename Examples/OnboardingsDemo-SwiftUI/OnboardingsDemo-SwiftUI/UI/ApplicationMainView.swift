@@ -18,6 +18,7 @@ struct ApplicationMainView: View {
             NavigationView {
                 ApplicationContentView()
             }
+            .zIndex(0)
 
             if !viewModel.onboardingFinished {
                 Onboardings.swiftuiView(
@@ -34,12 +35,8 @@ struct ApplicationMainView: View {
                         errorAlert = .init(value: error)
                     }
                 )
-
-//                Button("Force Skip") {
-//                    viewModel.onboardingFinished = true
-//                }
-//                .padding()
-//                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                .transition(.opacity)
+                .zIndex(1)
             }
         }
         .onAppear {
