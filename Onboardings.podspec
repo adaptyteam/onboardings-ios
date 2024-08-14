@@ -4,14 +4,14 @@ Pod::Spec.new do |s|
   s.summary          = 'Onboardings SDK for iOS.'
 
   s.description      = <<-DESC
-Onboardings SDK for iOS.
+Build your onboardings with Octobuildy!
                        DESC
 
-  s.homepage         = 'https://adapty.io/'
+  s.homepage         = 'http://octobuildy.com/'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Adapty' => 'contact@adapty.io' }
-  s.source           = { :git => 'https://github.com/adaptyteam/onboardings-ios', :tag => s.version.to_s }
-  s.documentation_url = "https://docs.adapty.io"
+  s.source           = { :git => 'https://github.com/adaptyteam/onboardings-ios.git', :tag => s.version.to_s }
+  s.documentation_url = "https://docs.octobuildy.com/"
 
   s.ios.deployment_target = '13.0'
   s.swift_version = '5.9'
