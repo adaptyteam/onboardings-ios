@@ -17,7 +17,7 @@ public struct OnboardingsConfiguration: Sendable {
 
 extension OnboardingsConfiguration {
     static func createBaseUrl(apiKey: String) -> URL? {
-        URL(string: "https://\(apiKey).fnlfx.com/")
+        URL(string: "https://\(apiKey).octopusbuilder.com/")
     }
 
     func onboardingUrl(onboardingId id: String) -> URL {
