@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Onboardings'
-  s.version          = '1.0.0-SNAPSHOT'
+  s.version          = '1.0.0-beta.1'
   s.summary          = 'Onboardings SDK for iOS.'
 
   s.description      = <<-DESC
