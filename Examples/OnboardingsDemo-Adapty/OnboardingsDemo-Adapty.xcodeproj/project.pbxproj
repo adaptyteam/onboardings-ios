@@ -12,7 +12,6 @@
 		745BF76E2C6A853C001781E4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 745BF7602C6A853C001781E4 /* Preview Assets.xcassets */; };
 		745BF76F2C6A853C001781E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 745BF7622C6A853C001781E4 /* Assets.xcassets */; };
 		745BF7702C6A853C001781E4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 745BF7632C6A853C001781E4 /* LaunchScreen.storyboard */; };
-		745BF7712C6A853C001781E4 /* ApplicationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745BF7662C6A853C001781E4 /* ApplicationContentView.swift */; };
 		745BF7722C6A853C001781E4 /* ApplicationMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745BF7672C6A853C001781E4 /* ApplicationMainView.swift */; };
 		745BF7732C6A853C001781E4 /* ApplicationSplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745BF7682C6A853C001781E4 /* ApplicationSplashView.swift */; };
 		745BF7742C6A853C001781E4 /* OnboardingsDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745BF76A2C6A853C001781E4 /* OnboardingsDemoApp.swift */; };
@@ -29,7 +28,6 @@
 		745BF7622C6A853C001781E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		745BF7632C6A853C001781E4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		745BF7642C6A853C001781E4 /* OnboardingsDemo_SwiftUI.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = OnboardingsDemo_SwiftUI.entitlements; sourceTree = "<group>"; };
-		745BF7662C6A853C001781E4 /* ApplicationContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationContentView.swift; sourceTree = "<group>"; };
 		745BF7672C6A853C001781E4 /* ApplicationMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationMainView.swift; sourceTree = "<group>"; };
 		745BF7682C6A853C001781E4 /* ApplicationSplashView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationSplashView.swift; sourceTree = "<group>"; };
 		745BF76A2C6A853C001781E4 /* OnboardingsDemoApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingsDemoApp.swift; sourceTree = "<group>"; };
@@ -95,7 +93,6 @@
 		745BF7692C6A853C001781E4 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				745BF7662C6A853C001781E4 /* ApplicationContentView.swift */,
 				745BF7672C6A853C001781E4 /* ApplicationMainView.swift */,
 				745BF7682C6A853C001781E4 /* ApplicationSplashView.swift */,
 			);
@@ -199,7 +196,6 @@
 				745BF76D2C6A853C001781E4 /* ViewModel.swift in Sources */,
 				745BF7742C6A853C001781E4 /* OnboardingsDemoApp.swift in Sources */,
 				745BF76C2C6A853C001781E4 /* IdentifiableErrorWrapper.swift in Sources */,
-				745BF7712C6A853C001781E4 /* ApplicationContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,7 +340,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
@@ -384,7 +380,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
