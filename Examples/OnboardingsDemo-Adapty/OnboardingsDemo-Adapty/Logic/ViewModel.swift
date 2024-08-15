@@ -145,6 +145,6 @@ extension [OnboardingsSelectParams] {
 
 extension OnboardingsDatePickerParams {
     var stringValue: String {
-        "\(year)-\(String(format: "%.2d", month))-\(String(format: "%.2d", day))"
+        "\(year ?? 0)-\(String(format: "%.2d", month ?? 0))-\(String(format: "%.2d", day ?? 0))"
     }
 }
