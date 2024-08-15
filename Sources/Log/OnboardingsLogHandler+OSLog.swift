@@ -18,7 +18,7 @@ extension Log {
 
     @Sendable
     static func defaultLogHandler(_ msg: OnboardingsLogMessage) {
-        os_log(msg.level.asOSLogType, log: logger, "%@\n%@", msg.message, msg.source.debugDescription)
+        os_log(msg.level.asOSLogType, log: logger, "%@\n%@", msg.value, msg.source.debugDescription)
     }
 }
 

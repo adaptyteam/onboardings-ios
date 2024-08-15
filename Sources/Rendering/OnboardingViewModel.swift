@@ -25,7 +25,6 @@ final class OnboardingViewModel: NSObject, ObservableObject {
 
     @MainActor
     func configureWebView(_ webView: WKWebView) {
-        let stamp = self.stamp
         Log.verbose("#OnboardingViewModel_\(stamp)# configureWebView \(self.url)")
 
         webView.navigationDelegate = self
@@ -38,34 +37,27 @@ final class OnboardingViewModel: NSObject, ObservableObject {
 
 extension OnboardingViewModel: WKNavigationDelegate, WKScriptMessageHandler {
     public func webView(_ webView: WKWebView, didStartProvisionalNavigation _: WKNavigation!) {
-        let stamp = self.stamp
         let url = webView.url?.absoluteString ?? "null"
-        
         Log.verbose("#OnboardingViewModel_\(stamp)# webView didStartProvisionalNavigation url: \(url)")
     }
 
     public func webView(_ webView: WKWebView, didFinish _: WKNavigation!) {
-        let stamp = self.stamp
         let url = webView.url?.absoluteString ?? "null"
-        
         Log.verbose("#OnboardingViewModel_\(stamp)# webView didFinish navigation url: \(url)")
     }
 
     public func webView(_: WKWebView, didFail _: WKNavigation!, withError error: Error) {
-        let stamp = self.stamp
         Log.error("#OnboardingViewModel_\(stamp)# didFail navigation withError \(error)")
         onError?(.webKit(error: error))
     }
 
     public func userContentController(_: WKUserContentController, didReceive wkMessage: WKScriptMessage) {
-        let stamp = self.stamp
         do {
             let message = try OnboardingsMessage(chanel: wkMessage.name, body: wkMessage.body)
             Log.verbose("#OnboardingViewModel_\(stamp)# On message: \(message)")
             onMessage?(message)
         } catch let error as OnboardingsUnknownMessageError {
-            let wkMessageBody = String(describing: wkMessage.body)
-            Log.warn("#OnboardingViewModel_\(stamp)# Unknown message \(error.type.map { "with type \"\($0)\"" } ?? "with name \"\(error.chanel)\""): \(wkMessageBody)")
+            Log.warn("#OnboardingViewModel_\(stamp)# Unknown message \(error.type.map { "with type \"\($0)\"" } ?? "with name \"\(error.chanel)\""): \(String(describing: wkMessage.body))")
         } catch {
             Log.error("#OnboardingViewModel_\(stamp)# Error on decoding event: \(error)")
         }

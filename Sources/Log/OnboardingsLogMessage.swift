@@ -11,12 +11,12 @@ import Foundation
 public struct OnboardingsLogMessage: Sendable {
     public let date: Date
     public let level: OnboardingsLogLevel
-    public let message: String
+    public let value: String
     public let source: Source
 }
 
 extension OnboardingsLogMessage {
-    public struct Source: Sendable {
+    public struct Source: Equatable, Sendable {
         public let sdkVersion: String
         public let threadName: String
         public let fileName: String
@@ -40,11 +40,11 @@ extension OnboardingsLogMessage: CustomStringConvertible, CustomDebugStringConve
     }
 
     public var description: String {
-        "\(dateAsString) \(level.description) \(source.description):\t\(message)"
+        "\(dateAsString) \(level.description) \(source.description):\t\(value)"
     }
 
     public var debugDescription: String {
-        "\(dateAsString) \(level.description) \(source.debugDescription):\t\(message)"
+        "\(dateAsString) \(level.description) \(source.debugDescription):\t\(value)"
     }
 }
 

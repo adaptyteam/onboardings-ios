@@ -22,3 +22,9 @@ public enum OnboardingsLogLevel: Int, Sendable {
     /// Debug purposes logging level
     case debug
 }
+
+extension OnboardingsLogLevel: Comparable {
+    public static func < (lhs: OnboardingsLogLevel, rhs: OnboardingsLogLevel) -> Bool {
+        lhs.rawValue < rhs.rawValue
+    }
+}

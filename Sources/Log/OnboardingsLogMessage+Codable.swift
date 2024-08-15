@@ -12,7 +12,7 @@ extension OnboardingsLogMessage: Codable {
     enum CodingKeys: String, CodingKey {
         case date
         case level
-        case message
+        case value
         case source = "debug_info"
     }
 
@@ -20,7 +20,7 @@ extension OnboardingsLogMessage: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         date = try Date(timeIntervalSince1970: container.decode(Double.self, forKey: .date) / 1000.0)
         level = try container.decode(OnboardingsLogLevel.self, forKey: .level)
-        message = try container.decode(String.self, forKey: .message)
+        value = try container.decode(String.self, forKey: .value)
         source = try container.decode(OnboardingsLogMessage.Source.self, forKey: .source)
     }
 
@@ -28,7 +28,7 @@ extension OnboardingsLogMessage: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(Int64(date.timeIntervalSince1970 * 1000), forKey: .date)
         try container.encode(level, forKey: .level)
-        try container.encode(message, forKey: .message)
+        try container.encode(value, forKey: .value)
         try container.encode(source, forKey: .source)
     }
 }
