@@ -17,8 +17,8 @@ extension Log {
     private static let logger = OSLog(subsystem: "io.adapty.onboardings", category: "sdk")
 
     @Sendable
-    static func defaultLogHandler(_ msg: OnboardingsLogMessage) {
-        os_log(msg.level.asOSLogType, log: logger, "%@\n%@", msg.value, msg.source.debugDescription)
+    static func defaultLogHandler(_ msg: OnboardingsLogRecord) {
+        os_log(msg.level.asOSLogType, log: logger, "%@\n%@", msg.message, msg.source.debugDescription)
     }
 }
 

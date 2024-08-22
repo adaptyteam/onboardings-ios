@@ -9,6 +9,7 @@
 import Foundation
 
 public enum OnboardingsLogLevel: Int, Sendable {
+    
     public static let `default` = OnboardingsLogLevel.info
 
     /// Only errors will be logged

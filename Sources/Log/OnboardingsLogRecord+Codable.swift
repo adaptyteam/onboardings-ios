@@ -8,11 +8,11 @@
 
 import Foundation
 
-extension OnboardingsLogMessage: Codable {
+extension OnboardingsLogRecord: Codable {
     enum CodingKeys: String, CodingKey {
         case date
         case level
-        case value
+        case message
         case source = "debug_info"
     }
 
@@ -20,20 +20,20 @@ extension OnboardingsLogMessage: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         date = try Date(timeIntervalSince1970: container.decode(Double.self, forKey: .date) / 1000.0)
         level = try container.decode(OnboardingsLogLevel.self, forKey: .level)
-        value = try container.decode(String.self, forKey: .value)
-        source = try container.decode(OnboardingsLogMessage.Source.self, forKey: .source)
+        message = try container.decode(String.self, forKey: .message)
+        source = try container.decode(OnboardingsLogRecord.Source.self, forKey: .source)
     }
 
     public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(Int64(date.timeIntervalSince1970 * 1000), forKey: .date)
         try container.encode(level, forKey: .level)
-        try container.encode(value, forKey: .value)
+        try container.encode(message, forKey: .message)
         try container.encode(source, forKey: .source)
     }
 }
 
-extension OnboardingsLogMessage.Source: Codable {
+extension OnboardingsLogRecord.Source: Codable {
     enum CodingKeys: String, CodingKey {
         case sdkVersion = "sdk_version"
         case threadName = "thread"

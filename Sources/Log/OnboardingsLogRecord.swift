@@ -8,14 +8,14 @@
 
 import Foundation
 
-public struct OnboardingsLogMessage: Sendable {
+public struct OnboardingsLogRecord: Sendable {
     public let date: Date
     public let level: OnboardingsLogLevel
-    public let value: String
+    public let message: String
     public let source: Source
 }
 
-extension OnboardingsLogMessage {
+extension OnboardingsLogRecord {
     public struct Source: Equatable, Sendable {
         public let sdkVersion: String
         public let threadName: String
@@ -25,7 +25,7 @@ extension OnboardingsLogMessage {
     }
 }
 
-extension OnboardingsLogMessage: CustomStringConvertible, CustomDebugStringConvertible {
+extension OnboardingsLogRecord: CustomStringConvertible, CustomDebugStringConvertible {
     private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .iso8601)
@@ -40,15 +40,15 @@ extension OnboardingsLogMessage: CustomStringConvertible, CustomDebugStringConve
     }
 
     public var description: String {
-        "\(dateAsString) \(level.description) \(source.description):\t\(value)"
+        "\(dateAsString) \(level.description) \(source.description):\t\(message)"
     }
 
     public var debugDescription: String {
-        "\(dateAsString) \(level.description) \(source.debugDescription):\t\(value)"
+        "\(dateAsString) \(level.description) \(source.debugDescription):\t\(message)"
     }
 }
 
-extension OnboardingsLogMessage.Source: CustomStringConvertible, CustomDebugStringConvertible {
+extension OnboardingsLogRecord.Source: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {
         "[Onboardings v\(sdkVersion)]"
     }

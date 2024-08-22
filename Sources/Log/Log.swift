@@ -18,33 +18,32 @@ package enum Log {
         _storage.level
     }
 
-    @LogActor
+    @InternalActor
     private(set) static var handler: OnboardingsLogHandler = Log.defaultLogHandler
 
-    @LogActor
+    @InternalActor
     static func set(level: OnboardingsLogLevel, handler: @escaping OnboardingsLogHandler) async {
         Log.handler = handler
         _storage.level = level
     }
 
-    @LogActor
-    private static func write(message: OnboardingsLogMessage) {
-        handler(message)
+    @InternalActor
+    private static func write(record: OnboardingsLogRecord) {
+        handler(record)
     }
 
-    @inlinable
-    nonisolated static func message(
-        _ message: @autoclosure () -> Message,
+    private nonisolated static func message(
+        message: String,
         withLevel level: OnboardingsLogLevel,
         file: String = #fileID,
         function: String = #function,
         line: UInt = #line
     ) {
         guard self.level >= level else { return }
-        let message = OnboardingsLogMessage(
+        let record = OnboardingsLogRecord(
             date: Date(),
             level: level,
-            value: message().value,
+            message: message,
             source: .init(
                 sdkVersion: Onboardings.SDKVersion,
                 threadName: Log.currentThreadName,
@@ -54,15 +53,47 @@ package enum Log {
             )
         )
         Task.detached(priority: .utility) {
-            await Log.write(message: message)
+            await Log.write(record: record)
         }
+    }
+
+    @inlinable
+    package nonisolated static func message(
+        _ message: @autoclosure () -> String,
+        withLevel level: OnboardingsLogLevel,
+        file: String = #fileID,
+        function: String = #function,
+        line: UInt = #line
+    ) {
+        self.message(message: message(), withLevel: level, file: file, function: function, line: line)
+    }
+
+    @inlinable
+    package nonisolated static func message(
+        _ message: @autoclosure () -> Message,
+        withLevel level: OnboardingsLogLevel,
+        file: String = #fileID,
+        function: String = #function,
+        line: UInt = #line
+    ) {
+        self.message(message: message().value, withLevel: level, file: file, function: function, line: line)
     }
 }
 
 package extension Log {
     @inlinable
+    nonisolated static func error(_ message: @autoclosure () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        Log.message(message(), withLevel: .error, file: file, function: function, line: line)
+    }
+
+    @inlinable
     nonisolated static func error(_ message: @autoclosure () -> Message, file: String = #fileID, function: String = #function, line: UInt = #line) {
         Log.message(message(), withLevel: .error, file: file, function: function, line: line)
+    }
+
+    @inlinable
+    nonisolated static func warn(_ message: @autoclosure () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        Log.message(message(), withLevel: .warn, file: file, function: function, line: line)
     }
 
     @inlinable
@@ -71,13 +102,28 @@ package extension Log {
     }
 
     @inlinable
+    nonisolated static func info(_ message: @autoclosure () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        Log.message(message(), withLevel: .info, file: file, function: function, line: line)
+    }
+
+    @inlinable
     nonisolated static func info(_ message: @autoclosure () -> Message, file: String = #fileID, function: String = #function, line: UInt = #line) {
         Log.message(message(), withLevel: .info, file: file, function: function, line: line)
     }
 
     @inlinable
+    nonisolated static func verbose(_ message: @autoclosure () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        Log.message(message(), withLevel: .verbose, file: file, function: function, line: line)
+    }
+
+    @inlinable
     nonisolated static func verbose(_ message: @autoclosure () -> Message, file: String = #fileID, function: String = #function, line: UInt = #line) {
         Log.message(message(), withLevel: .verbose, file: file, function: function, line: line)
+    }
+
+    @inlinable
+    nonisolated static func debug(_ message: @autoclosure () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        Log.message(message(), withLevel: .debug, file: file, function: function, line: line)
     }
 
     @inlinable

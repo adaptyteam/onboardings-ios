@@ -8,4 +8,4 @@
 
 import Foundation
 
-public typealias OnboardingsLogHandler = @Sendable (OnboardingsLogMessage) -> Void
+public typealias OnboardingsLogHandler = @Sendable (OnboardingsLogRecord) -> Void
