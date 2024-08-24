@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+private let log = Log.Category(name: "OnboardingView")
+
 final class OnboardingDelegateImpl: NSObject, OnboardingDelegate {
     private let onFinishLoading: (OnboardingsDidFinishLoadingAction) -> Void
     private let onCloseAction: (OnboardingsCloseAction) -> Void
@@ -33,7 +35,7 @@ final class OnboardingDelegateImpl: NSObject, OnboardingDelegate {
         self.onAnalyticsEvent = onAnalyticsEvent
         self.onError = onError
     }
-    
+
     func onboardingController(
         _ controller: UIViewController,
         didFinishLoading action: OnboardingsDidFinishLoadingAction
@@ -55,7 +57,7 @@ final class OnboardingDelegateImpl: NSObject, OnboardingDelegate {
         if let onOpenPaywallAction {
             onOpenPaywallAction(action)
         } else {
-            Log.warn("OnboardingView: Not implimented callback 'onOpenPaywallAction'")
+            log.warn("OnboardingView: Not implimented callback 'onOpenPaywallAction'")
         }
     }
 
@@ -66,7 +68,7 @@ final class OnboardingDelegateImpl: NSObject, OnboardingDelegate {
         if let onCustomAction {
             onCustomAction(action)
         } else {
-            Log.warn("OnboardingView: Not implimented callback 'onCustomAction'")
+            log.warn("OnboardingView: Not implimented callback 'onCustomAction'")
         }
     }
 
@@ -77,7 +79,7 @@ final class OnboardingDelegateImpl: NSObject, OnboardingDelegate {
         if let onStateUpdatedAction {
             onStateUpdatedAction(action)
         } else {
-            Log.warn("OnboardingView: Not implimented callback 'onStateUpdatedAction'")
+            log.warn("OnboardingView: Not implimented callback 'onStateUpdatedAction'")
         }
     }
 

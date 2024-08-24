@@ -8,6 +8,8 @@
 
 import UIKit
 
+private let log = Log.Category(name: "OnboardingDelegate")
+
 @MainActor
 public protocol OnboardingDelegate: NSObjectProtocol {
     func onboardingController(_ controller: UIViewController, didFinishLoading action: OnboardingsDidFinishLoadingAction)
@@ -25,23 +27,23 @@ public protocol OnboardingSplashDelegate: NSObjectProtocol {
 
 public extension OnboardingDelegate {
     func onboardingController(_ controller: UIViewController, didFinishLoading action: OnboardingsDidFinishLoadingAction) {
-        Log.warn("Not implemented method 'onboardingController(didFinishLoading:)' of OnboardingDelegate ")
+        log.warn("Not implemented method 'onboardingController(didFinishLoading:)' of OnboardingDelegate ")
     }
 
     func onboardingController(_ controller: UIViewController, onPaywallAction action: OnboardingsOpenPaywallAction) {
-        Log.warn("Not implemented method 'onboardingController(openPaywallAction:)' of OnboardingDelegate ")
+        log.warn("Not implemented method 'onboardingController(openPaywallAction:)' of OnboardingDelegate ")
     }
 
     func onboardingController(_ controller: UIViewController, onCustomAction action: OnboardingsCustomAction) {
-        Log.warn("Not implemented method 'onboardingController(onCustomAction:)' of OnboardingDelegate ")
+        log.warn("Not implemented method 'onboardingController(onCustomAction:)' of OnboardingDelegate ")
     }
 
     func onboardingController(_ controller: UIViewController, onStateUpdatedAction action: OnboardingsStateUpdatedAction) {
-        Log.warn("Not implemented method 'onboardingController(onStateUpdatedAction:)' of OnboardingDelegate ")
+        log.warn("Not implemented method 'onboardingController(onStateUpdatedAction:)' of OnboardingDelegate ")
     }
 
     func onboardingController(_ controller: UIViewController, onAnalyticsEvent event: OnboardingsAnalyticsEvent) {
-        Log.warn("Not implemented method 'onboardingController(onAnalyticsEvent:)' of OnboardingDelegate ")
+        log.warn("Not implemented method 'onboardingController(onAnalyticsEvent:)' of OnboardingDelegate ")
     }
 }
 

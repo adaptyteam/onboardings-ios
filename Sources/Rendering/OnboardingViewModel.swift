@@ -12,6 +12,8 @@ private extension Onboardings {
     static let webViewEventMessageName = "postEvent"
 }
 
+private let log = Log.Category(name: "OnboardingViewModel")
+
 final class OnboardingViewModel: NSObject, ObservableObject {
     let stamp: String
     let url: URL
@@ -25,7 +27,7 @@ final class OnboardingViewModel: NSObject, ObservableObject {
 
     @MainActor
     func configureWebView(_ webView: WKWebView) {
-        Log.verbose("#OnboardingViewModel_\(stamp)# configureWebView \(self.url)")
+        log.verbose("\(stamp) configureWebView \(self.url)")
 
         webView.navigationDelegate = self
         webView.configuration.userContentController.add(self, name: Onboardings.webViewEventMessageName)
@@ -38,28 +40,28 @@ final class OnboardingViewModel: NSObject, ObservableObject {
 extension OnboardingViewModel: WKNavigationDelegate, WKScriptMessageHandler {
     public func webView(_ webView: WKWebView, didStartProvisionalNavigation _: WKNavigation!) {
         let url = webView.url?.absoluteString ?? "null"
-        Log.verbose("#OnboardingViewModel_\(stamp)# webView didStartProvisionalNavigation url: \(url)")
+        log.verbose("\(stamp) webView didStartProvisionalNavigation url: \(url)")
     }
 
     public func webView(_ webView: WKWebView, didFinish _: WKNavigation!) {
         let url = webView.url?.absoluteString ?? "null"
-        Log.verbose("#OnboardingViewModel_\(stamp)# webView didFinish navigation url: \(url)")
+        log.verbose("\(stamp) webView didFinish navigation url: \(url)")
     }
 
     public func webView(_: WKWebView, didFail _: WKNavigation!, withError error: Error) {
-        Log.error("#OnboardingViewModel_\(stamp)# didFail navigation withError \(error)")
+        log.error("\(stamp) didFail navigation withError \(error)")
         onError?(.webKit(error: error))
     }
 
     public func userContentController(_: WKUserContentController, didReceive wkMessage: WKScriptMessage) {
         do {
             let message = try OnboardingsMessage(chanel: wkMessage.name, body: wkMessage.body)
-            Log.verbose("#OnboardingViewModel_\(stamp)# On message: \(message)")
+            log.verbose("\(stamp) On message: \(message)")
             onMessage?(message)
         } catch let error as OnboardingsUnknownMessageError {
-            Log.warn("#OnboardingViewModel_\(stamp)# Unknown message \(error.type.map { "with type \"\($0)\"" } ?? "with name \"\(error.chanel)\""): \(String(describing: wkMessage.body))")
+            log.warn("\(stamp) Unknown message \(error.type.map { "with type \"\($0)\"" } ?? "with name \"\(error.chanel)\""): \(String(describing: wkMessage.body))")
         } catch {
-            Log.error("#OnboardingViewModel_\(stamp)# Error on decoding event: \(error)")
+            log.error("\(stamp) Error on decoding event: \(error)")
         }
     }
 }

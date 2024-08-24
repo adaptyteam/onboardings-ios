@@ -31,23 +31,23 @@ extension OnboardingsConfiguration {
 public final class OnboardingsConfigurationBuilder {
     public private(set) var apiKey: String
     public private(set) var alternativeBaseUrl: URL?
-    public private(set) var logLevel: OnboardingsLogLevel
-    public private(set) var logHandler: OnboardingsLogHandler
+    public private(set) var logLevel: OnboardingsLog.Level
+    public private(set) var logHandler: OnboardingsLog.Handler?
 
     public convenience init(withAPIKey key: String) {
         self.init(
             apiKey: key,
             alternativeBaseUrl: nil,
             logLevel: .default,
-            logHandler: Log.defaultLogHandler
+            logHandler: nil
         )
     }
 
     init(
         apiKey: String,
         alternativeBaseUrl: URL? = nil,
-        logLevel: OnboardingsLogLevel,
-        logHandler: @escaping OnboardingsLogHandler
+        logLevel: OnboardingsLog.Level,
+        logHandler: OnboardingsLog.Handler?
     ) {
         self.apiKey = apiKey
         self.alternativeBaseUrl = alternativeBaseUrl
@@ -74,8 +74,8 @@ extension OnboardingsConfigurationBuilder: Decodable {
         try self.init(
             apiKey: container.decode(String.self, forKey: .apiKey),
             alternativeBaseUrl: container.decodeIfPresent(URL.self, forKey: .alternativeBaseUrl),
-            logLevel: container.decode(OnboardingsLogLevel.self, forKey: .logLevel),
-            logHandler: Log.defaultLogHandler
+            logLevel: container.decode(OnboardingsLog.Level.self, forKey: .logLevel),
+            logHandler: nil
         )
     }
 }
@@ -94,13 +94,13 @@ extension OnboardingsConfigurationBuilder {
     }
 
     @discardableResult
-    public func with(loglevel level: OnboardingsLogLevel) -> Self {
+    public func with(loglevel level: OnboardingsLog.Level) -> Self {
         logLevel = level
         return self
     }
 
     @discardableResult
-    public func with(logHandler handler: @escaping OnboardingsLogHandler) -> Self {
+    public func with(logHandler handler: OnboardingsLog.Handler?) -> Self {
         logHandler = handler
         return self
     }

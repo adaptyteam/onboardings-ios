@@ -1,5 +1,5 @@
 //
-//  Log+Message.swift
+//  Log.Message.swift
 //
 //
 //  Created by Aleksei Valiano on 06.08.2024

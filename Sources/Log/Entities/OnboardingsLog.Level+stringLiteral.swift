@@ -1,5 +1,5 @@
 //
-//  OnboardingsLogLevel+rawStringValue.swift
+//  OnboardingsLog.Level+rawStringValue.swift
 //
 //
 //  Created by Aleksei Valiano on 30.07.2024
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension OnboardingsLogLevel: ExpressibleByStringLiteral {
+extension OnboardingsLog.Level: ExpressibleByStringLiteral {
     enum CodingValues: String {
         case error
         case warn
@@ -42,6 +42,6 @@ extension OnboardingsLogLevel: ExpressibleByStringLiteral {
     }
 }
 
-extension OnboardingsLogLevel: CustomStringConvertible {
+extension OnboardingsLog.Level: CustomStringConvertible {
     public var description: String { stringLiteral.uppercased() }
 }

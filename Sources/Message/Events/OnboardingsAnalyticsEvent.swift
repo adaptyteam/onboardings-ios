@@ -8,6 +8,8 @@
 
 import Foundation
 
+private let log = Log.Category(name: "AnalitycsEvent")
+
 public enum OnboardingsAnalyticsEvent: Sendable, Hashable {
     case unknown(meta: OnboardingsMetaParams, name: String)
     case onboardingStarted(meta: OnboardingsMetaParams)
@@ -53,7 +55,7 @@ public enum OnboardingsAnalyticsEvent: Sendable, Hashable {
 
         guard let name = Name(rawValue: name) else {
             self = .unknown(meta: meta, name: name)
-            Log.warn("Uncnown analitycs event with name: \(name), meta: \(meta.debugDescription)")
+            log.warn("Uncnown analitycs event with name: \(name), meta: \(meta.debugDescription)")
             return
         }
 

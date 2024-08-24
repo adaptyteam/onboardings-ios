@@ -9,125 +9,113 @@
 import Foundation
 
 package enum Log {
+    @globalActor
+    package actor InternalActor {
+        package static let shared = InternalActor()
+    }
+
     private final class Storage: @unchecked Sendable {
-        var level: OnboardingsLogLevel = .default
+        var level: OnboardingsLog.Level = .default
     }
 
     private static let _storage = Storage()
-    package static var level: OnboardingsLogLevel {
+    package static var level: OnboardingsLog.Level {
         _storage.level
     }
 
     @InternalActor
-    private(set) static var handler: OnboardingsLogHandler = Log.defaultLogHandler
+    private(set) static var handler: OnboardingsLog.Handler?
 
     @InternalActor
-    static func set(level: OnboardingsLogLevel, handler: @escaping OnboardingsLogHandler) async {
+    static func set(level: OnboardingsLog.Level, handler: OnboardingsLog.Handler?) async {
         Log.handler = handler
         _storage.level = level
     }
 
     @InternalActor
-    private static func write(record: OnboardingsLogRecord) {
-        handler(record)
+    private static func handlerWrite(_ record: OnboardingsLog.Record) {
+        handler?(record)
     }
 
-    private nonisolated static func message(
-        message: String,
-        withLevel level: OnboardingsLogLevel,
-        file: String = #fileID,
-        function: String = #function,
-        line: UInt = #line
+    fileprivate static func write(record: OnboardingsLog.Record) {
+        Task.detached(priority: .utility) {
+            await osLogWrite(record)
+            await handlerWrite(record)
+        }
+    }
+}
+
+private extension OnboardingsLog.Category {
+    func write(
+        _ message: String,
+        withLevel level: OnboardingsLog.Level,
+        file: String,
+        function: String,
+        line: UInt
     ) {
-        guard self.level >= level else { return }
-        let record = OnboardingsLogRecord(
+        guard Log.level >= level else { return }
+
+        Log.write(record: .init(
             date: Date(),
             level: level,
             message: message,
+            category: self,
             source: .init(
-                sdkVersion: Onboardings.SDKVersion,
                 threadName: Log.currentThreadName,
                 fileName: file,
                 functionName: function,
                 lineNumber: line
             )
-        )
-        Task.detached(priority: .utility) {
-            await Log.write(record: record)
-        }
-    }
-
-    @inlinable
-    package nonisolated static func message(
-        _ message: @autoclosure () -> String,
-        withLevel level: OnboardingsLogLevel,
-        file: String = #fileID,
-        function: String = #function,
-        line: UInt = #line
-    ) {
-        self.message(message: message(), withLevel: level, file: file, function: function, line: line)
-    }
-
-    @inlinable
-    package nonisolated static func message(
-        _ message: @autoclosure () -> Message,
-        withLevel level: OnboardingsLogLevel,
-        file: String = #fileID,
-        function: String = #function,
-        line: UInt = #line
-    ) {
-        self.message(message: message().value, withLevel: level, file: file, function: function, line: line)
+        ))
     }
 }
 
-package extension Log {
-    @inlinable
-    nonisolated static func error(_ message: @autoclosure () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
-        Log.message(message(), withLevel: .error, file: file, function: function, line: line)
+package extension OnboardingsLog.Category {
+    func message(_ message: @autoclosure () -> String, withLevel level: OnboardingsLog.Level, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        write(message(), withLevel: level, file: file, function: function, line: line)
     }
 
-    @inlinable
-    nonisolated static func error(_ message: @autoclosure () -> Message, file: String = #fileID, function: String = #function, line: UInt = #line) {
-        Log.message(message(), withLevel: .error, file: file, function: function, line: line)
+    func message(_ message: @autoclosure () -> Log.Message, withLevel level: OnboardingsLog.Level, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        write(message().value, withLevel: level, file: file, function: function, line: line)
     }
 
-    @inlinable
-    nonisolated static func warn(_ message: @autoclosure () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
-        Log.message(message(), withLevel: .warn, file: file, function: function, line: line)
+    func error(_ message: @autoclosure () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        write(message(), withLevel: .error, file: file, function: function, line: line)
     }
 
-    @inlinable
-    nonisolated static func warn(_ message: @autoclosure () -> Message, file: String = #fileID, function: String = #function, line: UInt = #line) {
-        Log.message(message(), withLevel: .warn, file: file, function: function, line: line)
+    func error(_ message: @autoclosure () -> Log.Message, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        write(message().value, withLevel: .error, file: file, function: function, line: line)
     }
 
-    @inlinable
-    nonisolated static func info(_ message: @autoclosure () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
-        Log.message(message(), withLevel: .info, file: file, function: function, line: line)
+    func warn(_ message: @autoclosure () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        write(message(), withLevel: .warn, file: file, function: function, line: line)
     }
 
-    @inlinable
-    nonisolated static func info(_ message: @autoclosure () -> Message, file: String = #fileID, function: String = #function, line: UInt = #line) {
-        Log.message(message(), withLevel: .info, file: file, function: function, line: line)
+    func warn(_ message: @autoclosure () -> Log.Message, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        write(message().value, withLevel: .warn, file: file, function: function, line: line)
     }
 
-    @inlinable
-    nonisolated static func verbose(_ message: @autoclosure () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
-        Log.message(message(), withLevel: .verbose, file: file, function: function, line: line)
+    func info(_ message: @autoclosure () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        write(message(), withLevel: .info, file: file, function: function, line: line)
     }
 
-    @inlinable
-    nonisolated static func verbose(_ message: @autoclosure () -> Message, file: String = #fileID, function: String = #function, line: UInt = #line) {
-        Log.message(message(), withLevel: .verbose, file: file, function: function, line: line)
+    func info(_ message: @autoclosure () -> Log.Message, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        write(message().value, withLevel: .info, file: file, function: function, line: line)
     }
 
-    @inlinable
-    nonisolated static func debug(_ message: @autoclosure () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
-        Log.message(message(), withLevel: .debug, file: file, function: function, line: line)
+    func verbose(_ message: @autoclosure () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        write(message(), withLevel: .verbose, file: file, function: function, line: line)
     }
 
-    @inlinable
-    nonisolated static func debug(_ message: @autoclosure () -> Message, file: String = #fileID, function: String = #function, line: UInt = #line) {
-        Log.message(message(), withLevel: .debug, file: file, function: function, line: line)
+    func verbose(_ message: @autoclosure () -> Log.Message, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        write(message().value, withLevel: .verbose, file: file, function: function, line: line)
+    }
+
+    func debug(_ message: @autoclosure () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        write(message(), withLevel: .debug, file: file, function: function, line: line)
+    }
+
+    func debug(_ message: @autoclosure () -> Log.Message, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        write(message().value, withLevel: .debug, file: file, function: function, line: line)
     }
 }

@@ -11,8 +11,8 @@ import Foundation
 public struct OnboardingsConfiguration: Sendable {
     let apiKey: String
     let baseUrl: URL
-    let logLevel: OnboardingsLogLevel
-    let logHandler: OnboardingsLogHandler
+    let logLevel: OnboardingsLog.Level
+    let logHandler: OnboardingsLog.Handler?
 }
 
 extension OnboardingsConfiguration {
@@ -27,6 +27,6 @@ extension OnboardingsConfiguration {
 
 extension OnboardingsConfiguration: CustomDebugStringConvertible {
     public var debugDescription: String {
-        "{baseUrl: \(baseUrl.absoluteString), logLevel: \(logLevel.description)}"
+        "{baseUrl: \(baseUrl.absoluteString), logLevel: \(logLevel.description), logHandler: \(logHandler == nil ? "nil" : "defined")}"
     }
 }
