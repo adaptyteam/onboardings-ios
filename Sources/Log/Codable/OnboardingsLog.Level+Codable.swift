@@ -10,7 +10,7 @@ import Foundation
 
 extension OnboardingsLog.Level: Codable {
     public init(from decoder: Decoder) throws {
-        self = try OnboardingsLog.Level(stringLiteral: decoder.singleValueContainer().decode(String.self))
+        self = try Log.Level(stringLiteral: decoder.singleValueContainer().decode(String.self))
     }
 
     public func encode(to encoder: Encoder) throws {

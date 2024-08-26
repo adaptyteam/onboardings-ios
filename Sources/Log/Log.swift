@@ -15,29 +15,29 @@ package enum Log {
     }
 
     private final class Storage: @unchecked Sendable {
-        var level: OnboardingsLog.Level = .default
+        var level: Level = .default
     }
 
     private static let _storage = Storage()
-    package static var level: OnboardingsLog.Level {
+    package static var level: Level {
         _storage.level
     }
 
     @InternalActor
-    private(set) static var handler: OnboardingsLog.Handler?
+    private(set) static var handler: Handler?
 
     @InternalActor
-    static func set(level: OnboardingsLog.Level, handler: OnboardingsLog.Handler?) async {
+    static func set(level: Level, handler: Handler?) async {
         Log.handler = handler
         _storage.level = level
     }
 
     @InternalActor
-    private static func handlerWrite(_ record: OnboardingsLog.Record) {
+    private static func handlerWrite(_ record: Record) {
         handler?(record)
     }
 
-    fileprivate static func write(record: OnboardingsLog.Record) {
+    fileprivate static func write(record: Record) {
         Task.detached(priority: .utility) {
             await osLogWrite(record)
             await handlerWrite(record)
@@ -45,10 +45,10 @@ package enum Log {
     }
 }
 
-private extension OnboardingsLog.Category {
+private extension Log.Category {
     func write(
         _ message: String,
-        withLevel level: OnboardingsLog.Level,
+        withLevel level: Log.Level,
         file: String,
         function: String,
         line: UInt
@@ -70,12 +70,12 @@ private extension OnboardingsLog.Category {
     }
 }
 
-package extension OnboardingsLog.Category {
-    func message(_ message: @autoclosure () -> String, withLevel level: OnboardingsLog.Level, file: String = #fileID, function: String = #function, line: UInt = #line) {
+package extension Log.Category {
+    func message(_ message: @autoclosure () -> String, withLevel level: Log.Level, file: String = #fileID, function: String = #function, line: UInt = #line) {
         write(message(), withLevel: level, file: file, function: function, line: line)
     }
 
-    func message(_ message: @autoclosure () -> Log.Message, withLevel level: OnboardingsLog.Level, file: String = #fileID, function: String = #function, line: UInt = #line) {
+    func message(_ message: @autoclosure () -> Log.Message, withLevel level: Log.Level, file: String = #fileID, function: String = #function, line: UInt = #line) {
         write(message().value, withLevel: level, file: file, function: function, line: line)
     }
 

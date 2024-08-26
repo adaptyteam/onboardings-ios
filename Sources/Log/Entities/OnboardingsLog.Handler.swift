@@ -8,6 +8,10 @@
 
 import Foundation
 
+extension Log {
+    package typealias Handler = OnboardingsLog.Handler
+}
+
 extension OnboardingsLog {
-    public typealias Handler = @Sendable (OnboardingsLog.Record) -> Void
+    public typealias Handler = @Sendable (Record) -> Void
 }

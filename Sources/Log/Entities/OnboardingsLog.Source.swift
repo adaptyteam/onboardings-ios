@@ -8,6 +8,10 @@
 
 import Foundation
 
+extension Log {
+    package typealias Source = OnboardingsLog.Source
+}
+
 extension OnboardingsLog {
     public struct Source: Equatable, Sendable {
         public let threadName: String

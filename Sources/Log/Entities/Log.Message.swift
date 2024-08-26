@@ -9,7 +9,7 @@
 import Foundation
 
 extension Log {
-    package struct Message: ExpressibleByStringLiteral, ExpressibleByStringInterpolation {
+    package struct Message: Sendable, Hashable, ExpressibleByStringLiteral, ExpressibleByStringInterpolation {
         package typealias StringLiteralType = String
 
         package let value: String

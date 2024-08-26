@@ -8,11 +8,14 @@
 
 import Foundation
 
+extension Log {
+    package typealias Level = OnboardingsLog.Level
+}
+
 extension OnboardingsLog {
     public enum Level: Int, Sendable {
-        
-        public static let `default` = OnboardingsLog.Level.info
-        
+        public static let `default` = Level.info
+
         /// Only errors will be logged
         case error
         /// `.error` +  messages from the SDK that do not cause critical errors, but are worth paying attention to
@@ -27,7 +30,7 @@ extension OnboardingsLog {
 }
 
 extension OnboardingsLog.Level: Comparable {
-    public static func < (lhs: OnboardingsLog.Level, rhs: OnboardingsLog.Level) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         lhs.rawValue < rhs.rawValue
     }
 }

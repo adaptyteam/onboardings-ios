@@ -8,6 +8,10 @@
 
 import Foundation
 
+extension Log {
+    package typealias Record = OnboardingsLog.Record
+}
+
 extension OnboardingsLog {
     public struct Record: Sendable {
         public let date: Date

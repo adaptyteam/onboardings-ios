@@ -9,7 +9,7 @@
 import Foundation
 
 extension Log {
-    package static let `default` = OnboardingsLog.Category(
+    package static let `default` = Log.Category(
         subsystem: "io.adapty.onboardings",
         version: Onboardings.SDKVersion,
         name: "sdk"

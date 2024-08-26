@@ -15,10 +15,10 @@ import os.log
 
 extension Log {
     @InternalActor
-    private static var loggers = [OnboardingsLog.Category: OSLog]()
+    private static var loggers = [Category: OSLog]()
 
     @InternalActor
-    static func osLogWrite(_ record: OnboardingsLog.Record) {
+    static func osLogWrite(_ record: Record) {
         let logger: OSLog
 
         if let value = Log.loggers[record.category] {
@@ -31,7 +31,7 @@ extension Log {
     }
 }
 
-private extension OnboardingsLog.Level {
+private extension Log.Level {
     var asOSLogType: OSLogType {
         switch self {
         case .error:
