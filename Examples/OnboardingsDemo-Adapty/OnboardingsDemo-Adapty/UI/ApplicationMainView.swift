@@ -38,29 +38,10 @@ struct ApplicationMainView: View {
         }
     }
 
-    var body: some View {
+    var applicationWithOnboarding: some View {
         ZStack {
-            if showPaywall, let paywall = viewModel.adaptyPaywall,
-               let viewConfig = viewModel.adaptyViewConfiguration
-            {
-                applicationView
-                    .zIndex(0)
-                    .paywall(
-                        isPresented: $showPaywall,
-                        paywall: paywall,
-                        viewConfiguration: viewConfig,
-                        didFailPurchase: { _, _ in },
-                        didFinishRestore: { _ in },
-                        didFailRestore: { _ in },
-                        didFailRendering: { _ in }
-                    )
-                    .onAppear {
-                        showOnboarding = false
-                    }
-            } else {
-                applicationView
-                    .zIndex(0)
-            }
+            applicationView
+                .zIndex(0)
 
             if showOnboarding, let onboardingId = viewModel.onboardingId {
                 Onboardings.swiftuiView(
@@ -75,6 +56,10 @@ struct ApplicationMainView: View {
                     },
                     onOpenPaywallAction: { _ in
                         showPaywall = true
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            self.showOnboarding = false
+                        }
                     },
                     onStateUpdatedAction: { action in
                         viewModel.handleOnboardingStateUpdatedAction(action)
@@ -92,19 +77,38 @@ struct ApplicationMainView: View {
                 ApplicationSplashView()
                     .zIndex(1)
             }
-        }
-        .onAppear {
-            viewModel.onError = { error in
-                errorAlert = .init(value: error)
+
+            if let paywall = viewModel.adaptyPaywall,
+               let viewConfig = viewModel.adaptyViewConfiguration
+            {
+                Color.clear
+                    .paywall(
+                        isPresented: $showPaywall,
+                        paywall: paywall,
+                        viewConfiguration: viewConfig,
+                        didFailPurchase: { _, _ in },
+                        didFinishRestore: { _ in },
+                        didFailRestore: { _ in },
+                        didFailRendering: { _ in }
+                    )
             }
-            viewModel.loadOnboardingId()
         }
-        .alert(item: $errorAlert) { error in
-            Alert(
-                title: Text("Error!"),
-                message: Text(error.value.localizedDescription),
-                dismissButton: .cancel()
-            )
-        }
+    }
+
+    var body: some View {
+        applicationWithOnboarding
+            .onAppear {
+                viewModel.onError = { error in
+                    errorAlert = .init(value: error)
+                }
+                viewModel.loadOnboardingId()
+            }
+            .alert(item: $errorAlert) { error in
+                Alert(
+                    title: Text("Error!"),
+                    message: Text(error.value.localizedDescription),
+                    dismissButton: .cancel()
+                )
+            }
     }
 }
