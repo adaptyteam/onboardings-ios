@@ -25,15 +25,16 @@ public final class OnboardingController: UIViewController {
         self.delegate = delegate
         self.viewModel = OnboardingViewModel(
             stamp: stamp,
-            url: url )
+            url: url
+        )
 
         super.init(nibName: nil, bundle: nil)
-        
-        self.viewModel.onMessage = { [weak self] message in
+
+        viewModel.onMessage = { [weak self] message in
             self?.handleMessage(message)
         }
-        
-        self.viewModel.onError = { [weak self] error in
+
+        viewModel.onError = { [weak self] error in
             self?.handleError(error)
         }
     }
@@ -62,7 +63,11 @@ public final class OnboardingController: UIViewController {
     }
 
     private func buildWebView() -> WKWebView {
-        let webView = WKWebView()
+        let config = WKWebViewConfiguration()
+        config.allowsInlineMediaPlayback = true
+        config.mediaTypesRequiringUserActionForPlayback = []
+
+        let webView = WKWebView(frame: .zero, configuration: config)
 
         return webView
     }
