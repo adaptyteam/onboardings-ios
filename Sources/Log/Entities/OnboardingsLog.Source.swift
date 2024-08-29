@@ -23,6 +23,6 @@ extension OnboardingsLog {
 
 extension OnboardingsLog.Source: CustomStringConvertible {
     public var description: String {
-        "thrd: \(threadName), func: \(functionName)]\t \(fileName)#\(lineNumber)"
+        "thrd: \(threadName), func: \(functionName)\t \(fileName)#\(lineNumber)"
     }
 }

@@ -19,7 +19,10 @@ public struct Onboardings: Sendable {
     @OnboardingsActor
     private init(configuration: OnboardingsConfiguration) async throws {
         self.configuration = configuration
-        await Log.set(level: configuration.logLevel, handler: configuration.logHandler)
+        await Log.set(level: configuration.logLevel)
+        if let logHandler = configuration.logHandler {
+            await Log.set(handler: logHandler)
+        }
         Log.sdk.info("SDK Activated with configuration: \(configuration)")
     }
 }

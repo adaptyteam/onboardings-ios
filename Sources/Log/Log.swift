@@ -23,13 +23,21 @@ package enum Log {
         _storage.level
     }
 
+    package static func isLevel(_ level: Level) -> Bool {
+        self.level >= level
+    }
+
     @InternalActor
     private(set) static var handler: Handler?
 
     @InternalActor
-    static func set(level: Level, handler: Handler?) async {
-        Log.handler = handler
+    static func set(level: Level) async {
         _storage.level = level
+    }
+
+    @InternalActor
+    static func set(handler: @escaping Handler) async {
+        Log.handler = handler
     }
 
     @InternalActor
@@ -53,8 +61,6 @@ private extension Log.Category {
         function: String,
         line: UInt
     ) {
-        guard Log.level >= level else { return }
-
         Log.write(record: .init(
             date: Date(),
             level: level,
@@ -72,50 +78,62 @@ private extension Log.Category {
 
 package extension Log.Category {
     func message(_ message: @autoclosure () -> String, withLevel level: Log.Level, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        guard Log.isLevel(level) else { return }
         write(message(), withLevel: level, file: file, function: function, line: line)
     }
 
     func message(_ message: @autoclosure () -> Log.Message, withLevel level: Log.Level, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        guard Log.isLevel(level) else { return }
         write(message().value, withLevel: level, file: file, function: function, line: line)
     }
 
     func error(_ message: @autoclosure () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        guard Log.isLevel(.error) else { return }
         write(message(), withLevel: .error, file: file, function: function, line: line)
     }
 
     func error(_ message: @autoclosure () -> Log.Message, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        guard Log.isLevel(.error) else { return }
         write(message().value, withLevel: .error, file: file, function: function, line: line)
     }
 
     func warn(_ message: @autoclosure () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        guard Log.isLevel(.warn) else { return }
         write(message(), withLevel: .warn, file: file, function: function, line: line)
     }
 
     func warn(_ message: @autoclosure () -> Log.Message, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        guard Log.isLevel(.warn) else { return }
         write(message().value, withLevel: .warn, file: file, function: function, line: line)
     }
 
     func info(_ message: @autoclosure () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        guard Log.isLevel(.info) else { return }
         write(message(), withLevel: .info, file: file, function: function, line: line)
     }
 
     func info(_ message: @autoclosure () -> Log.Message, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        guard Log.isLevel(.info) else { return }
         write(message().value, withLevel: .info, file: file, function: function, line: line)
     }
 
     func verbose(_ message: @autoclosure () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        guard Log.isLevel(.verbose) else { return }
         write(message(), withLevel: .verbose, file: file, function: function, line: line)
     }
 
     func verbose(_ message: @autoclosure () -> Log.Message, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        guard Log.isLevel(.verbose) else { return }
         write(message().value, withLevel: .verbose, file: file, function: function, line: line)
     }
 
     func debug(_ message: @autoclosure () -> String, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        guard Log.isLevel(.debug) else { return }
         write(message(), withLevel: .debug, file: file, function: function, line: line)
     }
 
     func debug(_ message: @autoclosure () -> Log.Message, file: String = #fileID, function: String = #function, line: UInt = #line) {
+        guard Log.isLevel(.debug) else { return }
         write(message().value, withLevel: .debug, file: file, function: function, line: line)
     }
 }
