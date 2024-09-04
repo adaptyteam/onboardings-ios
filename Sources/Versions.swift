@@ -9,5 +9,5 @@
 import Foundation
 
 extension Onboardings {
-    public static let SDKVersion = "1.0.0-beta.2"
+    public static let SDKVersion = "1.0.0-beta.3"
 }
