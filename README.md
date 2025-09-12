@@ -1,1 +1,1 @@
-## ⚠️ This repository is deprecated because AdaptyUI is now part of [AdaptySDK](https://github.com/adaptyteam/AdaptySDK-iOS). Please consider updating. [Read More.](https://adapty.io/docs/onboardings) ⚠️
+## ⚠️ This repository is deprecated because Onboardings is now part of [AdaptySDK](https://github.com/adaptyteam/AdaptySDK-iOS). Please consider updating. [Read More.](https://adapty.io/docs/onboardings) ⚠️
